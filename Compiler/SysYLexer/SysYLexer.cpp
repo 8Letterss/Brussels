@@ -3,48 +3,48 @@ using namespace std;
 
 bool isdigit(char ch);
 bool isletter(char ch);
-int char_type(char ch);//·µ»Ø×Ö·ûchµÄÀàĞÍ
-void Handle_annotation(char *src);//°ÑsrcÖĞ³ıÁË×¢ÊÍµÄÄÚÈİ¶¼·Åµ½dele_annotationÀïÃæ
-void Handle_tab(char *src); //È¥µôtab
+int char_type(char ch);//è¿”å›å­—ç¬¦chçš„ç±»å‹
+void Handle_annotation(char *src);//æŠŠsrcä¸­é™¤äº†æ³¨é‡Šçš„å†…å®¹éƒ½æ”¾åˆ°dele_annotationé‡Œé¢
+void Handle_tab(char *src); //å»æ‰tab
 
-//±£Áô×Ö
+//ä¿ç•™å­—
 string reserved_keywords[] = {"const", "int", "void", "if", "while", "break", "return", "continue", "main"};
 set<string> reserved_keywords_set(reserved_keywords, reserved_keywords + 9);
-//ÔËËã·û
+//è¿ç®—ç¬¦
 string operational_characters[] = {"+", "-", "*", "/", "%", "==", "!=", "<", ">", "<=", ">=", "!", "&&", "||", "[", "]", "++", "--", "=", "><"};
 set<string> operational_characters_set(operational_characters, operational_characters + 20);
-//·Ö¸ô·û
+//åˆ†éš”ç¬¦
 string separators[] = {";", "{", "}", "(", ")"};
 set<string> separators_set(separators, separators +5);
-//×Ô¶¨Òå±êÊ¶·û
+//è‡ªå®šä¹‰æ ‡è¯†ç¬¦
 set<string> identifiers_set;
-char dele_annotation[255];//±£´æ´¦ÀíºÃ×¢ÊÍµÄÒ»ĞĞ×Ö·û´®
-char dele_tab[255];//±£´æ´¦ÀíºÃÍË¸ñ·ûµÄ×Ö·û´®
+char dele_annotation[255];//ä¿å­˜å¤„ç†å¥½æ³¨é‡Šçš„ä¸€è¡Œå­—ç¬¦ä¸²
+char dele_tab[255];//ä¿å­˜å¤„ç†å¥½é€€æ ¼ç¬¦çš„å­—ç¬¦ä¸²
 
 
 int main(){
-    char one_row_char[255] = {};//´æ·ÅÒ»´ÎĞÔ¶ÁÈ¡µÄÎÄ¼şÖĞÒ»ĞĞµÄ×Ö·û
-    bool is_annotation = false;//µ±Ç°ĞĞÊÇ·ñÔÚ×¢ÊÍÄÚ
-    char *str = NULL;//°´ÕÕĞĞÖĞµÄ¿Õ¸ñ·Ö¸ôĞĞ£¬´æ·Å·Ö¸ôºóµÄ×Ö·û´®
-    char delims[] = " ";//¿Õ¸ñ×÷Îª·Ö¸îĞĞµÄ±êÖ¾
-    char temp[255];//ÓÃÀ´Ôİ´æÍ¬Ò»¸östrÖĞÁ¬ĞøµÄ£¨×Ö·û£¬Êı×Ö£¬ÏÂ»®Ïß£©£¬£¨ÔËËã·û£©£¬£¨·Ö¸ô·û£©
-    int row_number = 0;//¼ÇÂ¼ĞĞºÅ
+    char one_row_char[255] = {};//å­˜æ”¾ä¸€æ¬¡æ€§è¯»å–çš„æ–‡ä»¶ä¸­ä¸€è¡Œçš„å­—ç¬¦
+    bool is_annotation = false;//å½“å‰è¡Œæ˜¯å¦åœ¨æ³¨é‡Šå†…
+    char *str = NULL;//æŒ‰ç…§è¡Œä¸­çš„ç©ºæ ¼åˆ†éš”è¡Œï¼Œå­˜æ”¾åˆ†éš”åçš„å­—ç¬¦ä¸²
+    char delims[] = " ";//ç©ºæ ¼ä½œä¸ºåˆ†å‰²è¡Œçš„æ ‡å¿—
+    char temp[255];//ç”¨æ¥æš‚å­˜åŒä¸€ä¸ªsträ¸­è¿ç»­çš„ï¼ˆå­—ç¬¦ï¼Œæ•°å­—ï¼Œä¸‹åˆ’çº¿ï¼‰ï¼Œï¼ˆè¿ç®—ç¬¦ï¼‰ï¼Œï¼ˆåˆ†éš”ç¬¦ï¼‰
+    int row_number = 0;//è®°å½•è¡Œå·
     freopen("source.txt", "r", stdin);
     freopen("result.txt", "w", stdout);
 
     while(gets(one_row_char) != NULL){
         row_number++;
-        Handle_tab(one_row_char);//´¦Àítab
-        Handle_annotation(dele_tab);//´¦Àí×¢ÊÍ
-        str=strtok(dele_annotation, delims);//¸ù¾İ¿Õ¸ñ·Ö¸ôdele_annotation£¬µÃµ½×Ö·û´®¡£
+        Handle_tab(one_row_char);//å¤„ç†tab
+        Handle_annotation(dele_tab);//å¤„ç†æ³¨é‡Š
+        str=strtok(dele_annotation, delims);//æ ¹æ®ç©ºæ ¼åˆ†éš”dele_annotationï¼Œå¾—åˆ°å­—ç¬¦ä¸²ã€‚
         while(str != NULL){
             //cout<<str<<'\n';
             for(int i = 0; i < strlen(str); i++){
                 memset(temp, 0, 255);
-                if(str[i] == '/' && str[i+1] == '*'){ //¿ªÆô×¢ÊÍ
+                if(str[i] == '/' && str[i+1] == '*'){ //å¼€å¯æ³¨é‡Š
                     is_annotation = true;
                 }
-                if(str[i] == '*' && str[i+1] == '/') //È¡Ïû×¢ÊÍ
+                if(str[i] == '*' && str[i+1] == '/') //å–æ¶ˆæ³¨é‡Š
                 {
                     is_annotation = false;
                     i++;
@@ -53,43 +53,43 @@ int main(){
                         break;
                 }
 
-                if(char_type(str[i]) == 5 && !is_annotation){ //·Ö¸ô·û
-                    printf("<·Ö½ç·û£¬%c>\n", str[i]);
-                }else if(char_type(str[i]) == 4 && !is_annotation){ //ÔËËã·û
-                    if(char_type(str[i+1]) == 4) //ÔËËã·ûÓĞÁ½¸ö·ûºÅ
+                if(char_type(str[i]) == 5 && !is_annotation){ //åˆ†éš”ç¬¦
+                    printf("<åˆ†ç•Œç¬¦ï¼Œ%c>\n", str[i]);
+                }else if(char_type(str[i]) == 4 && !is_annotation){ //è¿ç®—ç¬¦
+                    if(char_type(str[i+1]) == 4) //è¿ç®—ç¬¦æœ‰ä¸¤ä¸ªç¬¦å·
                     {
                         temp[0] = str[i];
                         temp[1] = str[i+1];
                         i++;
-                        printf("<ÔËËã·û£¬%s>\n", temp);
+                        printf("<è¿ç®—ç¬¦ï¼Œ%s>\n", temp);
                     }
-                    else //ÔËËã·ûÓĞÒ»¸ö·ûºÅ
+                    else //è¿ç®—ç¬¦æœ‰ä¸€ä¸ªç¬¦å·
                     {
-                        printf("<ÔËËã·û£¬%c>\n", str[i]);
+                        printf("<è¿ç®—ç¬¦ï¼Œ%c>\n", str[i]);
                     }
                 }else if(char_type(str[i])==6){
-                    printf("ERROR IN LINE %d, ERROR TYPE: ³öÏÖ´Ê·¨ÖĞÎ´¶¨Òå×Ö·û¡£\n", row_number);
-                }else if(!is_annotation){ //¹Ø¼ü×Ö¡¢±êÊ¶·û¡¢³£Á¿£¨Êı×Ö£¬×Ö·û£©
+                    printf("ERROR IN LINE %d, ERROR TYPE: å‡ºç°è¯æ³•ä¸­æœªå®šä¹‰å­—ç¬¦ã€‚\n", row_number);
+                }else if(!is_annotation){ //å…³é”®å­—ã€æ ‡è¯†ç¬¦ã€å¸¸é‡ï¼ˆæ•°å­—ï¼Œå­—ç¬¦ï¼‰
                     int j = 0;
                     temp[j++] = str[i++];
                     while((char_type(str[i]) == 1 || char_type(str[i]) == 2 || char_type(str[i]) == 3)&&i<strlen(str)){
                         temp[j++] = str[i++];
                     }
-                    if(isdigit(temp[0])) //Èç¹ûµÚÒ»¸ö×Ö·ûÊÇÊı×Ö£¬ÄÇÃ´¿ÉÄÜÊÇÕûÊı£¨°Ë¡¢Ê®¡¢Ê®Áù½øÖÆ£©»òÕß·Ç·¨±êÊ¶·û
+                    if(isdigit(temp[0])) //å¦‚æœç¬¬ä¸€ä¸ªå­—ç¬¦æ˜¯æ•°å­—ï¼Œé‚£ä¹ˆå¯èƒ½æ˜¯æ•´æ•°ï¼ˆå…«ã€åã€åå…­è¿›åˆ¶ï¼‰æˆ–è€…éæ³•æ ‡è¯†ç¬¦
                     {
                         if(temp[0] == '0')
                         {
                             if(strlen(temp) == 1)
-                                printf("<ÊıÖµĞÍ³£Á¿£¨Ê®½øÖÆ£©£¬%s>\n", temp);
+                                printf("<æ•°å€¼å‹å¸¸é‡ï¼ˆåè¿›åˆ¶ï¼‰ï¼Œ%s>\n", temp);
                             else
                             {
-                                if(temp[1] == 'x' || temp[1] == 'X') //Ê®Áù½øÖÆ
+                                if(temp[1] == 'x' || temp[1] == 'X') //åå…­è¿›åˆ¶
                                 {
-                                    printf("<ÊıÖµĞÍ³£Á¿£¨Ê®Áù½øÖÆ£©£¬%s>\n", temp);
+                                    printf("<æ•°å€¼å‹å¸¸é‡ï¼ˆåå…­è¿›åˆ¶ï¼‰ï¼Œ%s>\n", temp);
                                 }
-                                else //°Ë½øÖÆ
+                                else //å…«è¿›åˆ¶
                                 {
-                                    printf("<ÊıÖµĞÍ³£Á¿£¨°Ë½øÖÆ£©£¬%s>\n", temp);
+                                    printf("<æ•°å€¼å‹å¸¸é‡ï¼ˆå…«è¿›åˆ¶ï¼‰ï¼Œ%s>\n", temp);
                                 }
                             }
                         }
@@ -100,39 +100,39 @@ int main(){
                             {
                                 if(!isdigit(temp[j]))
                                 {
-                                    printf("ERROR IN LINE %d, ERROR TYPE: ±êÊ¶·ûÒÔÊı×Ö¿ªÍ·¡£\n", row_number);
+                                    printf("ERROR IN LINE %d, ERROR TYPE: æ ‡è¯†ç¬¦ä»¥æ•°å­—å¼€å¤´ã€‚\n", row_number);
                                     flag = 1;
                                     break;
                                 }
                             }
                             if(!flag)
-                            printf("<ÊıÖµĞÍ³£Á¿£¨Ê®½øÖÆ£©£¬%s>\n", temp);
+                            printf("<æ•°å€¼å‹å¸¸é‡ï¼ˆåè¿›åˆ¶ï¼‰ï¼Œ%s>\n", temp);
                         }
                     }
                     else
                     {
-                        if(reserved_keywords_set.find(temp) != reserved_keywords_set.end()) //ÊÇ±£Áô×Ö
+                        if(reserved_keywords_set.find(temp) != reserved_keywords_set.end()) //æ˜¯ä¿ç•™å­—
                         {
-                            printf("<±£Áô×Ö£¬%s>\n", temp);
+                            printf("<ä¿ç•™å­—ï¼Œ%s>\n", temp);
                         }else
                         {
-                            printf("<±êÊ¶·û£¬%s>\n", temp);
+                            printf("<æ ‡è¯†ç¬¦ï¼Œ%s>\n", temp);
                         }
                     }
-                    i--;//ÕâÀïÍË³öºó£¬»Øµ½forÑ­»·»¹Òª++£¬ËùÒÔÕâÀïÏÈ--;´íÎó¶ş
+                    i--;//è¿™é‡Œé€€å‡ºåï¼Œå›åˆ°forå¾ªç¯è¿˜è¦++ï¼Œæ‰€ä»¥è¿™é‡Œå…ˆ--;é”™è¯¯äºŒ
                 }
             }
             str = strtok(NULL, delims);
         }
     }
 
-    if(is_annotation==true) printf("ERROR, ERROR TYPE: ×¢ÊÍ²»ÍêÕû£¬Çë¼ì²é¡£\n");
-    freopen("CON", "w", stdout);//ÎªÁËºóÃæÊä³öµ½¿ØÖÆÌ¨£¬ÕâÀï´ò¿ª¡°¿ØÖÆÌ¨¡±ÎÄ¼ş¡£
-    cout<<"ÒÑÍê³É´Ê·¨·ÖÎö:"<<endl<<endl;
-    freopen("result.txt", "r", stdin);//°ÑÎÄ¼şÀïÃæµÄÄÚÈİ×÷ÎªÊäÈë£¬Êä³öµ½¿ØÖÆÌ¨¡£
+    if(is_annotation==true) printf("ERROR, ERROR TYPE: æ³¨é‡Šä¸å®Œæ•´ï¼Œè¯·æ£€æŸ¥ã€‚\n");
+    freopen("CON", "w", stdout);//ä¸ºäº†åé¢è¾“å‡ºåˆ°æ§åˆ¶å°ï¼Œè¿™é‡Œæ‰“å¼€â€œæ§åˆ¶å°â€æ–‡ä»¶ã€‚
+    cout<<"å·²å®Œæˆè¯æ³•åˆ†æ:"<<endl<<endl;
+    freopen("result.txt", "r", stdin);//æŠŠæ–‡ä»¶é‡Œé¢çš„å†…å®¹ä½œä¸ºè¾“å…¥ï¼Œè¾“å‡ºåˆ°æ§åˆ¶å°ã€‚
     while ((gets(one_row_char)) != NULL)
         cout<<one_row_char<<endl;
-    while (getchar() != '\n') //ÕâÁ½¾ä´úÂëÊÇÇå¿ÕÊäÈë»º³åÇøÄÚÈİ£¬µÈÍ¬ÓÚfflush(stdin);
+    while (getchar() != '\n') //è¿™ä¸¤å¥ä»£ç æ˜¯æ¸…ç©ºè¾“å…¥ç¼“å†²åŒºå†…å®¹ï¼Œç­‰åŒäºfflush(stdin);
         continue;
     getchar();
     system("pause");
@@ -151,7 +151,7 @@ bool isletter(char ch){
     return false;
 }
 
-//·µ»Ø×Ö·ûchµÄÀàĞÍ
+//è¿”å›å­—ç¬¦chçš„ç±»å‹
 int char_type(char ch){
     if(isdigit(ch))
         return 1;
@@ -159,7 +159,7 @@ int char_type(char ch){
         return 2;
     if(ch == '_')
         return 3;
-    string ch1(1, ch);//°Ñchar×ªÎªÎªstring
+    string ch1(1, ch);//æŠŠcharè½¬ä¸ºä¸ºstring
     if(operational_characters_set.find(ch1) != operational_characters_set.end())
         return 4;
     if(separators_set.find(ch1) != separators_set.end())
@@ -167,19 +167,19 @@ int char_type(char ch){
     return 6;
 }
 
-void Handle_annotation(char *src){ //°ÑsrcÖĞ³ıÁË×¢ÊÍµÄÄÚÈİ¶¼·Åµ½dele_annotationÀïÃæ
+void Handle_annotation(char *src){ //æŠŠsrcä¸­é™¤äº†æ³¨é‡Šçš„å†…å®¹éƒ½æ”¾åˆ°dele_annotationé‡Œé¢
     int j = 0;
     memset(dele_annotation, 0, 255);
     for(int i = 0; i < strlen(src); i++)
     {
-        if(src[i] == '/')//´íÎóÒ»Ô­À´forÀïĞ´µÄÊÇi < strlen(src)-1
+        if(src[i] == '/')//é”™è¯¯ä¸€åŸæ¥foré‡Œå†™çš„æ˜¯i < strlen(src)-1
             if(src[i+1] == '/')
                 return;
         dele_annotation[j++] = src[i];
     }
 }
 
-void Handle_tab(char *src){ //È¥µôtab
+void Handle_tab(char *src){ //å»æ‰tab
     int j = 0;
     memset(dele_tab, 0, 255);
     for(int i = 0; i < strlen(src); i++)
