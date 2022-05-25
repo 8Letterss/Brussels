@@ -1,58 +1,58 @@
 #include<stdio.h>
-#include<Windows.h>//ÒªÓÃµ½ÓÃ»§½çÃæº¯Êı£¬Kernelº¯Êı£¬»¹ÓĞÏµÍ³ĞİÃß£¬ÇåÆÁ
+#include<Windows.h>//è¦ç”¨åˆ°ç”¨æˆ·ç•Œé¢å‡½æ•°ï¼ŒKernelå‡½æ•°ï¼Œè¿˜æœ‰ç³»ç»Ÿä¼‘çœ ï¼Œæ¸…å±
 #include<conio.h>
 #include<time.h>
 #include<string.h>
-#define MAP_HEIGHT 80  //µØÍ¼µÄ¸ß¶È
-#define MAP_WIDHT 40 //µØÍ¼µÄ¿í¶È
-#define UP 'w'          //¶¨Òå¿ØÖÆÉß×ßÏòµÄ·½Ïò¼ü
+#define MAP_HEIGHT 80  //åœ°å›¾çš„é«˜åº¦
+#define MAP_WIDHT 40 //åœ°å›¾çš„å®½åº¦
+#define UP 'w'          //å®šä¹‰æ§åˆ¶è›‡èµ°å‘çš„æ–¹å‘é”®
 #define DOWN 's'
 #define LEFT 'a'
 #define RIGHT 'd'
-typedef struct//¶¨ÒåÊ³ÎïºÍµ¥¸öÉßÉíµÄ½á¹¹Ìå
+typedef struct//å®šä¹‰é£Ÿç‰©å’Œå•ä¸ªè›‡èº«çš„ç»“æ„ä½“
 {
 	int x;
-	int y;//ÓÃ×ø±êÀ´±íÊ¾
+	int y;//ç”¨åæ ‡æ¥è¡¨ç¤º
 }Food,Snakenode,Barrier;
-typedef struct //¶¨ÒåÉßµÄ½á¹¹Ìå
+typedef struct //å®šä¹‰è›‡çš„ç»“æ„ä½“
 {
-	Snakenode snakeNode[1000];//ÏŞÖÆÉßµÄ×î³¤³¤¶È
-	int length; //ÉßÄ¿Ç°µÄ³¤¶È
-	int speed; //ÉßÄ¿Ç°µÄËÙ¶È
+	Snakenode snakeNode[1000];//é™åˆ¶è›‡çš„æœ€é•¿é•¿åº¦
+	int length; //è›‡ç›®å‰çš„é•¿åº¦
+	int speed; //è›‡ç›®å‰çš„é€Ÿåº¦
 }Snake;
 typedef struct
 {
-	char name[50];		//¼ÇÂ¼ĞÕÃû
-	int grade;			//³É¼¨
-	int m;//¶¨ÒåÓÃ»§¸öÊı
+	char name[50];		//è®°å½•å§“å
+	int grade;			//æˆç»©
+	int m;//å®šä¹‰ç”¨æˆ·ä¸ªæ•°
 }Data;
-Snake snake;   //¶¨ÒåÉßµÄ½á¹¹Ìå±äÁ¿
-Food food;     //¶¨ÒåÊ³ÎïµÄ½á¹¹Ìå±äÁ¿
-Barrier barrier[100];//¶¨ÒåÕÏ°­ÎïµÄ½á¹¹Ìå±äÁ¿
+Snake snake;   //å®šä¹‰è›‡çš„ç»“æ„ä½“å˜é‡
+Food food;     //å®šä¹‰é£Ÿç‰©çš„ç»“æ„ä½“å˜é‡
+Barrier barrier[100];//å®šä¹‰éšœç¢ç‰©çš„ç»“æ„ä½“å˜é‡
 Data data[100];
-int n;//¶¨ÒåÕÏ°­Îï
-int Cfood=0;//¶¨ÒåËæ»úÊ³ÎïµÄÖÖÀà
-int Efood = 0;//¶¨Òå
+int n;//å®šä¹‰éšœç¢ç‰©
+int Cfood=0;//å®šä¹‰éšæœºé£Ÿç‰©çš„ç§ç±»
+int Efood = 0;//å®šä¹‰
 int r = 0;
 int flag = 0;
-char now_Dir = RIGHT;  //¶¨Òåµ±Ç°ÉßÍ·µÄ·½Ïò
-char direction = RIGHT;  //ÆÚ´ıÉßÍ·µÄ·½Ïò
-void GotoXY(int x, int y); //¹â±ê¶¨Î»º¯Êı
-void Hide();			   //Òş²Ø¹â±êº¯Êı
-int Menu();			   //Ö÷²Ëµ¥º¯Êı
-void Help();			   //°ïÖúĞÅÏ¢º¯Êı
-void About();			   //¹ØÓÚĞÅÏ¢º¯Êı
-void InitMap();			   //µØÍ¼³õÊ¼»¯
-void PrintFood();		   //Éú³ÉÊ³Îï
-int MoveSnake();		   //ÉßÒÆ¶¯º¯Êı
-int Correct();			   //×Ô×²»ò×²Ç½º¯Êı
-void SpeedControl();	   //ËÙ¶È¿ØÖÆº¯Êı
-int IsCorrect();		   //ÅĞ¶ÏÊÇ·ñ×²Ç½»ò×Ô×²£¬·µ»ØÖµÎª0£¬·ñÔòÎª1
-void Read();			   //¶ÁÈ¡¼ÇÂ¼
-void List();			   //ÅÅĞĞ°ñ
-void Name();			   //¼ÇÂ¼ÓÃ»§Ãû
-void Rank();			   //¼ÇÂ¼³É¼¨
-void Write();			   //½«¼ÇÂ¼±£´æµ½¼ÇÊÂ±¾
+char now_Dir = RIGHT;  //å®šä¹‰å½“å‰è›‡å¤´çš„æ–¹å‘
+char direction = RIGHT;  //æœŸå¾…è›‡å¤´çš„æ–¹å‘
+void GotoXY(int x, int y); //å…‰æ ‡å®šä½å‡½æ•°
+void Hide();			   //éšè—å…‰æ ‡å‡½æ•°
+int Menu();			   //ä¸»èœå•å‡½æ•°
+void Help();			   //å¸®åŠ©ä¿¡æ¯å‡½æ•°
+void About();			   //å…³äºä¿¡æ¯å‡½æ•°
+void InitMap();			   //åœ°å›¾åˆå§‹åŒ–
+void PrintFood();		   //ç”Ÿæˆé£Ÿç‰©
+int MoveSnake();		   //è›‡ç§»åŠ¨å‡½æ•°
+int Correct();			   //è‡ªæ’æˆ–æ’å¢™å‡½æ•°
+void SpeedControl();	   //é€Ÿåº¦æ§åˆ¶å‡½æ•°
+int IsCorrect();		   //åˆ¤æ–­æ˜¯å¦æ’å¢™æˆ–è‡ªæ’ï¼Œè¿”å›å€¼ä¸º0ï¼Œå¦åˆ™ä¸º1
+void Read();			   //è¯»å–è®°å½•
+void List();			   //æ’è¡Œæ¦œ
+void Name();			   //è®°å½•ç”¨æˆ·å
+void Rank();			   //è®°å½•æˆç»©
+void Write();			   //å°†è®°å½•ä¿å­˜åˆ°è®°äº‹æœ¬
 int main()
 {
 	srand((unsigned int)time(0));
@@ -88,21 +88,21 @@ int main()
 int Menu()
 {
 	GotoXY(45,12);
-	printf("»¶Ó­À´µ½Ì°³ÔÉßĞ¡ÓÎÏ·");
+	printf("æ¬¢è¿æ¥åˆ°è´ªåƒè›‡å°æ¸¸æˆ");
 	GotoXY(48, 14);
-	printf("1.¿ªÊ¼ÓÎÏ·");
+	printf("1.å¼€å§‹æ¸¸æˆ");
 	GotoXY(48, 16);
-	printf("2.°ïÖú");
+	printf("2.å¸®åŠ©");
 	GotoXY(48, 18);
-	printf("3.¹ØÓÚ");
+	printf("3.å…³äº");
 	GotoXY(48, 20);
-	printf("4.ÅÅĞĞ°ñ");
+	printf("4.æ’è¡Œæ¦œ");
 	GotoXY(48, 22);
-	printf("ÆäËûÈÎÒâ¼üÍË³öÓÎÏ·");
+	printf("å…¶ä»–ä»»æ„é”®é€€å‡ºæ¸¸æˆ");
 	Hide();
 	char ch;
 	int result = 0;
-	ch = _getch();//getch()º¯ÊıËùĞèÍ·ÎÄ¼ş£ºconio.h
+	ch = _getch();//getch()å‡½æ•°æ‰€éœ€å¤´æ–‡ä»¶ï¼šconio.h
 	switch (ch)
 	{
 	case'1':
@@ -118,32 +118,32 @@ int Menu()
 		result = 4;
 		break;
 	}
-	system("cls");  //µ÷ÓÃÏµÍ³ÃüÁîclsÍê³ÉÇåÆÁ²Ù×÷
+	system("cls");  //è°ƒç”¨ç³»ç»Ÿå‘½ä»¤clså®Œæˆæ¸…å±æ“ä½œ
 	return result;
 }
 void GotoXY(int x,int y)
 {
-	HANDLE hout;//¾ä±ú
-	COORD cor; //Window.hÖĞ¶¨ÒåµÄ×ø±ê½á¹¹Ìå£¬ÓÃÀ´±íÊ¾µÚÒ»¸ö×Ö·ûÔÚ¿ØÖÆÌ¨ÆÁÄ»ÉÏµÄ×ø±ê
-	hout = GetStdHandle(STD_OUTPUT_HANDLE);//GetStdHandle£¨£©ÊÇÒ»¸öWindows APIº¯Êı¡£ËüÓÃÓÚ´ÓÒ»¸öÌØ¶¨µÄ±ê×¼Éè±¸£¨±ê×¼ÊäÈë¡¢±ê×¼Êä³ö»ò±ê×¼´íÎó£©ÖĞÈ¡µÃÒ»¸ö¾ä±ú£¨ÓÃÀ´±êÊ¶²»Í¬Éè±¸µÄÊıÖµ£©
+	HANDLE hout;//å¥æŸ„
+	COORD cor; //Window.hä¸­å®šä¹‰çš„åæ ‡ç»“æ„ä½“ï¼Œç”¨æ¥è¡¨ç¤ºç¬¬ä¸€ä¸ªå­—ç¬¦åœ¨æ§åˆ¶å°å±å¹•ä¸Šçš„åæ ‡
+	hout = GetStdHandle(STD_OUTPUT_HANDLE);//GetStdHandleï¼ˆï¼‰æ˜¯ä¸€ä¸ªWindows APIå‡½æ•°ã€‚å®ƒç”¨äºä»ä¸€ä¸ªç‰¹å®šçš„æ ‡å‡†è®¾å¤‡ï¼ˆæ ‡å‡†è¾“å…¥ã€æ ‡å‡†è¾“å‡ºæˆ–æ ‡å‡†é”™è¯¯ï¼‰ä¸­å–å¾—ä¸€ä¸ªå¥æŸ„ï¼ˆç”¨æ¥æ ‡è¯†ä¸åŒè®¾å¤‡çš„æ•°å€¼ï¼‰
 	cor.X = x;
 	cor.Y = y;
-	SetConsoleCursorPosition(hout, cor);//SetConsoleCursorPositionÊÇAPIÖĞ¶¨Î»¹â±êÎ»ÖÃµÄº¯Êı¡£
+	SetConsoleCursorPosition(hout, cor);//SetConsoleCursorPositionæ˜¯APIä¸­å®šä½å…‰æ ‡ä½ç½®çš„å‡½æ•°ã€‚
 }
 void Hide()
 {
-	HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);//GetStdHandle·µ»ØÒ»¸öÖ¸Ïò±ê×¼ÊäÈë£¬Êä³ö»ò´íÎó´¦ÀíµÄ¾ä±ú. STD_OUTPUT_HANDLE : Í¨³£Îª±ê×¼Êä³öµÄÆÁÄ»¡£
-	CONSOLE_CURSOR_INFO cor_info = { 1,0 };//¶¨Òå¹â±êµÄ²ÎÊı£¬
+	HANDLE hout = GetStdHandle(STD_OUTPUT_HANDLE);//GetStdHandleè¿”å›ä¸€ä¸ªæŒ‡å‘æ ‡å‡†è¾“å…¥ï¼Œè¾“å‡ºæˆ–é”™è¯¯å¤„ç†çš„å¥æŸ„. STD_OUTPUT_HANDLE : é€šå¸¸ä¸ºæ ‡å‡†è¾“å‡ºçš„å±å¹•ã€‚
+	CONSOLE_CURSOR_INFO cor_info = { 1,0 };//å®šä¹‰å…‰æ ‡çš„å‚æ•°ï¼Œ
 	SetConsoleCursorInfo(hout, &cor_info);
 }
 void About()
 {
 	GotoXY(45, 12);
-	printf("º¼Öİµç×Ó¿Æ¼¼´óÑ§--³ÌĞòÉè¼Æ×ÛºÏÊµ¼ù");
+	printf("æ­å·ç”µå­ç§‘æŠ€å¤§å­¦--ç¨‹åºè®¾è®¡ç»¼åˆå®è·µ");
 	GotoXY(48, 14);
-	printf("Ì°³ÔÉßÓÎÏ·");
+	printf("è´ªåƒè›‡æ¸¸æˆ");
 	GotoXY(48, 16);
-	printf("°´ÈÎÒâ¼ü·µ»ØÉÏ¼¶²Ëµ¥");
+	printf("æŒ‰ä»»æ„é”®è¿”å›ä¸Šçº§èœå•");
 	Hide();
 	char ch = _getch();
 	system("cls");
@@ -151,17 +151,17 @@ void About()
 void Help()
 {
 	GotoXY(48, 12);
-	printf("wÉÏ");
+	printf("wä¸Š");
 	GotoXY(48,14);
-	printf("sÏÂ");
+	printf("sä¸‹");
 	GotoXY(48, 16);
-	printf("a×ó");
+	printf("aå·¦");
 	GotoXY(48, 18);
-	printf("dÓÒ");
+	printf("då³");
 	GotoXY(48, 20);
-	printf("µ±Éß×²Ç½ºÍÕÏ°­ÎïÊ±ÓÎÏ·½áÊø");
+	printf("å½“è›‡æ’å¢™å’Œéšœç¢ç‰©æ—¶æ¸¸æˆç»“æŸ");
 	GotoXY(48, 22);
-	printf("°´ÈÎÒâ¼ü·µ»ØÉÏ¼¶²Ëµ¥");
+	printf("æŒ‰ä»»æ„é”®è¿”å›ä¸Šçº§èœå•");
 	Hide();
 	char ch = _getch();
 	system("cls");
@@ -170,29 +170,29 @@ void InitMap()
 {
 	
 	Hide();
-	snake.snakeNode[0].x = MAP_HEIGHT / 2 - 1;//Ê¹ÉßÍ·µÄÎ»ÖÃ³öÏÖÔÚµØÍ¼ÖĞ¼ä
+	snake.snakeNode[0].x = MAP_HEIGHT / 2 - 1;//ä½¿è›‡å¤´çš„ä½ç½®å‡ºç°åœ¨åœ°å›¾ä¸­é—´
 	snake.snakeNode[0].y = MAP_WIDHT / 2 - 1;
-	GotoXY(snake.snakeNode[0].x, snake.snakeNode[0].y);//½«¹â±êÒÆÖÁÉßÍ·Î»ÖÃ
-	printf("@");//´òÓ¡ÉßÍ·
-	snake.length = 3;	//ÉèÖÃÉßµÄ³õÊ¼³¤¶ÈÎª3
-	snake.speed = 250;	//ÉèÖÃÉßµÄ³õÊ¼ÒÆ¶¯ËÙ¶È250
-	now_Dir = LEFT;//µ±Ç°ÉßÍ·µÄ·½Ïò
-	for (int i = 1; i < snake.length; i++) //´òÓ¡ÉßÉí
+	GotoXY(snake.snakeNode[0].x, snake.snakeNode[0].y);//å°†å…‰æ ‡ç§»è‡³è›‡å¤´ä½ç½®
+	printf("@");//æ‰“å°è›‡å¤´
+	snake.length = 3;	//è®¾ç½®è›‡çš„åˆå§‹é•¿åº¦ä¸º3
+	snake.speed = 250;	//è®¾ç½®è›‡çš„åˆå§‹ç§»åŠ¨é€Ÿåº¦250
+	now_Dir = LEFT;//å½“å‰è›‡å¤´çš„æ–¹å‘
+	for (int i = 1; i < snake.length; i++) //æ‰“å°è›‡èº«
 	{
-		snake.snakeNode[i].y = snake.snakeNode[i - 1].y; //ÉßÉíµÄ×İ×ø±êÎ»ÖÃºÍÉßÍ·µÄÎ»ÖÃÏàÍ¬
-		snake.snakeNode[i].x = snake.snakeNode[i - 1].x+1; //ÉèÖÃÉßÉíµÄºá×ø±êÎ»ÖÃ£¬ÉßÉíÔÚÉßÍ·µÄ×ó±ß£¬ËùÒÔºá×ø±êÒÀ´Î¼õ1
-		GotoXY(snake.snakeNode[i].x, snake.snakeNode[i].y);//¹â±êÒÆ¶¯µ½ÉßÉíµÄÎ»ÖÃ
-		printf("o");//´òÓ¡ÉßÉí
+		snake.snakeNode[i].y = snake.snakeNode[i - 1].y; //è›‡èº«çš„çºµåæ ‡ä½ç½®å’Œè›‡å¤´çš„ä½ç½®ç›¸åŒ
+		snake.snakeNode[i].x = snake.snakeNode[i - 1].x+1; //è®¾ç½®è›‡èº«çš„æ¨ªåæ ‡ä½ç½®ï¼Œè›‡èº«åœ¨è›‡å¤´çš„å·¦è¾¹ï¼Œæ‰€ä»¥æ¨ªåæ ‡ä¾æ¬¡å‡1
+		GotoXY(snake.snakeNode[i].x, snake.snakeNode[i].y);//å…‰æ ‡ç§»åŠ¨åˆ°è›‡èº«çš„ä½ç½®
+		printf("o");//æ‰“å°è›‡èº«
 
 	}
-	for (int i = 0; i < MAP_WIDHT; i++)//Éú³ÉµØÍ¼ÉÏÏÂ±ß½ç
+	for (int i = 0; i < MAP_WIDHT; i++)//ç”Ÿæˆåœ°å›¾ä¸Šä¸‹è¾¹ç•Œ
 	{
 		GotoXY(0, i);
 		printf("|");
 		GotoXY(MAP_HEIGHT, i);
 		printf("|");
 	}
-	for (int i = 0; i < MAP_HEIGHT; i++)//Éú³ÉµØÍ¼×óÓÒ±ß½ç
+	for (int i = 0; i < MAP_HEIGHT; i++)//ç”Ÿæˆåœ°å›¾å·¦å³è¾¹ç•Œ
 	{
 		GotoXY(i, 0);
 		printf("-");
@@ -220,25 +220,25 @@ void InitMap()
 		n++;
 	}
 	GotoXY(MAP_HEIGHT + 1, 5);
-	printf("µ±Ç°µÃ·Ö£º%d", snake.length - 3);
+	printf("å½“å‰å¾—åˆ†ï¼š%d", snake.length - 3);
 	GotoXY(MAP_HEIGHT + 1, 7);
-	printf("$ ------ 1·Ö");
+	printf("$ ------ 1åˆ†");
 	GotoXY(MAP_HEIGHT + 1, 9);
-	printf("* ------ 2·Ö");
+	printf("* ------ 2åˆ†");
 	GotoXY(MAP_HEIGHT + 1, 11);
-	printf("+ ------ 3·Ö");
+	printf("+ ------ 3åˆ†");
 	GotoXY(MAP_HEIGHT + 1, 13);
-	printf("£¡ ----- 4·Ö");
+	printf("ï¼ ----- 4åˆ†");
 	GotoXY(MAP_HEIGHT + 1, 15);
-	printf("Åöµ½×Ô¼ºÉíÌå¼õÒ»·Ö");
+	printf("ç¢°åˆ°è‡ªå·±èº«ä½“å‡ä¸€åˆ†");
 	GotoXY(MAP_HEIGHT + 1, 17);
-	printf("µ±Éß×²Ç½ºÍÕÏ°­ÎïÊ±ÓÎÏ·½áÊø");
+	printf("å½“è›‡æ’å¢™å’Œéšœç¢ç‰©æ—¶æ¸¸æˆç»“æŸ");
 	PrintFood();
 }
 int IsCorrect()
 {
 	if (snake.snakeNode[0].x == 0 || snake.snakeNode[0].y == 0 || snake.snakeNode[0].x == MAP_HEIGHT||
-		snake.snakeNode[0].y == MAP_WIDHT)//ÅĞ¶ÏÉßÍ·ÊÇ·ñ×²Ç½
+		snake.snakeNode[0].y == MAP_WIDHT)//åˆ¤æ–­è›‡å¤´æ˜¯å¦æ’å¢™
 	{
 		return 0;
 	}
@@ -249,7 +249,7 @@ int IsCorrect()
 			return 0;
 		}
 	}
-	for (int i = 1; i < snake.length; i++)//ÅĞ¶ÏÉßÍ·ÊÇ·ñÓë×ÔÉíÖØµş
+	for (int i = 1; i < snake.length; i++)//åˆ¤æ–­è›‡å¤´æ˜¯å¦ä¸è‡ªèº«é‡å 
 	{
 		if (snake.snakeNode[0].x == snake.snakeNode[i].x && snake.snakeNode[0].y == snake.snakeNode[i].y)
 		{
@@ -263,20 +263,20 @@ int MoveSnake()
 	int a = 0;
 	Hide();
 	Snakenode temp;
-	temp = snake.snakeNode[snake.length - 1];//¼ÇÂ¼ÉßÎ²
+	temp = snake.snakeNode[snake.length - 1];//è®°å½•è›‡å°¾
 	for (int i = snake.length - 1; i >= 1; i--)
 	{
 		snake.snakeNode[i] = snake.snakeNode[i - 1];
 	}
 		GotoXY(snake.snakeNode[1].x, snake.snakeNode[1].y);
 		printf("o");
-		if (_kbhit())//¼ì²éµ±Ç°ÊÇ·ñÓĞ¼üÅÌÊäÈë£¬ÈôÓĞ£¬Ôò·µ»ØÒ»¸ö·Ç0µÄÖµ£¬·ñÔò·µ»Ø0
+		if (_kbhit())//æ£€æŸ¥å½“å‰æ˜¯å¦æœ‰é”®ç›˜è¾“å…¥ï¼Œè‹¥æœ‰ï¼Œåˆ™è¿”å›ä¸€ä¸ªé0çš„å€¼ï¼Œå¦åˆ™è¿”å›0
 		{
 			direction = _getch();
 			switch (direction)
 			{
 			case UP:
-				if (now_Dir != DOWN)//ÈôÊäÈëµÄ·½ÏòÓëµ±Ç°·½ÏòÏà·´£¬Ôò²»»áÆğ×÷ÓÃ
+				if (now_Dir != DOWN)//è‹¥è¾“å…¥çš„æ–¹å‘ä¸å½“å‰æ–¹å‘ç›¸åï¼Œåˆ™ä¸ä¼šèµ·ä½œç”¨
 				{
 					now_Dir = direction;
 				}
@@ -316,10 +316,10 @@ int MoveSnake()
 		printf("@");
 		if (snake.snakeNode[0].x == food.x && snake.snakeNode[0].y == food.y)
 		{
-			flag+=Efood;  //flag=1±íÊ¾³Ôµ½Ê³Îï£¬flag=0±íÊ¾Ã»ÓĞ³Ôµ½Ê³Îï
+			flag+=Efood;  //flag=1è¡¨ç¤ºåƒåˆ°é£Ÿç‰©ï¼Œflag=0è¡¨ç¤ºæ²¡æœ‰åƒåˆ°é£Ÿç‰©
 			snake.length++;
-			snake.snakeNode[snake.length - 1] = temp; //³Ôµ½Ê³Îï£¬ÉßÉí¼Ó1
-			r = 1;//ÓÃÀ´ÅĞ¶ÏÊÇ·ñÖØ¸´¼Ó·Ö
+			snake.snakeNode[snake.length - 1] = temp; //åƒåˆ°é£Ÿç‰©ï¼Œè›‡èº«åŠ 1
+			r = 1;//ç”¨æ¥åˆ¤æ–­æ˜¯å¦é‡å¤åŠ åˆ†
 		}
 		if (!flag)
 		{
@@ -328,7 +328,7 @@ int MoveSnake()
 		}
 		else
 		{
-			if (flag != 0)//¸øÉß¼ÓÉÏ¶ÔÓ¦·ÖÊıµÄµÄ³¤¶È
+			if (flag != 0)//ç»™è›‡åŠ ä¸Šå¯¹åº”åˆ†æ•°çš„çš„é•¿åº¦
 			{
 				flag--;
 				if (r == 0)
@@ -342,19 +342,19 @@ int MoveSnake()
 				PrintFood();
 			}
 			GotoXY(MAP_HEIGHT+1, 5);
-			printf("µ±Ç°µÃ·Ö£º%d", snake.length - 3);
+			printf("å½“å‰å¾—åˆ†ï¼š%d", snake.length - 3);
 			GotoXY(MAP_HEIGHT + 1, 7);
-			printf("$ ------ 1·Ö");
+			printf("$ ------ 1åˆ†");
 			GotoXY(MAP_HEIGHT + 1, 9);
-			printf("* ------ 2·Ö");
+			printf("* ------ 2åˆ†");
 			GotoXY(MAP_HEIGHT + 1, 11);
-			printf("+ ------ 3·Ö");
+			printf("+ ------ 3åˆ†");
 			GotoXY(MAP_HEIGHT + 1, 13);
-			printf("£¡ ----- 4·Ö");
+			printf("ï¼ ----- 4åˆ†");
 			GotoXY(MAP_HEIGHT + 1, 15);
-			printf("Åöµ½×Ô¼ºÉíÌå¼õÒ»·Ö");
+			printf("ç¢°åˆ°è‡ªå·±èº«ä½“å‡ä¸€åˆ†");
 			GotoXY(MAP_HEIGHT + 1, 17);
-			printf("µ±Éß×²Ç½ºÍÕÏ°­ÎïÊ±ÓÎÏ·½áÊø");
+			printf("å½“è›‡æ’å¢™å’Œéšœç¢ç‰©æ—¶æ¸¸æˆç»“æŸ");
 		}
 		r = 0;
 		a = IsCorrect();
@@ -363,11 +363,11 @@ int MoveSnake()
 			system("cls");
 			data[data[0].m-1].grade = snake.length - 3;
 			GotoXY(45, 14);
-			printf("×îÖÕµÃ·Ö£º%d", snake.length - 3);
+			printf("æœ€ç»ˆå¾—åˆ†ï¼š%d", snake.length - 3);
 			GotoXY(45, 16);
-			printf("ÄãÊäÁË£¡");
+			printf("ä½ è¾“äº†ï¼");
 			GotoXY(45, 18);
-			printf("°´ÈÎÒâ¼ü²é¿´ÅÅÃû");
+			printf("æŒ‰ä»»æ„é”®æŸ¥çœ‹æ’å");
 			char c;
 			c = _getch();
 			system("cls");
@@ -379,10 +379,10 @@ int MoveSnake()
 			printf(" ");
 			snake.length--;
 			GotoXY(MAP_HEIGHT + 1, 5);
-			printf("µ±Ç°µÃ·Ö£º%d", snake.length - 3);
+			printf("å½“å‰å¾—åˆ†ï¼š%d", snake.length - 3);
 		}
 		SpeedControl();
-		Sleep(snake.speed);//½«½ø³Ì¹ÒÆğÒ»¶ÎÊ±¼ä£¬ÓÃÓÚ¿ØÖÆÉßµÄÒÆ¶¯ËÙ¶È
+		Sleep(snake.speed);//å°†è¿›ç¨‹æŒ‚èµ·ä¸€æ®µæ—¶é—´ï¼Œç”¨äºæ§åˆ¶è›‡çš„ç§»åŠ¨é€Ÿåº¦
 		
 	return 1;
 }
@@ -396,7 +396,7 @@ void PrintFood()
 		food.y = rand() % (MAP_WIDHT - 2)+1;
 		for (int k = 0; k < snake.length - 1; k++)
 		{
-			if (snake.snakeNode[k].x == food.x && snake.snakeNode[k].y == food.y)//ÅĞ¶ÏÊ³ÎïµÄÎ»ÖÃÊÇ·ñºÍÉßµÄÎ»ÖÃÖØºÏ£¬ÈôÖØºÏ£¬ÖØĞÂËæ»úÒ»¸öÎ»ÖÃ
+			if (snake.snakeNode[k].x == food.x && snake.snakeNode[k].y == food.y)//åˆ¤æ–­é£Ÿç‰©çš„ä½ç½®æ˜¯å¦å’Œè›‡çš„ä½ç½®é‡åˆï¼Œè‹¥é‡åˆï¼Œé‡æ–°éšæœºä¸€ä¸ªä½ç½®
 			{
 				lag = 1;
 				break;
@@ -476,9 +476,9 @@ void List()
 {
 	int i;
 	GotoXY(48, 12);
-	printf("ÓÃ»§Ãû");
+	printf("ç”¨æˆ·å");
 	GotoXY(58, 12);
-	printf("³É¼¨");
+	printf("æˆç»©");
 	for (i = 0; i <data[0].m; i++)
 	{
 		GotoXY(48, 12+(i+1)*2);
@@ -487,7 +487,7 @@ void List()
 		printf("%d",data[i].grade);
 	}
 	GotoXY(48, 12 + (i + 1) * 2);
-	printf("°´ÈÎÒâ¼ü·µ»Ø²Ëµ¥");
+	printf("æŒ‰ä»»æ„é”®è¿”å›èœå•");
 	Hide();
 	char ch = _getch();
 	system("cls");
@@ -495,7 +495,7 @@ void List()
 void Name()
 {
 	GotoXY(48, 12);
-	printf("ÇëÊäÈëÓÃ»§Ãû£º");
+	printf("è¯·è¾“å…¥ç”¨æˆ·åï¼š");
 	GotoXY(48, 14);
 	scanf("%s", &data[data[0].m].name);
 	data[0].m++;
