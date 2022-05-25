@@ -1,6 +1,6 @@
-/* Ô¼Éª·ò»·ÎÊÌâ£¨Joseph£©ÓÖ³Æ¶ªÊÖ¾îÎÊÌâ£ºÒÑÖª m ¸öÈËÎ§×ø³ÉÒ»È¦£¬ÓÉÄ³ÈËÆðÍ·£¬ÏÂÒ»¸öÈË¿ªÊ¼´Ó 1 µÝÔö±¨Êý£¬
-±¨µ½Êý×Ö n µÄÄÇ¸öÈË³öÁÐ£¬ËûµÄÏÂÒ»¸öÈËÓÖ´Ó 1 ¿ªÊ¼±¨Êý£¬Êýµ½ n µÄÄÇ¸öÈËÓÖ³öÁÐ£»
-ÒÀ´Ë¹æÂÉÖØ¸´ÏÂÈ¥£¬Ö±µ½ m ¸öÈËÈ«²¿³öÁÐÔ¼Éª·ò»·½áÊø¡£Èç¹û´Ó 0 ~ (m-1) ¸øÕâ m ¸öÈË±àºÅ£¬ÇëÊä³öÕâ m ¸öÈËµÄ³öÁÐË³Ðò¡£
+/* çº¦ç‘Ÿå¤«çŽ¯é—®é¢˜ï¼ˆJosephï¼‰åˆç§°ä¸¢æ‰‹ç»¢é—®é¢˜ï¼šå·²çŸ¥ m ä¸ªäººå›´åæˆä¸€åœˆï¼Œç”±æŸäººèµ·å¤´ï¼Œä¸‹ä¸€ä¸ªäººå¼€å§‹ä»Ž 1 é€’å¢žæŠ¥æ•°ï¼Œ
+æŠ¥åˆ°æ•°å­— n çš„é‚£ä¸ªäººå‡ºåˆ—ï¼Œä»–çš„ä¸‹ä¸€ä¸ªäººåˆä»Ž 1 å¼€å§‹æŠ¥æ•°ï¼Œæ•°åˆ° n çš„é‚£ä¸ªäººåˆå‡ºåˆ—ï¼›
+ä¾æ­¤è§„å¾‹é‡å¤ä¸‹åŽ»ï¼Œç›´åˆ° m ä¸ªäººå…¨éƒ¨å‡ºåˆ—çº¦ç‘Ÿå¤«çŽ¯ç»“æŸã€‚å¦‚æžœä»Ž 0 ~ (m-1) ç»™è¿™ m ä¸ªäººç¼–å·ï¼Œè¯·è¾“å‡ºè¿™ m ä¸ªäººçš„å‡ºåˆ—é¡ºåºã€‚
 */
 
 #include<bits/stdc++.h>
@@ -15,11 +15,11 @@ struct node
 int main()
 {
 	int m,n,x;
-	printf("ÇëÊäÈëmµÄ³õÊ¼Öµ£º\n");
+	printf("è¯·è¾“å…¥mçš„åˆå§‹å€¼ï¼š\n");
 	scanf("%d",&m);
-	printf("ÇëÊäÈë²ÎÓëÓÎÏ·µÄ×ÜÈËÊýn£º\n");
+	printf("è¯·è¾“å…¥å‚ä¸Žæ¸¸æˆçš„æ€»äººæ•°nï¼š\n");
 	scanf("%d",&n);
-	printf("ÇëÒÀ´ÎÊäÈëÓÎÏ·²ÎÓëÕßµÄÃÜÂë£º\n");
+	printf("è¯·ä¾æ¬¡è¾“å…¥æ¸¸æˆå‚ä¸Žè€…çš„å¯†ç ï¼š\n");
 	
 	head=new node;
 	last=head;
@@ -36,7 +36,7 @@ int main()
 	pre=exm;
 	exm=exm->next;
 	x=0;
-	printf("³öÁÐË³ÐòÎª£º\n");
+	printf("å‡ºåˆ—é¡ºåºä¸ºï¼š\n");
 	while(exm->next!=exm)
 	{
 		x++;
