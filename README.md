@@ -1,2 +1,2 @@
 # Brussels
-I never broke my word: I was lazy until May, and on June 1 I sat down to write code
+I never broke my word: I'm only lazy until May, and I've been sitting down and writing code since June 1
