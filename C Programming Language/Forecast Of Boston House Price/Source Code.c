@@ -6,43 +6,43 @@
 #define bool int
 #define false 0
 #define true 1
-#define FeatureMax 20  //ºê¶¨ÒåÌØÕ÷Êı×î´óÖµ£¬ºÃ¸ÄÊı¾İ
-#define DataMax 600    //Ñù±¾ÊıÄ¿£¨¼¸Ìõ£©×î´ó
-#define TrainNum 9999      //ÑµÁ·´ÎÊı
-#define LearnV 0.04         //Ñ§Ï°ÂÊ
+#define FeatureMax 20  //å®å®šä¹‰ç‰¹å¾æ•°æœ€å¤§å€¼ï¼Œå¥½æ”¹æ•°æ®
+#define DataMax 600    //æ ·æœ¬æ•°ç›®ï¼ˆå‡ æ¡ï¼‰æœ€å¤§
+#define TrainNum 9999      //è®­ç»ƒæ¬¡æ•°
+#define LearnV 0.04         //å­¦ä¹ ç‡
 
 
-double data[DataMax][FeatureMax]; //´æ´¢·¿¼ÛÊı¾İ¼¯µÄÊı×é
-double max[FeatureMax];   //´æ×î´óÖµÓÃÓÚÊı¾İ¹éÒ»»¯
-double min[FeatureMax];   //´æ×îĞ¡ÖµÓÃÓÚÊı¾İ¹éÒ»»¯
-int dataNum; //Ñù±¾ÊıÄ¿
-int trdataNum;  //ÑµÁ·Ñù±¾ÊıÄ¿
-int featureNum;//ÌØÕ÷ÊıÄ¿
-int n;     //×Ö¶ÎÊı(featureNum+1)
+double data[DataMax][FeatureMax]; //å­˜å‚¨æˆ¿ä»·æ•°æ®é›†çš„æ•°ç»„
+double max[FeatureMax];   //å­˜æœ€å¤§å€¼ç”¨äºæ•°æ®å½’ä¸€åŒ–
+double min[FeatureMax];   //å­˜æœ€å°å€¼ç”¨äºæ•°æ®å½’ä¸€åŒ–
+int dataNum; //æ ·æœ¬æ•°ç›®
+int trdataNum;  //è®­ç»ƒæ ·æœ¬æ•°ç›®
+int featureNum;//ç‰¹å¾æ•°ç›®
+int n;     //å­—æ®µæ•°(featureNum+1)
 
-double sumXY[FeatureMax];//x*yµÄÇóºÍ
-double sumX[FeatureMax]; //xµÄÇóºÍ
-double sumY;//yµÄÇóºÍ
-double everageX[FeatureMax];  //xÆ½¾ù
-double everageY; //yÆ½¾ù
-double varianceX[FeatureMax]; //x·½²î
-double varianceY; //y·½²î
-double recoef[FeatureMax];  //¸÷ÌØÕ÷Æ¤¶ûÑ·Ïà¹ØÏµÊı
+double sumXY[FeatureMax];//x*yçš„æ±‚å’Œ
+double sumX[FeatureMax]; //xçš„æ±‚å’Œ
+double sumY;//yçš„æ±‚å’Œ
+double everageX[FeatureMax];  //xå¹³å‡
+double everageY; //yå¹³å‡
+double varianceX[FeatureMax]; //xæ–¹å·®
+double varianceY; //yæ–¹å·®
+double recoef[FeatureMax];  //å„ç‰¹å¾çš®å°”é€Šç›¸å…³ç³»æ•°
 
-int p;   //ÒªÑ¡Ôñ×îÏà¹ØÌØÕ÷Êı£¨±ÈÈçÌâÖĞËµµÄ4£©
-int pos[FeatureMax];   //¼ÇÂ¼Ñ¡ÔñµÄÄÇ¼¸¸öÌØÕ÷ÔÚÔ­Êı¾İ¼¯µÄÁĞÊı
-double datase[DataMax][FeatureMax]; //²ÎÓëÏßĞÔ·½³ÌµÄÊı¾İ¼¯£¬Ìô³öÀ´µÄ
-double coef[TrainNum+1][FeatureMax];  //ÏµÊı¾ØÕó,×îºóÒ»ĞĞÊÇÑµÁ·½áÊøµÄÏµÊı½á¹û
+int p;   //è¦é€‰æ‹©æœ€ç›¸å…³ç‰¹å¾æ•°ï¼ˆæ¯”å¦‚é¢˜ä¸­è¯´çš„4ï¼‰
+int pos[FeatureMax];   //è®°å½•é€‰æ‹©çš„é‚£å‡ ä¸ªç‰¹å¾åœ¨åŸæ•°æ®é›†çš„åˆ—æ•°
+double datase[DataMax][FeatureMax]; //å‚ä¸çº¿æ€§æ–¹ç¨‹çš„æ•°æ®é›†ï¼ŒæŒ‘å‡ºæ¥çš„
+double coef[TrainNum+1][FeatureMax];  //ç³»æ•°çŸ©é˜µ,æœ€åä¸€è¡Œæ˜¯è®­ç»ƒç»“æŸçš„ç³»æ•°ç»“æœ
 
-double rmse;  //²âÊÔ¼¯ÖĞµÄ¾ù·½¸ùÎó²î
+double rmse;  //æµ‹è¯•é›†ä¸­çš„å‡æ–¹æ ¹è¯¯å·®
 
-double realcoef[FeatureMax];  //ÕæÕıµÄÏµÊı£¬Äæ¹éÒ»»¯ºóµÄ
+double realcoef[FeatureMax];  //çœŸæ­£çš„ç³»æ•°ï¼Œé€†å½’ä¸€åŒ–åçš„
 
 struct Feature {
-	char* name[FeatureMax];//ÌØÕ÷Ãû×Ö×Ö·û´®
-	double coef[FeatureMax];  //ÌØÕ÷ÏµÊı
+	char* name[FeatureMax];//ç‰¹å¾åå­—å­—ç¬¦ä¸²
+	double coef[FeatureMax];  //ç‰¹å¾ç³»æ•°
 };
-struct Feature Feain, Feaout;  //´æµÄÌØÕ÷ºÍÑ¡ÔñµÄÌØÕ÷
+struct Feature Feain, Feaout;  //å­˜çš„ç‰¹å¾å’Œé€‰æ‹©çš„ç‰¹å¾
 
 bool Inputs();
 void Init();
@@ -68,7 +68,7 @@ int main() {
 	return 0;
 }
 
-//Êı¾İ¶ÁÈë
+//æ•°æ®è¯»å…¥
 bool Inputs() {
 	int i;
 	for (i = 0; i < FeatureMax; i++) {
@@ -76,21 +76,21 @@ bool Inputs() {
 		Feaout.name[i] = (char*)malloc(sizeof(char) * 10);
 	}
 
-	//char fname[256];//ÎÄ¼şÃû
-	//printf("ÇëÊäÈë´æ·ÅÊı¾İµÄÎÄ¼şÃû£º ");
+	//char fname[256];//æ–‡ä»¶å
+	//printf("è¯·è¾“å…¥å­˜æ”¾æ•°æ®çš„æ–‡ä»¶åï¼š ");
 	//scanf("%s", fname);
-	printf("´æ·ÅÊı¾İµÄÎÄ¼şÃû£ºhousing.txt\n");
-	printf("\nÑù±¾ÊıÄ¿dataNum£º\n");   //506
+	printf("å­˜æ”¾æ•°æ®çš„æ–‡ä»¶åï¼šhousing.txt\n");
+	printf("\næ ·æœ¬æ•°ç›®dataNumï¼š\n");   //506
 	scanf("%d", &dataNum);
-	printf("\nÌØÕ÷ÊıÄ¿featureNum:\n");  //ËãÉÏ·¿¼Û 14
+	printf("\nç‰¹å¾æ•°ç›®featureNum:\n");  //ç®—ä¸Šæˆ¿ä»· 14
 	scanf("%d", &featureNum);
 	n = featureNum + 1;
-	trdataNum = dataNum * 7 / 10;   //Ñù±¾ÖĞÑµÁ·Ñù±¾Êı£¨Êı¾İ¼¯»®·Ö!!!
+	trdataNum = dataNum * 7 / 10;   //æ ·æœ¬ä¸­è®­ç»ƒæ ·æœ¬æ•°ï¼ˆæ•°æ®é›†åˆ’åˆ†!!!
 
-	FILE* fp = fopen("housing.txt", "rb");//ÎªÁËÃ¿´ÎÔËĞĞ²»ÓÃÖØĞÂÊäÈëÃû×Ö
+	FILE* fp = fopen("housing.txt", "rb");//ä¸ºäº†æ¯æ¬¡è¿è¡Œä¸ç”¨é‡æ–°è¾“å…¥åå­—
 	if (fp == NULL) {
-		printf("²»ÄÜ´ò¿ªÊäÈëµÄÎÄ¼ş\n");
-		fprintf(stderr, "open file error: %s", strerror(errno));  //´íÎóÔ­Òò
+		printf("ä¸èƒ½æ‰“å¼€è¾“å…¥çš„æ–‡ä»¶\n");
+		fprintf(stderr, "open file error: %s", strerror(errno));  //é”™è¯¯åŸå› 
 		return false;
 	}
 
@@ -100,12 +100,12 @@ bool Inputs() {
 		fscanf(fp, "%s", Feain.name[i]);
 	}
 
-	memset(max, 0, sizeof(max));//³õÊ¼»¯×î´óÊı×é¶¼Îª0
-	memset(min, 0x7f7f7f7f, sizeof(min));//ÎŞÇî´ó
+	memset(max, 0, sizeof(max));//åˆå§‹åŒ–æœ€å¤§æ•°ç»„éƒ½ä¸º0
+	memset(min, 0x7f7f7f7f, sizeof(min));//æ— ç©·å¤§
 	for ( i = 0; i < dataNum; i++) {
-		data[i][0] = 1; //  Áî³õÊ¼ÏµÊıÎª1£¬x0ÊÇ1
+		data[i][0] = 1; //  ä»¤åˆå§‹ç³»æ•°ä¸º1ï¼Œx0æ˜¯1
 		for (int j = 1; j < n; j++) {
-			fscanf(fp, "%lf", &data[i][j]);    //´æÊı¾İµÄÍ¬Ê±ÕÒ¸÷ÌØÕ÷×î´ó×îĞ¡Öµ
+			fscanf(fp, "%lf", &data[i][j]);    //å­˜æ•°æ®çš„åŒæ—¶æ‰¾å„ç‰¹å¾æœ€å¤§æœ€å°å€¼
 			if (data[i][j] > max[j])
 				max[j] = data[i][j];
 			if (data[i][j] < min[j])
@@ -118,7 +118,7 @@ bool Inputs() {
 	return true;
 }
 
-//³õÊ¼»¯  Êı¾İ¹éÒ»»¯
+//åˆå§‹åŒ–  æ•°æ®å½’ä¸€åŒ–
 void Init() {
 	for (int i = 0; i < dataNum; i++) {
 		for (int j = 1; j < n; j++) {
@@ -127,7 +127,7 @@ void Init() {
 	}
 }
 
-//ÅÅĞòÑ¡Ôñ¸÷ÌØÕ÷µÄÏà¹ØÏµÊı£¡£¡£¡Ñ¡¼¸¸ö×îÏà¹ØÎ¬¶È£¡
+//æ’åºé€‰æ‹©å„ç‰¹å¾çš„ç›¸å…³ç³»æ•°ï¼ï¼ï¼é€‰å‡ ä¸ªæœ€ç›¸å…³ç»´åº¦ï¼
 void SortSelect() {
 	int i, j;
 	sumY = 0;
@@ -164,18 +164,18 @@ void SortSelect() {
 		varianceX[j] = 1.0*t / dataNum;
 		//printf("\n varianceX[%d]=%f", j, varianceX[j]);
 	}
-	printf("\n¸÷ÌØÕ÷Ïà¹ØÏµÊı£º\n");
+	printf("\nå„ç‰¹å¾ç›¸å…³ç³»æ•°ï¼š\n");
 	for (j = 1; j < featureNum; j++) {
 		recoef[j] = 1.0*(1.0*sumXY[j] / dataNum - everageX[j] * everageY) / sqrt(varianceX[j] * varianceY);
 		//printf("\n recoef[%d]=%f", j, recoef[j]);
 		printf("%s\t%f\n", Feain.name[j], recoef[j]);
 	}
-	//ÒòÎªÓĞ¸ºÊıµÄÏµÊı£¬»¹ÓĞÑ¡ÔñĞèÒª£¬½¨tempÊı×é£»
+	//å› ä¸ºæœ‰è´Ÿæ•°çš„ç³»æ•°ï¼Œè¿˜æœ‰é€‰æ‹©éœ€è¦ï¼Œå»ºtempæ•°ç»„ï¼›
 	double temp[FeatureMax];
 	for (j = 1; j < featureNum; j++) {
 		temp[j] = fabs(recoef[j]);
 	}
-	printf("\nÇëÊäÈëÑ¡Ôñ×îÏà¹ØÌØÕ÷µÄ¸öÊı£¨1<=p<featureNum£©\n");
+	printf("\nè¯·è¾“å…¥é€‰æ‹©æœ€ç›¸å…³ç‰¹å¾çš„ä¸ªæ•°ï¼ˆ1<=p<featureNumï¼‰\n");
 	scanf_s("%d", &p);
 	int k=1;
 	int m = 1;
@@ -186,7 +186,7 @@ void SortSelect() {
 				max = j;
 			}
 		}
-		temp[max] = 0;   //±ä0²»²ÎÓë±È½ÏÁË
+		temp[max] = 0;   //å˜0ä¸å‚ä¸æ¯”è¾ƒäº†
 		pos[m++] = max;
 		strcpy(Feaout.name[k], Feain.name[max]);
 		for (i = 0; i < dataNum; i++) {
@@ -194,7 +194,7 @@ void SortSelect() {
 		}
 		k++;
 	}
-	for (i = 0; i < dataNum; i++) {    //²»ÒªÍüÁË»¹ÓĞ·¿¼ÛÄÇÒ»ÁĞ
+	for (i = 0; i < dataNum; i++) {    //ä¸è¦å¿˜äº†è¿˜æœ‰æˆ¿ä»·é‚£ä¸€åˆ—
 		datase[i][0] = 1;
 		datase[i][p+1] = data[i][featureNum];
 	}
@@ -204,13 +204,13 @@ void SortSelect() {
 //		}
 //		printf("\n");
 //	}
-	//Ñ¡µÄÌØÕ÷¾Í¹¹³ÉÒ»¸öĞÂµÄÊı¾İ¼¯ÁË
+	//é€‰çš„ç‰¹å¾å°±æ„æˆä¸€ä¸ªæ–°çš„æ•°æ®é›†äº†
 }
 
-//ÏßĞÔ»Ø¹é  Ìİ¶ÈÏÂ½µ ÑµÁ·1000´Î£¡£¡ ÇóÏßĞÔ·½³Ì
+//çº¿æ€§å›å½’  æ¢¯åº¦ä¸‹é™ è®­ç»ƒ1000æ¬¡ï¼ï¼ æ±‚çº¿æ€§æ–¹ç¨‹
 void LineReg() {
 	int i,j,k,l;
-	//for (i = 0; i < TrainNum; i++) { //ÏµÊı³õÊ¼»¯Îª1
+	//for (i = 0; i < TrainNum; i++) { //ç³»æ•°åˆå§‹åŒ–ä¸º1
 		for (j = 0; j < p+1; j++) {
 			coef[0][j] = 1;
 		}
@@ -232,7 +232,7 @@ void LineReg() {
 
 	}
 
-	printf("\nÑµÁ·%d´Îºó£¬ÏßĞÔ·½³ÌÖĞÏàÓ¦µÄÏµÊı(Î´·´¹éÒ»»¯)£º\n",TrainNum,p);
+	printf("\nè®­ç»ƒ%dæ¬¡åï¼Œçº¿æ€§æ–¹ç¨‹ä¸­ç›¸åº”çš„ç³»æ•°(æœªåå½’ä¸€åŒ–)ï¼š\n",TrainNum,p);
 	for (i = 0; i < p + 1; i++) {
 		printf("%10s : %10f\n", Feaout.name[i], coef[TrainNum][i]);
 	}
@@ -252,15 +252,15 @@ void Text() {
 	//printf("\n t1=%f \n", t1);
 	double num = (double)dataNum - trdataNum;
 	rmse = sqrt(1.0*t1 / num);
-	printf("\nÑµÁ·%d´ÎºóµÄRMSEÎª£º%f\n",TrainNum,rmse);
+	printf("\nè®­ç»ƒ%dæ¬¡åçš„RMSEä¸ºï¼š%f\n",TrainNum,rmse);
 }
-//ÏµÊı·´¹éÒ»»¯
+//ç³»æ•°åå½’ä¸€åŒ–
 void ReInit() {
 	int i;
 	for (i = 0; i < p + 1; i++) {
 		realcoef[i] = coef[TrainNum][i];
 	}
-	for (i = 1; i <= p; i++) {//ÏÈ¼ÆËãw0µÄÕæÊµÖµ
+	for (i = 1; i <= p; i++) {//å…ˆè®¡ç®—w0çš„çœŸå®å€¼
 		realcoef[0] -= (1.0 * coef[TrainNum][i] * min[pos[i]] / (max[pos[i]] - min[pos[i]]));
 	}
 	realcoef[0] = realcoef[0] * (max[featureNum] - min[featureNum]) + min[featureNum];
@@ -268,26 +268,26 @@ void ReInit() {
 	for (j = 1; j < p+1; j++) {
 		realcoef[j] *= (1.0 * (max[featureNum] - min[featureNum]) / (max[pos[j]] - min[pos[j]]));
 	}
-	printf("\nÑµÁ·%d´Îºó£¬ÏßĞÔ·½³ÌÖĞÏàÓ¦µÄÏµÊı(ÒÑ·´¹éÒ»»¯)£º\n",TrainNum, p);
+	printf("\nè®­ç»ƒ%dæ¬¡åï¼Œçº¿æ€§æ–¹ç¨‹ä¸­ç›¸åº”çš„ç³»æ•°(å·²åå½’ä¸€åŒ–)ï¼š\n",TrainNum, p);
 	for (i = 0; i < p + 1; i++) {
 		printf("%10s : %10f\n", Feaout.name[i], realcoef[i]);
 	}
 }
 
-//Êä³ö
+//è¾“å‡º
 void Outputs() {
-	printf("\n½ÓÏÂÀ´¿É½øĞĞ·¿¼ÛÔ¤²â\n");
+	printf("\næ¥ä¸‹æ¥å¯è¿›è¡Œæˆ¿ä»·é¢„æµ‹\n");
 	int i;
 	double x[FeatureMax];
 	x[0] = 1;
 	for (i = 1; i < p + 1; i++) {
-		printf("ÇëÊäÈë%sµÄÖµ:\n", Feaout.name[i]);
+		printf("è¯·è¾“å…¥%sçš„å€¼:\n", Feaout.name[i]);
 		scanf_s("%lf", &x[i]);
 	}
 	double result=0;
 	for (i = 0; i < p + 1;i++) {
 		result += realcoef[i] * x[i];
 	}
-	printf("Ô¤²â½á¹ûÎª£º%f", result);
+	printf("é¢„æµ‹ç»“æœä¸ºï¼š%f", result);
 }
 
