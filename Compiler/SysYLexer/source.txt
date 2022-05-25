@@ -1,0 +1,13 @@
+void main(){//test	
+	int a=0x12;
+	const int b=011;
+	int abc=a+b;
+ 	if(1ab>abc){
+		abc=a*b;
+		break;
+	}
+	return 0;$
+/*if fili
+test
+*//*#
+}
