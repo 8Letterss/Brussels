@@ -1,17 +1,17 @@
-//µİ¹éÏÂ½µ×Ó³ÌĞò·ÖÎö
-//ÎªÁË·½±ãĞ´´úÂë£¬Ê¹ÓÃ¡°E_¡±±íÊ¾¡°E¡¯¡±£¬Ê¹ÓÃ¡°@¡±´ú±í¡°¦Å¡±£¬ÌØ´ËÉùÃ÷¡£
+//é€’å½’ä¸‹é™å­ç¨‹åºåˆ†æ
+//ä¸ºäº†æ–¹ä¾¿å†™ä»£ç ï¼Œä½¿ç”¨â€œE_â€è¡¨ç¤ºâ€œEâ€™â€ï¼Œä½¿ç”¨â€œ@â€ä»£è¡¨â€œÎµâ€ï¼Œç‰¹æ­¤å£°æ˜ã€‚
 
 
 #include <bits/stdc++.h>
 using namespace std;
 
-struct info_node //±£´æ·ÖÎö²½ÖèµÄĞÅÏ¢
+struct info_node //ä¿å­˜åˆ†ææ­¥éª¤çš„ä¿¡æ¯
 {
-    //int steps_number;//·ÖÎö²½ÖèºÅ
-    string grammer; //ÓÃµ½µÄÓï·¨
-    string hv_ana;  //ÒÑ¾­·ÖÎö¹ıµÄ×Ö·û´®
-    char bi_ana;    //ÕıÔÚ·ÖÎöµÄ×Ö·û
-    string rem_str; //Ê£ÓàµÄ×Ö·û´®
+    //int steps_number;//åˆ†ææ­¥éª¤å·
+    string grammer; //ç”¨åˆ°çš„è¯­æ³•
+    string hv_ana;  //å·²ç»åˆ†æè¿‡çš„å­—ç¬¦ä¸²
+    char bi_ana;    //æ­£åœ¨åˆ†æçš„å­—ç¬¦
+    string rem_str; //å‰©ä½™çš„å­—ç¬¦ä¸²
     info_node(/*int steps_number,*/ string grammer, string hv_ana, char bi_ana, string rem_str)
     {
         //this->steps_number = steps_number;
@@ -22,19 +22,19 @@ struct info_node //±£´æ·ÖÎö²½ÖèµÄĞÅÏ¢
     }
 };
 
-string expression; //ÊäÈëµÄ±í´ïÊ½
-int lookahead;     //µ±Ç°´ıÆ¥Åä×Ö·ûµÄÏÂ±ê
-//set<int> error_id; //Æ¥ÅäÊ±³ö´íµÄ×Ö·ûµÄÏÂ±ê
-stack<info_node *> steps; //´æ·ÅĞÅÏ¢½Úµã£¬ÓÃÀ´´òÓ¡
-bool is_valid = true;     //ÊäÈëµÄ±í´ïÊ½ÊÇ·ñºÏ·¨
-int steps_number = 0;     //µ±Ç°²½ÖèµÄ±àºÅ
+string expression; //è¾“å…¥çš„è¡¨è¾¾å¼
+int lookahead;     //å½“å‰å¾…åŒ¹é…å­—ç¬¦çš„ä¸‹æ ‡
+//set<int> error_id; //åŒ¹é…æ—¶å‡ºé”™çš„å­—ç¬¦çš„ä¸‹æ ‡
+stack<info_node *> steps; //å­˜æ”¾ä¿¡æ¯èŠ‚ç‚¹ï¼Œç”¨æ¥æ‰“å°
+bool is_valid = true;     //è¾“å…¥çš„è¡¨è¾¾å¼æ˜¯å¦åˆæ³•
+int steps_number = 0;     //å½“å‰æ­¥éª¤çš„ç¼–å·
 
 /****************function declaration********/
 void E();
 
 void match(char a)
 {
-    if (lookahead >= expression.size())//ËµÃ÷ÒÑ¾­·ÖÎöÍê³Éº¯Êı´úÂëÖ»ÓĞ×îºóÒ»¾ä»°ÓĞÓÃ£¬´úÂëÈßÓà¡£
+    if (lookahead >= expression.size())//è¯´æ˜å·²ç»åˆ†æå®Œæˆå‡½æ•°ä»£ç åªæœ‰æœ€åä¸€å¥è¯æœ‰ç”¨ï¼Œä»£ç å†—ä½™ã€‚
     {
         is_valid = false;
         return;
@@ -50,12 +50,12 @@ void match(char a)
 
 void M()
 {
-    if (lookahead >= expression.size())//ËµÃ÷ÒÑ¾­·ÖÎöÍê³É
+    if (lookahead >= expression.size())//è¯´æ˜å·²ç»åˆ†æå®Œæˆ
     {
         is_valid = false;
         return;
     }
-    if (expression[lookahead] == '*') //ÕâÀï¾Í²»ÓÃ»ØËİÁË£¬ÓÃifÅĞ¶Ï¼´¿É£¬»ØËİµ±È»Ò²¿ÉÒÔĞ´
+    if (expression[lookahead] == '*') //è¿™é‡Œå°±ä¸ç”¨å›æº¯äº†ï¼Œç”¨ifåˆ¤æ–­å³å¯ï¼Œå›æº¯å½“ç„¶ä¹Ÿå¯ä»¥å†™
     {
         steps.push(new info_node(/*steps_number++,*/ "M->*", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
         match('*');
@@ -71,12 +71,12 @@ void M()
 
 void A()
 {
-    if (lookahead >= expression.size())//ËµÃ÷ÒÑ¾­·ÖÎöÍê³É
+    if (lookahead >= expression.size())//è¯´æ˜å·²ç»åˆ†æå®Œæˆ
     {
         is_valid = false;
         return;
     }
-    if (expression[lookahead] == '+') //ÕâÀï¾Í²»ÓÃ»ØËİÁË£¬ÓÃifÅĞ¶Ï¼´¿É£¬»ØËİµ±È»Ò²¿ÉÒÔĞ´
+    if (expression[lookahead] == '+') //è¿™é‡Œå°±ä¸ç”¨å›æº¯äº†ï¼Œç”¨ifåˆ¤æ–­å³å¯ï¼Œå›æº¯å½“ç„¶ä¹Ÿå¯ä»¥å†™
     {
         steps.push(new info_node(/*steps_number++,*/ "A->+", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
         match('+');
@@ -92,12 +92,12 @@ void A()
 
 void F()
 {
-    if (lookahead >= expression.size())//ËµÃ÷ÒÑ¾­·ÖÎöÍê³É
+    if (lookahead >= expression.size())//è¯´æ˜å·²ç»åˆ†æå®Œæˆ
     {
         is_valid = false;
         return;
     }
-    if (expression[lookahead] == '(') //ÕâÀï¾Í²»ÓÃ»ØËİÁË£¬ÓÃifÅĞ¶Ï¼´¿É£¬»ØËİµ±È»Ò²¿ÉÒÔĞ´
+    if (expression[lookahead] == '(') //è¿™é‡Œå°±ä¸ç”¨å›æº¯äº†ï¼Œç”¨ifåˆ¤æ–­å³å¯ï¼Œå›æº¯å½“ç„¶ä¹Ÿå¯ä»¥å†™
     {
         steps.push(new info_node(/*steps_number++,*/ "F->(E)", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
         match('(');
@@ -118,18 +118,18 @@ void T_()
     if(!is_valid)
         return;
 
-    int cu_lookahead = lookahead;//¼ÇÂ¼ÏÂµ±Ç°Æ¥ÅäµÄÖµ£¬¼ÓÕâ¾ä»°ÊÇÎªÁË·ÅÖÃÀàËÆÓÚ¡°i*¡±±»ÎóÅĞÕıÈ·¡£
+    int cu_lookahead = lookahead;//è®°å½•ä¸‹å½“å‰åŒ¹é…çš„å€¼ï¼ŒåŠ è¿™å¥è¯æ˜¯ä¸ºäº†æ”¾ç½®ç±»ä¼¼äºâ€œi*â€è¢«è¯¯åˆ¤æ­£ç¡®ã€‚
     steps.push(new info_node(/*steps_number++,*/ "T'->MFT'", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
     M();
     F();
     T_();
-    if (!is_valid) //»ØËİµ÷ÓÃÁíÒ»ÌõÓï¾ä
+    if (!is_valid) //å›æº¯è°ƒç”¨å¦ä¸€æ¡è¯­å¥
     {
-        if(cu_lookahead != lookahead)//ËµÃ÷ÓĞ×Ö·ûÆ¥ÅäÁË,µ«ÊÇ¼ÈÈ»»ØËİ£¬ÄÇÃ´Æ¥ÅäµÄ×Ö·û¾Í²»Ëã¡£
+        if(cu_lookahead != lookahead)//è¯´æ˜æœ‰å­—ç¬¦åŒ¹é…äº†,ä½†æ˜¯æ—¢ç„¶å›æº¯ï¼Œé‚£ä¹ˆåŒ¹é…çš„å­—ç¬¦å°±ä¸ç®—ã€‚
             lookahead--;
         is_valid = true;
         steps.pop();
-        steps.push(new info_node(/*steps_number++,*/ "T'->¦Å", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
+        steps.push(new info_node(/*steps_number++,*/ "T'->Îµ", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
     }
 }
 void T()
@@ -141,24 +141,24 @@ void T()
     T_();
 }
 
-void E_() //´ø»ØËİ
+void E_() //å¸¦å›æº¯
 {
     if(!is_valid)
         return;
 
-    int cu_lookahead = lookahead;//¼ÇÂ¼ÏÂµ±Ç°Æ¥ÅäµÄÖµ£¬¼ÓÕâ¾ä»°ÊÇÎªÁË·ÅÖÃÀàËÆÓÚ¡°i*¡±±»ÎóÅĞÕıÈ·¡£
+    int cu_lookahead = lookahead;//è®°å½•ä¸‹å½“å‰åŒ¹é…çš„å€¼ï¼ŒåŠ è¿™å¥è¯æ˜¯ä¸ºäº†æ”¾ç½®ç±»ä¼¼äºâ€œi*â€è¢«è¯¯åˆ¤æ­£ç¡®ã€‚
     //cout<<lookahead;
     steps.push(new info_node(/*steps_number++,*/ "E'->ATE'", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
     A();
     T();
     E_();
-    if (!is_valid) //»ØËİµ÷ÓÃÁíÒ»ÌõÓï¾ä£ºE->¦Å
+    if (!is_valid) //å›æº¯è°ƒç”¨å¦ä¸€æ¡è¯­å¥ï¼šE->Îµ
     {
-        if(cu_lookahead != lookahead)//ËµÃ÷ÓĞ×Ö·ûÆ¥ÅäÁË,µ«ÊÇ¼ÈÈ»»ØËİ£¬ÄÇÃ´Æ¥ÅäµÄ×Ö·û¾Í²»Ëã¡£
+        if(cu_lookahead != lookahead)//è¯´æ˜æœ‰å­—ç¬¦åŒ¹é…äº†,ä½†æ˜¯æ—¢ç„¶å›æº¯ï¼Œé‚£ä¹ˆåŒ¹é…çš„å­—ç¬¦å°±ä¸ç®—ã€‚
             lookahead--;
         is_valid = true;
         steps.pop();
-        steps.push(new info_node(/*steps_number++,*/ "E'->¦Å", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
+        steps.push(new info_node(/*steps_number++,*/ "E'->Îµ", expression.substr(0, lookahead), expression[lookahead], expression.substr(lookahead)));
     }
 }
 
@@ -195,10 +195,10 @@ int main()
     else
         is_valid = false;
     if(is_valid)
-        cout<<"±í´ïÊ½ºÏ·¨£¡"<<'\n';
+        cout<<"è¡¨è¾¾å¼åˆæ³•ï¼"<<'\n';
     else
-        cout<<"±í´ïÊ½²»ºÏ·¨£¡"<<'\n';
-    cout<<setiosflags(ios::left)<<setw(15)<<"ÎÄ·¨"<<setw(15)<<"ÒÑ·ÖÎö"<<setw(15)<<"Õı·ÖÎö"<<setw(15)<<"Î´·ÖÎö"<<'\n';
+        cout<<"è¡¨è¾¾å¼ä¸åˆæ³•ï¼"<<'\n';
+    cout<<setiosflags(ios::left)<<setw(15)<<"æ–‡æ³•"<<setw(15)<<"å·²åˆ†æ"<<setw(15)<<"æ­£åˆ†æ"<<setw(15)<<"æœªåˆ†æ"<<'\n';
     if(is_valid)
         print_table();
     system("pause");
