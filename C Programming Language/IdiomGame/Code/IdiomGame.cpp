@@ -1,33 +1,33 @@
 #include"Idiom.h"
 
 int main() {
-    system("title Ö÷½çÃæ");
+    system("title ä¸»ç•Œé¢");
     system("color f4");
     system("mode con cols=80 lines=20");
-    //system("color 0B");//ĞŞ¸Ä±³¾°ºÍ×ÖÌåÑÕÉ«
+    //system("color 0B");//ä¿®æ”¹èƒŒæ™¯å’Œå­—ä½“é¢œè‰²
 
-    int num1, num2, num3;//½ÓÊÜ³ÉÓïÊÍÒåÊıÁ¿£»½ÓÊÜ½ÓÁú³ÉÓïÊıÁ¿£»½ÓÊÜÅÅĞĞ°ñÓÃ»§ÊıÁ¿
-    idiom word[300];   //´æ·Å³ÉÓïÊı¾İ
+    int num1, num2, num3;//æ¥å—æˆè¯­é‡Šä¹‰æ•°é‡ï¼›æ¥å—æ¥é¾™æˆè¯­æ•°é‡ï¼›æ¥å—æ’è¡Œæ¦œç”¨æˆ·æ•°é‡
+    idiom word[300];   //å­˜æ”¾æˆè¯­æ•°æ®
     idiom* wptr = word;
-    user member;       //´æ·ÅÓÃ»§µÇÂ¼Êı¾İ
+    user member;       //å­˜æ”¾ç”¨æˆ·ç™»å½•æ•°æ®
     user* mptr = &member;
-    record player;      //´æ·ÅÓÃ»§³É¼¨Êı¾İ
+    record player;      //å­˜æ”¾ç”¨æˆ·æˆç»©æ•°æ®
     record* pptr = &player;
-    record rank[10];    //´æ·ÅÅÅĞĞ°ñÊı¾İ
+    record rank[10];    //å­˜æ”¾æ’è¡Œæ¦œæ•°æ®
     record* rptr = rank;
     max* maxptr = (max*)malloc(sizeof(max) * 100);
     max* hmaxptr = maxptr;
 
 
-    printf("\n\n                               ÏµÍ³³õÊ¼»¯ÖĞ....    \n\n\n\n\n");
+    printf("\n\n                               ç³»ç»Ÿåˆå§‹åŒ–ä¸­....    \n\n\n\n\n");
     //    cartoon();
     system("pause");
     system("cls");
     //    mciSentString("open abc.mp3 alias bkmusic",NULL,0,NULL);
     //    mciSentString("play bkmusic repeat",NULL,0,NULL);
-    OutMenu(mptr);//Æô¶¯µÇÂ¼ÏµÍ³
-    strcpy(pptr->name, mptr->name);//µ¼ÈëÃû×ÖĞÅÏ¢
-    num1 = GetData(wptr);//µ¼Èë³ÉÓïÊı¾İ
+    OutMenu(mptr);//å¯åŠ¨ç™»å½•ç³»ç»Ÿ
+    strcpy(pptr->name, mptr->name);//å¯¼å…¥åå­—ä¿¡æ¯
+    num1 = GetData(wptr);//å¯¼å…¥æˆè¯­æ•°æ®
     num2 = SuperGet(maxptr);
     num3 = RankingList(rptr);
     system("cls");
@@ -35,35 +35,35 @@ int main() {
 
     player.fre = player.score1 = player.score2 = player.nums = 0;
     while (StartGame(pptr, wptr, num1, maxptr, num3, rptr) != 0) {
-        system("pause");//Ê¹ÓÃÍêµ¥¸ö¹¦ÄÜÊ±ÔİÍ£
+        system("pause");//ä½¿ç”¨å®Œå•ä¸ªåŠŸèƒ½æ—¶æš‚åœ
         system("cls");
     }
     free(maxptr);
     //WriteList(pptr, rptr, num3);
     system("cls");
-    printf("\n\n                   Êı¾İÉÏ´«ÖĞ...   \n\n\n");
+    printf("\n\n                   æ•°æ®ä¸Šä¼ ä¸­...   \n\n\n");
     //    cartoon();
     system("pause");
-    MessageBoxA(NULL, "¸ĞĞ»Ê¹ÓÃ", "¼´½«ÍÆ³öÏµÍ³", MB_ICONINFORMATION | MB_OK);
+    MessageBoxA(NULL, "æ„Ÿè°¢ä½¿ç”¨", "å³å°†æ¨å‡ºç³»ç»Ÿ", MB_ICONINFORMATION | MB_OK);
 
     return 0;
 }
 
 int GetData(idiom* ptr) {
     int num = 0;
-    char str[200];//ÁÙÊ±´æ·Å³ÉÓïÊı¾İ
+    char str[200];//ä¸´æ—¶å­˜æ”¾æˆè¯­æ•°æ®
     int i;
     FILE* fp;
 
     fp = fopen("idiom.txt", "r+");
     if (fp == NULL) {
-        MessageBoxA(NULL, "ÍË³öÏµÍ³", "¶ÁÊı¾İ´íÎó", MB_ICONSTOP | MB_OK);
+        MessageBoxA(NULL, "é€€å‡ºç³»ç»Ÿ", "è¯»æ•°æ®é”™è¯¯", MB_ICONSTOP | MB_OK);
         exit(0);
     }
     while (!feof(fp)) {
         fgets(str, 200, fp);
         for (i = 0; str[i] != '\n' && str[i] != '\0'; i++) {
-            if (str[i] == ':') {//½«×Ö·û´®·Ö¸îÎª³ÉÓïºÍÊÍÒå
+            if (str[i] == ':') {//å°†å­—ç¬¦ä¸²åˆ†å‰²ä¸ºæˆè¯­å’Œé‡Šä¹‰
                 str[8] = '\0';
                 break;
             }
@@ -90,7 +90,7 @@ int SeekWord(idiom* input, idiom* wptr, int num) {
     return idx;
 }
 
-int SuperGet(max* maxptr) {//³ÉÓï½ÓÁúÊı¾İ¶ÁÈ¡
+int SuperGet(max* maxptr) {//æˆè¯­æ¥é¾™æ•°æ®è¯»å–
     int num = 0;
     char str[10];
     int i;
@@ -99,7 +99,7 @@ int SuperGet(max* maxptr) {//³ÉÓï½ÓÁúÊı¾İ¶ÁÈ¡
 
     fp = fopen("word.txt", "r+");
     if (fp == NULL) {
-        MessageBoxA(NULL, "ÍË³öÏµÍ³", "·¢Éú´íÎó", MB_ICONSTOP | MB_OK);
+        MessageBoxA(NULL, "é€€å‡ºç³»ç»Ÿ", "å‘ç”Ÿé”™è¯¯", MB_ICONSTOP | MB_OK);
         exit(0);
     }
     while (!feof(fp)) {
@@ -118,7 +118,7 @@ int SuperGet(max* maxptr) {//³ÉÓï½ÓÁúÊı¾İ¶ÁÈ¡
     return num;
 }
 
-int SuperSearch(max* maxptr, char str[]) {//³ÉÓï½ÓÁú¼ìË÷
+int SuperSearch(max* maxptr, char str[]) {//æˆè¯­æ¥é¾™æ£€ç´¢
     int idx = -1;
     int i;
     max* maxptrTemp = maxptr;
@@ -135,7 +135,7 @@ int SuperSearch(max* maxptr, char str[]) {//³ÉÓï½ÓÁú¼ìË÷
     return idx;
 }
 
-int MatchingIdioms(max* maxptr, char str[]) {//Æ¥Åä³ÉÓï½ÓÁú
+int MatchingIdioms(max* maxptr, char str[]) {//åŒ¹é…æˆè¯­æ¥é¾™
     int idx = -1;
     int i;
     max* maxptrTemp = maxptr;
@@ -155,23 +155,23 @@ int MyRand(int num) {
 }
 
 int StartGame(record* player, idiom* wptr, int num, max* mptr, int num2, record* rptr) {
-    int select;//´æ´¢ÓÃ»§Ñ¡Ôñ¹¦ÄÜ
-    int flag = 1;//ÓÎÏ·ÊÇ·ñ¼ÌĞø
-    int select2;//´æ´¢ÓÃ»§Ñ¡Ôñ²âÊÔÄ£Ê½
+    int select;//å­˜å‚¨ç”¨æˆ·é€‰æ‹©åŠŸèƒ½
+    int flag = 1;//æ¸¸æˆæ˜¯å¦ç»§ç»­
+    int select2;//å­˜å‚¨ç”¨æˆ·é€‰æ‹©æµ‹è¯•æ¨¡å¼
 
-    system("title ¿ªÊ¼ÓÎÏ·");
+    system("title å¼€å§‹æ¸¸æˆ");
     system("color f4");
     system("mode con cols=45 lines=35");
 
-    printf("==========ÇëÑ¡ÔñÊ¹ÓÃ¹¦ÄÜ==========\n");
-    printf("\n[1]³ÉÓï´Êµä\n");
-    printf("\n[2]³ÉÓïÌî¿Õ\n");
-    printf("\n[3]³ÉÓï½ÓÁú\n");
-    printf("\n[4]ÅÅĞĞ°ñ\n");
-    printf("\n[5]ÍË³öÓÎÏ·\n");
+    printf("==========è¯·é€‰æ‹©ä½¿ç”¨åŠŸèƒ½==========\n");
+    printf("\n[1]æˆè¯­è¯å…¸\n");
+    printf("\n[2]æˆè¯­å¡«ç©º\n");
+    printf("\n[3]æˆè¯­æ¥é¾™\n");
+    printf("\n[4]æ’è¡Œæ¦œ\n");
+    printf("\n[5]é€€å‡ºæ¸¸æˆ\n");
     printf("==================================\n\n");
     scanf("%d", &select);
-    rewind(stdin);//Çå¿Õ»º³åÇø
+    rewind(stdin);//æ¸…ç©ºç¼“å†²åŒº
 
     switch (select) {
     case 1:
@@ -179,13 +179,13 @@ int StartGame(record* player, idiom* wptr, int num, max* mptr, int num2, record*
         break;
     case 2:
         system("cls");
-        printf("==========ÇëÑ¡Ôñ²âÊÔÄ£Ê½==========\n");
-        printf("\n[1]Å®æ´²¹Ìì\n");
-        printf("\n[2]ÍûÎÄÉúÒå\n");
-        printf("\n[3]·µ»Ø\n");
+        printf("==========è¯·é€‰æ‹©æµ‹è¯•æ¨¡å¼==========\n");
+        printf("\n[1]å¥³å¨²è¡¥å¤©\n");
+        printf("\n[2]æœ›æ–‡ç”Ÿä¹‰\n");
+        printf("\n[3]è¿”å›\n");
         printf("==================================\n\n");
         scanf("%d", &select2);
-        rewind(stdin);//Çå¿Õ»º³åÇø
+        rewind(stdin);//æ¸…ç©ºç¼“å†²åŒº
 
         switch (select2) {
         case 1:
@@ -197,7 +197,7 @@ int StartGame(record* player, idiom* wptr, int num, max* mptr, int num2, record*
         case 3:
             break;
         default:
-            printf("\nÊäÈë´íÎó£¬·µ»Ø\n\n");
+            printf("\nè¾“å…¥é”™è¯¯ï¼Œè¿”å›\n\n");
             break;
         }
         break;
@@ -211,7 +211,7 @@ int StartGame(record* player, idiom* wptr, int num, max* mptr, int num2, record*
         flag = 0;
         break;
     default:
-        printf("\nÊäÈë´íÎó£¬·µ»Ø\n\n");
+        printf("\nè¾“å…¥é”™è¯¯ï¼Œè¿”å›\n\n");
         break;
     }
 
@@ -225,29 +225,29 @@ int OpenDictionary(idiom* wptr, int num) {
     int judge = 1;
     int count = 0;
 
-    system("title ³ÉÓï´Êµä");
+    system("title æˆè¯­è¯å…¸");
     system("color f4");
     system("mode con cols=100 lines=18");
     system("cls");
-    MessageBoxA(NULL, "ÄúÕıÔÚÊ¹ÓÃµÄÊÇ¹¦ÄÜÒ»£º³ÉÓï´Êµä", "Ä£Ê½Ñ¡Ôñ", MB_OK);
-    MessageBoxA(NULL, "ÊäÈëÄãÏëÒª²éÑ¯µÄ³ÉÓï£¬ÏµÍ³½«ÔÚ³ÉÓï¿âÖĞÎªÄãÆ¥Åä£¬Æ¥Åä³É¹¦½«ÏÔÊ¾³ÉÓïÊÍÒå", "Ê¹ÓÃËµÃ÷", MB_OK);
+    MessageBoxA(NULL, "æ‚¨æ­£åœ¨ä½¿ç”¨çš„æ˜¯åŠŸèƒ½ä¸€ï¼šæˆè¯­è¯å…¸", "æ¨¡å¼é€‰æ‹©", MB_OK);
+    MessageBoxA(NULL, "è¾“å…¥ä½ æƒ³è¦æŸ¥è¯¢çš„æˆè¯­ï¼Œç³»ç»Ÿå°†åœ¨æˆè¯­åº“ä¸­ä¸ºä½ åŒ¹é…ï¼ŒåŒ¹é…æˆåŠŸå°†æ˜¾ç¤ºæˆè¯­é‡Šä¹‰", "ä½¿ç”¨è¯´æ˜", MB_OK);
     while (judge == 1) {
         system("cls");
-        printf("==========³ÉÓï´Êµä==========\n\n");
-        printf("ÇëÊäÈëÏëÒª²éÑ¯µÄ³ÉÓï£º ");
+        printf("==========æˆè¯­è¯å…¸==========\n\n");
+        printf("è¯·è¾“å…¥æƒ³è¦æŸ¥è¯¢çš„æˆè¯­ï¼š ");
         rewind(stdin);
         fgets(input.word, 9, stdin);
         input.word[8] = '\0';
         idx = SeekWord(&input, wptr, num);
         if (idx == -1) {
-            printf("\n(£À_£À;) ¸Ã³ÉÓï»¹Î´ÊÕÂ¼Å¶ (£À_£À;)\n\n");
+            printf("\n(ï¼ _ï¼ ;) è¯¥æˆè¯­è¿˜æœªæ”¶å½•å“¦ (ï¼ _ï¼ ;)\n\n");
         }
         else {
-            printf("\nÄã²éÕÒµÄ³ÉÓïÒâË¼ÊÇ£º\n\n  %s\n", (wptr + idx)->str);
+            printf("\nä½ æŸ¥æ‰¾çš„æˆè¯­æ„æ€æ˜¯ï¼š\n\n  %s\n", (wptr + idx)->str);
         }
         Sleep(1000);
-        judge = MessageBoxA(NULL, "ÊÇ·ñ¼ÌĞø²éÑ¯", "ÌáÊ¾", MB_OKCANCEL);
-        if (judge == 2) {//Ñ¡ÔñÈ¡Ïû
+        judge = MessageBoxA(NULL, "æ˜¯å¦ç»§ç»­æŸ¥è¯¢", "æç¤º", MB_OKCANCEL);
+        if (judge == 2) {//é€‰æ‹©å–æ¶ˆ
             judge = 0;
         }
         count++;
@@ -258,183 +258,183 @@ int OpenDictionary(idiom* wptr, int num) {
 int PlayTest(idiom* wptr, int num) {
     begin_menu();
 
-    //MessageBoxA(NULL, "ÄúÕıÔÚÊ¹ÓÃµÄÊÇ¹¦ÄÜ¶ş£º³ÉÓïÖªÊ¶²âÊÔ", "Ä£Ê½Ñ¡Ôñ", MB_OK);
-    //printf("£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½Å®æ´²¹Ìì³ÉÓï²âÊÔ£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½\n");
-    //printf("\nl.ÏµÍ³»áËæ»ú¸ø³öÒ»¸ö³ÉÓï£¬µ«ÊÇ»áÒşÈ¥Á½¸ö×Ö£¬ÄãĞèÒªÊäÈëÁ½¸ö×ÖÀ´Íê³ÉÕâ¸ö³ÉÓï;\n");
-    //printf("\n2.ÏµÍ³Ò»¹²¸ø³ö20Ìâ£¬Ã¿µÀÌâµÄÃ¿¸ö×ÖÄãÖ»ÓĞÒ»´Î»ú»á×÷´ğ;\n");
-    //printf("\n3.Ã¿¸ö×ÖµÄ´ğÌâÊ±¼äÎª15ÃëÖÓ£¬³¬Ê±×÷´ğ²»¼ÆÈë³É¼¨£»\n");
-    //printf("\n4.Ò»¸ö×Ö·ÖÊıÎª5·Ö£¬Ã¿´Î×÷´ğÒÔºó£¬ÏµÍ³»á×Ô¶¯½áËã´ğÌâÇé¿ö£º\n");
+    //MessageBoxA(NULL, "æ‚¨æ­£åœ¨ä½¿ç”¨çš„æ˜¯åŠŸèƒ½äºŒï¼šæˆè¯­çŸ¥è¯†æµ‹è¯•", "æ¨¡å¼é€‰æ‹©", MB_OK);
+    //printf("ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼å¥³å¨²è¡¥å¤©æˆè¯­æµ‹è¯•ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼\n");
+    //printf("\nl.ç³»ç»Ÿä¼šéšæœºç»™å‡ºä¸€ä¸ªæˆè¯­ï¼Œä½†æ˜¯ä¼šéšå»ä¸¤ä¸ªå­—ï¼Œä½ éœ€è¦è¾“å…¥ä¸¤ä¸ªå­—æ¥å®Œæˆè¿™ä¸ªæˆè¯­;\n");
+    //printf("\n2.ç³»ç»Ÿä¸€å…±ç»™å‡º20é¢˜ï¼Œæ¯é“é¢˜çš„æ¯ä¸ªå­—ä½ åªæœ‰ä¸€æ¬¡æœºä¼šä½œç­”;\n");
+    //printf("\n3.æ¯ä¸ªå­—çš„ç­”é¢˜æ—¶é—´ä¸º15ç§’é’Ÿï¼Œè¶…æ—¶ä½œç­”ä¸è®¡å…¥æˆç»©ï¼›\n");
+    //printf("\n4.ä¸€ä¸ªå­—åˆ†æ•°ä¸º5åˆ†ï¼Œæ¯æ¬¡ä½œç­”ä»¥åï¼Œç³»ç»Ÿä¼šè‡ªåŠ¨ç»“ç®—ç­”é¢˜æƒ…å†µï¼š\n");
     
-    return 0;//·µ»ØÓÃ»§·ÖÊı
+    return 0;//è¿”å›ç”¨æˆ·åˆ†æ•°
 }
 
-int ManMachineWar(max* maxptr, int num) {//³ÉÓï½ÓÁú£¬ÈË»ú´óÕ½
-    int turn = 0;//¼ÇÂ¼½ÓÁúÂÖ´Î
-    char putout[10];//´æ´¢¡°ÍõÕ¨¡±½ÓÁú³ÉÓï
-    char getin[10];//´æ´¢ÓÃ»§½ÓÁú³ÉÓï
-    int idx1, idx2;//½ÓÊÕ²éÑ¯½á¹û
+int ManMachineWar(max* maxptr, int num) {//æˆè¯­æ¥é¾™ï¼Œäººæœºå¤§æˆ˜
+    int turn = 0;//è®°å½•æ¥é¾™è½®æ¬¡
+    char putout[10];//å­˜å‚¨â€œç‹ç‚¸â€æ¥é¾™æˆè¯­
+    char getin[10];//å­˜å‚¨ç”¨æˆ·æ¥é¾™æˆè¯­
+    int idx1, idx2;//æ¥æ”¶æŸ¥è¯¢ç»“æœ
     int i;
     char allr[20][10];
     int r = 0;
 
-    system("title ³ÉÓï½ÓÁú");
+    system("title æˆè¯­æ¥é¾™");
     system("color f4");
     system("mode con cols=55 lines=44");
 
-    srand(time(NULL));//µ÷ÓÃËæ»úÖÖ×Ó
+    srand(time(NULL));//è°ƒç”¨éšæœºç§å­
     system("cls");
-    MessageBoxA(NULL, "ÄúÕıÔÚÊ¹ÓÃµÄÊÇ¹¦ÄÜÈı£º³ÉÓï½ÓÁúÈË»ú´óÕ½", "Ä£Ê½Ñ¡Ôñ", MB_OK);
-    printf("==================³ÉÓï½ÓÁúÈË»ú´óÕ½==================\n");
-    printf("\n  ½ÓÏÂÀ´Äã½«ÓëÈË¹¤ÖÇÄÜ¡°ÍõÕ¨¡±½øĞĞÒ»³¡ÈË»ú´óÕ½¡£\n");
+    MessageBoxA(NULL, "æ‚¨æ­£åœ¨ä½¿ç”¨çš„æ˜¯åŠŸèƒ½ä¸‰ï¼šæˆè¯­æ¥é¾™äººæœºå¤§æˆ˜", "æ¨¡å¼é€‰æ‹©", MB_OK);
+    printf("==================æˆè¯­æ¥é¾™äººæœºå¤§æˆ˜==================\n");
+    printf("\n  æ¥ä¸‹æ¥ä½ å°†ä¸äººå·¥æ™ºèƒ½â€œç‹ç‚¸â€è¿›è¡Œä¸€åœºäººæœºå¤§æˆ˜ã€‚\n");
     printf("\n==================================================\n");
-    Sleep(2000);//ÓÃÌáÊ¾¿òÏÔÊ¾ÌáÊ¾ĞÅÏ¢£¬ÓÅ»¯ÌåÑé
+    Sleep(2000);//ç”¨æç¤ºæ¡†æ˜¾ç¤ºæç¤ºä¿¡æ¯ï¼Œä¼˜åŒ–ä½“éªŒ
 
-    MessageBoxA(NULL, "µã»÷È·¶¨¿ªÊ¼ÈË»ú´óÕ½¡£", "¼´½«¿ªÊ¼¾öÕ½", MB_OK);
-    printf("ÄãÃëÉ±ÎÒ£¿\n\n");//»¥¶¯£¬ÓÅ»¯ÌåÑé
+    MessageBoxA(NULL, "ç‚¹å‡»ç¡®å®šå¼€å§‹äººæœºå¤§æˆ˜ã€‚", "å³å°†å¼€å§‹å†³æˆ˜", MB_OK);
+    printf("ä½ ç§’æ€æˆ‘ï¼Ÿ\n\n");//äº’åŠ¨ï¼Œä¼˜åŒ–ä½“éªŒ
     Sleep(1000);
-    printf("Äã½ñÌìÒªÊÇÄÜ½Ó×¡ÎÒ10¸ö³ÉÓï£¬\n\n");
+    printf("ä½ ä»Šå¤©è¦æ˜¯èƒ½æ¥ä½æˆ‘10ä¸ªæˆè¯­ï¼Œ\n\n");
     Sleep(1000);
-    printf("ÎÒµ±³¡£¬°ÑÕâ¸öÄÚ´æÌõ³Ôµô £¨¨p£şÃó£ş£©\n");
+    printf("æˆ‘å½“åœºï¼ŒæŠŠè¿™ä¸ªå†…å­˜æ¡åƒæ‰ ï¼ˆâ•¬ï¿£çš¿ï¿£ï¼‰\n");
     Sleep(1000);
-    idx1 = MyRand(15) * 2;//Ëæ»úÏÈÊä³ö³õÊ¼³ÉÓï
-    printf("\n½ÓÕĞ°É£¡%s\n", (maxptr + idx1)->word);
+    idx1 = MyRand(15) * 2;//éšæœºå…ˆè¾“å‡ºåˆå§‹æˆè¯­
+    printf("\næ¥æ‹›å§ï¼%s\n", (maxptr + idx1)->word);
     strcpy(putout, (maxptr + idx1)->word);
     strcpy(allr[r++], putout);
     while (1) {
-        printf("\nÂÖµ½ÄãÁË£º");
-        rewind(stdin);//Óöµ½ÊäÈë¾ÍÇå¿Õ»º³åÇø
+        printf("\nè½®åˆ°ä½ äº†ï¼š");
+        rewind(stdin);//é‡åˆ°è¾“å…¥å°±æ¸…ç©ºç¼“å†²åŒº
         fgets(getin, 9, stdin);
-        getin[8] = '\0';//±£»¤Êı¾İ
-        idx1 = SuperSearch(maxptr, getin);//¼ì²éÓÃ»§ÊÇ·ñ×÷±×
-        if (idx1 == -1) {//Ã»ÓĞÕÒµ½£¬ËµÃ÷²»ÊÇ³ÉÓï£¬±¨´í
-            printf("\nÍõÕ¨£ºÄã¾ÓÈ»¸ÒÆ­ÎÒ£¬Õâ¸ù±¾²»ÊÇ³ÉÓï£¡ÄãÊäÁË£¡\n\n");
+        getin[8] = '\0';//ä¿æŠ¤æ•°æ®
+        idx1 = SuperSearch(maxptr, getin);//æ£€æŸ¥ç”¨æˆ·æ˜¯å¦ä½œå¼Š
+        if (idx1 == -1) {//æ²¡æœ‰æ‰¾åˆ°ï¼Œè¯´æ˜ä¸æ˜¯æˆè¯­ï¼ŒæŠ¥é”™
+            printf("\nç‹ç‚¸ï¼šä½ å±…ç„¶æ•¢éª—æˆ‘ï¼Œè¿™æ ¹æœ¬ä¸æ˜¯æˆè¯­ï¼ä½ è¾“äº†ï¼\n\n");
             break;
         }
-        if (getin[0] != putout[6] || getin[1] != putout[7]) {//ÓÃ»§ÓÃ³ÉÓï×÷´ğ£¬µ«ÊÇÎŞ·¨½ÓÉÏ
-            printf("\nÍõÕ¨£º½Ó²»ÉÏÁË°É£¬¹ş¹ş£¬ÄãÊäÁË£¡\n\n");
+        if (getin[0] != putout[6] || getin[1] != putout[7]) {//ç”¨æˆ·ç”¨æˆè¯­ä½œç­”ï¼Œä½†æ˜¯æ— æ³•æ¥ä¸Š
+            printf("\nç‹ç‚¸ï¼šæ¥ä¸ä¸Šäº†å§ï¼Œå“ˆå“ˆï¼Œä½ è¾“äº†ï¼\n\n");
             break;
-        }//Èç¹ûÃ»ÓĞÌø³öÑ­»·£¬ËµÃ÷½ÓÁú³É¹¦£¬ÓÎÏ·¼ÌĞø
-        turn++;//½ÓÁúÂÖ´Î¼Ó
+        }//å¦‚æœæ²¡æœ‰è·³å‡ºå¾ªç¯ï¼Œè¯´æ˜æ¥é¾™æˆåŠŸï¼Œæ¸¸æˆç»§ç»­
+        turn++;//æ¥é¾™è½®æ¬¡åŠ 
         idx2 = MatchingIdioms(maxptr, getin);
-        if (idx2 == -1) {//´«Èë×îºóÒ»¸ö×Ö£¬ËÑË÷ÊÇ·ñÓĞ³ÉÓï¿ÉÒÔ½ÓÉÏ
-            printf("\nÍõÕ¨£ºÎÒ´ÊÇî£¬ÄãÓ®ÁË£¡\n\n");
+        if (idx2 == -1) {//ä¼ å…¥æœ€åä¸€ä¸ªå­—ï¼Œæœç´¢æ˜¯å¦æœ‰æˆè¯­å¯ä»¥æ¥ä¸Š
+            printf("\nç‹ç‚¸ï¼šæˆ‘è¯ç©·ï¼Œä½ èµ¢äº†ï¼\n\n");
             break;
-        }else {//ÕÒµ½£¬Ğ´Èë×Ö·û´®£¬²¢Êä³ö³ÉÓï£¬ÓÎÏ·¼ÌĞø
+        }else {//æ‰¾åˆ°ï¼Œå†™å…¥å­—ç¬¦ä¸²ï¼Œå¹¶è¾“å‡ºæˆè¯­ï¼Œæ¸¸æˆç»§ç»­
             strcpy(allr[r++], getin);
             strcpy(putout, (maxptr + idx2)->word);
             strcpy(allr[r++], putout);
-            printf("\nÍõÕ¨£ºÕâ¸öÎÒ»á½Ó£¡%s\n", putout);
+            printf("\nç‹ç‚¸ï¼šè¿™ä¸ªæˆ‘ä¼šæ¥ï¼%s\n", putout);
         }
         if (turn == 10) {
-            MessageBoxA(NULL, "»¹ÊÇÄãÇ¿(¨s#-_-)¨s~~~~~~~~~~~~~~~~~¨k¨T¨k ", "ÄãÓ®ÁË£¡", MB_OK);
+            MessageBoxA(NULL, "è¿˜æ˜¯ä½ å¼º(â•¯#-_-)â•¯~~~~~~~~~~~~~~~~~â•§â•â•§ ", "ä½ èµ¢äº†ï¼", MB_OK);
             break;
         }
     }
     Sleep(2000);
     system("cls");
-    printf("\n\n-----------ÓÎÏ·½áÊø------------");//Êä³ö½áËãĞÅÏ¢
-    printf("\n\nÄã´ğ¶ÔÁË%d¸ö³ÉÓï\n\n", turn);
-    printf("³ÉÓï½ÓÁú½á¹û:");
+    printf("\n\n-----------æ¸¸æˆç»“æŸ------------");//è¾“å‡ºç»“ç®—ä¿¡æ¯
+    printf("\n\nä½ ç­”å¯¹äº†%dä¸ªæˆè¯­\n\n", turn);
+    printf("æˆè¯­æ¥é¾™ç»“æœ:");
     for (i = 0; i <r; i++) {
         printf("\n              %s    ", allr[i]);
     }
     printf("\n");
-    return turn;//·µ»Ø½ÓÁúÂÖ´Î
+    return turn;//è¿”å›æ¥é¾™è½®æ¬¡
 }
 
 int PlayTest2(idiom* wptr, int num) {
-    int grade = 100;//³õÊ¼×Ü·Ö100·Ö.ÊµĞĞ¿Û·ÖÖÆ
+    int grade = 100;//åˆå§‹æ€»åˆ†100åˆ†.å®è¡Œæ‰£åˆ†åˆ¶
     int i = 0;
-    int oneBegin = 0; //´æ´¢ÓÃ»§Ò»µÀÌâ¿ªÊ¼×÷´ğÊ±¼ä
-    int oneEnd = 0;   //´æ´¢ÓÃ»§Ò»µÀÌâ½áÊø×÷´ğÊ±¼ä
-    char answer[9];//´æ´¢ÓÃ»§×÷´ğ
-    char putout[9];//´æ´¢Êä³öµÄÌâÄ¿
+    int oneBegin = 0; //å­˜å‚¨ç”¨æˆ·ä¸€é“é¢˜å¼€å§‹ä½œç­”æ—¶é—´
+    int oneEnd = 0;   //å­˜å‚¨ç”¨æˆ·ä¸€é“é¢˜ç»“æŸä½œç­”æ—¶é—´
+    char answer[9];//å­˜å‚¨ç”¨æˆ·ä½œç­”
+    char putout[9];//å­˜å‚¨è¾“å‡ºçš„é¢˜ç›®
     char meaning[200];
-    int idx;//½ÓÊÕ²éÑ¯½á¹û
-    int deduct;//¼ÇÂ¼¿ÛÁË¼¸·Ö
+    int idx;//æ¥æ”¶æŸ¥è¯¢ç»“æœ
+    int deduct;//è®°å½•æ‰£äº†å‡ åˆ†
     char allr[10][9];
     char allw[10][9];
     int r = 0, w = 0;
 
-    system("title ³ÉÓï´Êµä");
+    system("title æˆè¯­è¯å…¸");
     system("color f4");
     system("mode con cols=120 lines=30");
 
-    srand(time(NULL));//µ÷ÓÃËæ»úÖÖ×Ó
-    putout[8] = '\0';//±£»¤Êı¾İ
+    srand(time(NULL));//è°ƒç”¨éšæœºç§å­
+    putout[8] = '\0';//ä¿æŠ¤æ•°æ®
     system("cls");
-    MessageBoxA(NULL, "ÄúÕıÔÚÊ¹ÓÃµÄÊÇ¹¦ÄÜ¶ş£º³ÉÓïÖªÊ¶²âÊÔ", "Ä£Ê½Ñ¡Ôñ", MB_OK);
-    printf("£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½ÍûÎÄÉúÒå³ÉÓï²âÊÔ£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½£½\n");
-    printf("\nl.ÏµÍ³»áËæ»ú¸ø³öÒ»¸ö³ÉÓïÊÍÒå£¬ÄãĞèÒª¸ù¾İÊÍÒåÊäÈëÕâ¸ö³ÉÓï;\n");
-    printf("\n2.ÏµÍ³Ò»¹²¸ø³ö10Ìâ£¬Ã¿µÀÌâÄãÖ»ÓĞÒ»´Î»ú»á×÷´ğ;\n");
-    printf("\n3.Ã¿¸ö×ÖµÄ´ğÌâÊ±¼äÎª15ÃëÖÓ£¬³¬Ê±×÷´ğ²»¼ÆÈë³É¼¨£»\n");
-    printf("\n4.Ò»¸ö³ÉÓï·ÖÊıÎª10·Ö£¬Ã¿´Î×÷´ğÒÔºó£¬ÏµÍ³»á×Ô¶¯½áËã´ğÌâÇé¿ö£º\n");
-    printf("\n5.ÎŞÂÛÕıÎó£¬ÏµÍ³¶¼»á¸ø³ö³ÉÓïÊÍÒå£¬ÒÔ¹©Ñ§Ï°¡£\n");
-    printf("\n£½£½£½£½£½£½\n\n");
+    MessageBoxA(NULL, "æ‚¨æ­£åœ¨ä½¿ç”¨çš„æ˜¯åŠŸèƒ½äºŒï¼šæˆè¯­çŸ¥è¯†æµ‹è¯•", "æ¨¡å¼é€‰æ‹©", MB_OK);
+    printf("ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼æœ›æ–‡ç”Ÿä¹‰æˆè¯­æµ‹è¯•ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼ï¼\n");
+    printf("\nl.ç³»ç»Ÿä¼šéšæœºç»™å‡ºä¸€ä¸ªæˆè¯­é‡Šä¹‰ï¼Œä½ éœ€è¦æ ¹æ®é‡Šä¹‰è¾“å…¥è¿™ä¸ªæˆè¯­;\n");
+    printf("\n2.ç³»ç»Ÿä¸€å…±ç»™å‡º10é¢˜ï¼Œæ¯é“é¢˜ä½ åªæœ‰ä¸€æ¬¡æœºä¼šä½œç­”;\n");
+    printf("\n3.æ¯ä¸ªå­—çš„ç­”é¢˜æ—¶é—´ä¸º15ç§’é’Ÿï¼Œè¶…æ—¶ä½œç­”ä¸è®¡å…¥æˆç»©ï¼›\n");
+    printf("\n4.ä¸€ä¸ªæˆè¯­åˆ†æ•°ä¸º10åˆ†ï¼Œæ¯æ¬¡ä½œç­”ä»¥åï¼Œç³»ç»Ÿä¼šè‡ªåŠ¨ç»“ç®—ç­”é¢˜æƒ…å†µï¼š\n");
+    printf("\n5.æ— è®ºæ­£è¯¯ï¼Œç³»ç»Ÿéƒ½ä¼šç»™å‡ºæˆè¯­é‡Šä¹‰ï¼Œä»¥ä¾›å­¦ä¹ ã€‚\n");
+    printf("\nï¼ï¼ï¼ï¼ï¼ï¼\n\n");
     Sleep(2000);
-    MessageBoxA(NULL, "µã»÷È·¶¨¿ªÊ¼´ğÌâ¡£", "¼´½«¿ªÊ¼²âÊÔ", MB_OK);//ÓÃÌáÊ¾¿òÓÅ»¯ÓÃ»§ÌåÑé
-    printf("´ğÌâ×¼±¸\n\n3...\n\n");
+    MessageBoxA(NULL, "ç‚¹å‡»ç¡®å®šå¼€å§‹ç­”é¢˜ã€‚", "å³å°†å¼€å§‹æµ‹è¯•", MB_OK);//ç”¨æç¤ºæ¡†ä¼˜åŒ–ç”¨æˆ·ä½“éªŒ
+    printf("ç­”é¢˜å‡†å¤‡\n\n3...\n\n");
     Sleep(1000);
     printf("2...\n\n");
     Sleep(1000);
     printf("1...\n\n");
     Sleep(1000);
-    printf("²âÊÔ¿ªÊ¼£¡");
+    printf("æµ‹è¯•å¼€å§‹ï¼");
 
     for (i = 1; i <= 10; i++) {
-        deduct = 0;//¸´Î»¿Û·ÖÇé¿ö
-        oneBegin = time(NULL);//×¥È¡¿ªÊ¼Ê±¼ä
-        printf("\n\n==========ÌâÄ¿%d£½£½========\n\n", i);
-        idx = MyRand(num);//ÓÃËæ»úÊı³öÌâ
-        strcpy(putout, (wptr + idx)->word);//½«Ô­³ÉÓïĞ´Èë×Ö·û´®
-        strcpy(meaning, (wptr + idx)->str);//½«Ô­³ÉÓïĞ´Èë×Ö·û´®
-        puts(meaning);//Êä³öÌâÄ¿
-        printf("\n\nÇë×÷´ğ£º");
-        rewind(stdin);//Óöµ½ÊäÈë¾ÍÇå¿Õ»º³åÇø
+        deduct = 0;//å¤ä½æ‰£åˆ†æƒ…å†µ
+        oneBegin = time(NULL);//æŠ“å–å¼€å§‹æ—¶é—´
+        printf("\n\n==========é¢˜ç›®%dï¼ï¼========\n\n", i);
+        idx = MyRand(num);//ç”¨éšæœºæ•°å‡ºé¢˜
+        strcpy(putout, (wptr + idx)->word);//å°†åŸæˆè¯­å†™å…¥å­—ç¬¦ä¸²
+        strcpy(meaning, (wptr + idx)->str);//å°†åŸæˆè¯­å†™å…¥å­—ç¬¦ä¸²
+        puts(meaning);//è¾“å‡ºé¢˜ç›®
+        printf("\n\nè¯·ä½œç­”ï¼š");
+        rewind(stdin);//é‡åˆ°è¾“å…¥å°±æ¸…ç©ºç¼“å†²åŒº
         fgets(answer, 9, stdin);
-        answer[8] = '\0';//±£»¤Êı¾İ
-        oneEnd = time(NULL);//×¥È¡×÷´ğÍê±ÏÊ±¼ä
+        answer[8] = '\0';//ä¿æŠ¤æ•°æ®
+        oneEnd = time(NULL);//æŠ“å–ä½œç­”å®Œæ¯•æ—¶é—´
         if (oneEnd - oneBegin > 30)
-            deduct = 10;//³¬Ê±Ö±½Ó¿Û10·Ö
+            deduct = 10;//è¶…æ—¶ç›´æ¥æ‰£10åˆ†
         else {
             if (strcmp(answer, putout) != 0)
-                deduct += 10;//ÅĞ¶ÏµÚÒ»¸ö×Ö£¬´ğ´í¿Û5·Ö
+                deduct += 10;//åˆ¤æ–­ç¬¬ä¸€ä¸ªå­—ï¼Œç­”é”™æ‰£5åˆ†
         }
         if (deduct == 0) {
             strcpy(allr[r++], putout);
-            printf("\n\n»Ø´ğÕıÈ·£¬ÊÍÒåÎª£º");//È«¶Ô£¬Êä³öÊÍÒå
+            printf("\n\nå›ç­”æ­£ç¡®ï¼Œé‡Šä¹‰ä¸ºï¼š");//å…¨å¯¹ï¼Œè¾“å‡ºé‡Šä¹‰
             printf("\n\n %s", (wptr + idx)->str);
         }
-        else {//´ğ´í£¬Êä³ö´ğ°¸
+        else {//ç­”é”™ï¼Œè¾“å‡ºç­”æ¡ˆ
             strcpy(allw[w++], putout);
-            printf("\n\n»Ø´ğ´íÎó£¬ÕıÈ·´ğ°¸Îª£º%s", (wptr + idx)->word);
+            printf("\n\nå›ç­”é”™è¯¯ï¼Œæ­£ç¡®ç­”æ¡ˆä¸ºï¼š%s", (wptr + idx)->word);
             printf("\n\n %s", (wptr + idx)->str);
         }
-        grade -= deduct;//¼ÆËã·ÖÊı
-        Sleep(1000);//Í£¶Ù1Ãë£¬ÓÅ»¯ÌåÑé
+        grade -= deduct;//è®¡ç®—åˆ†æ•°
+        Sleep(1000);//åœé¡¿1ç§’ï¼Œä¼˜åŒ–ä½“éªŒ
     }
     system("cls");
-    printf("\n\n-²âÊÔ½áÊø-");//Êä³ö½áËãĞÅÏ¢
-    printf("\n\nÄã´ğ¶ÔÁË%d¸ö³ÉÓï£¬×Ü·ÖÎª%d·Ö£¡\n\n", grade / 10, grade);
-    printf("Äã´ğ´íµÄÌâÓĞ:");
+    printf("\n\n-æµ‹è¯•ç»“æŸ-");//è¾“å‡ºç»“ç®—ä¿¡æ¯
+    printf("\n\nä½ ç­”å¯¹äº†%dä¸ªæˆè¯­ï¼Œæ€»åˆ†ä¸º%dåˆ†ï¼\n\n", grade / 10, grade);
+    printf("ä½ ç­”é”™çš„é¢˜æœ‰:");
     for (i = 0; i < w; i++) {
         printf("%s     ", allw[i]);
     }
-    printf("\n\nÄã´ğ¶ÔµÄÌâÓĞ:");
+    printf("\n\nä½ ç­”å¯¹çš„é¢˜æœ‰:");
     for (i = 0; i < r; i++){
         printf("%s     ", allr[i]);
     }
-    return grade;//·µ»ØÓÃ»§·ÖÊı
+    return grade;//è¿”å›ç”¨æˆ·åˆ†æ•°
 }
 
-int RankingList(record* rptr) {//¶ÁÈ¡ÅÅĞĞ°ñÊı¾İ
+int RankingList(record* rptr) {//è¯»å–æ’è¡Œæ¦œæ•°æ®
     FILE* fp;
     record* playerTemp = rptr;
 
     int num = 0;
     fp = fopen("ranking.txt", "r+");
     if (fp == NULL) {
-        MessageBoxA(NULL, "ÍË³öÏµÍ³", "¶ÁÊı¾İ´íÎó", MB_ICONSTOP | MB_OK);
+        MessageBoxA(NULL, "é€€å‡ºç³»ç»Ÿ", "è¯»æ•°æ®é”™è¯¯", MB_ICONSTOP | MB_OK);
         exit(0);
     }
     while (!feof(fp)) {
@@ -446,29 +446,29 @@ int RankingList(record* rptr) {//¶ÁÈ¡ÅÅĞĞ°ñÊı¾İ
     return num;
 }
 
-void InList(record* player, int num) {//ÏÔÊ¾ÅÅĞĞ°ñ
+void InList(record* player, int num) {//æ˜¾ç¤ºæ’è¡Œæ¦œ
     int i;
-    system("title ÅÅĞĞ°ñ");
+    system("title æ’è¡Œæ¦œ");
     system("color f4");
     system("mode con cols=70 lines=20");
     record* playerTemp = player;
-    printf("ÓÃ»§ĞÕÃû     ²éÕÒ´ÎÊı     Å®æ´²¹Ìì     ÍûÎÄÉúÒå    ³ÉÓï½ÓÁú\n");
+    printf("ç”¨æˆ·å§“å     æŸ¥æ‰¾æ¬¡æ•°     å¥³å¨²è¡¥å¤©     æœ›æ–‡ç”Ÿä¹‰    æˆè¯­æ¥é¾™\n");
     for (i = 0; i < num; i++, playerTemp++) {
         printf("%10s %10d %10d %10d %10d\n", playerTemp->name, playerTemp->fre, playerTemp->score1, playerTemp->score2, playerTemp->nums);
     }
 
 }
 
-void WriteList(record* player, record* rptr, int num) {//ÏòÅÅĞĞ°ñĞ´ÈëÊı¾İ
+void WriteList(record* player, record* rptr, int num) {//å‘æ’è¡Œæ¦œå†™å…¥æ•°æ®
     FILE* fp;
     int i;
-    int f1ag = 1;//È·ÈÏÊÇ·ñÓĞ°Ñ±¾´ÎµÄ³É¼¨Ğ´Èë
-    fp = fopen("ranking.txt", "w");//ÖØ¹¹ÅÅĞĞ°ñĞÅÏ¢
+    int f1ag = 1;//ç¡®è®¤æ˜¯å¦æœ‰æŠŠæœ¬æ¬¡çš„æˆç»©å†™å…¥
+    fp = fopen("ranking.txt", "w");//é‡æ„æ’è¡Œæ¦œä¿¡æ¯
     for (i = 0; i < 10; i++) {
-        if ((player->score1 + player->score2) >= (rptr->score1 + rptr->score2) && f1ag == 1) {//Ê¹ÓÃ¼òÒ×µÄ²åÈëÅÅĞò
-            f1ag = 0;//¹Ø±Õ¿ª¹Ø
+        if ((player->score1 + player->score2) >= (rptr->score1 + rptr->score2) && f1ag == 1) {//ä½¿ç”¨ç®€æ˜“çš„æ’å…¥æ’åº
+            f1ag = 0;//å…³é—­å¼€å…³
             fprintf(fp, "%s %d %d %d %d", player->name, player->fre, player->score1, player->score2, player->nums);
-            i++;//´òµôÔ­ÓĞÊı¾İµÄ×óÓÒÒ»Î»ÓÃ»§µÄÊı¾İ
+            i++;//æ‰“æ‰åŸæœ‰æ•°æ®çš„å·¦å³ä¸€ä½ç”¨æˆ·çš„æ•°æ®
         }
         fprintf(fp, "%s %d %d %d %d", rptr->name, rptr->fre, rptr->score1, player->score2, rptr->nums);
         rptr++;
@@ -476,55 +476,55 @@ void WriteList(record* player, record* rptr, int num) {//ÏòÅÅĞĞ°ñĞ´ÈëÊı¾İ
     fclose(fp);
 }
 
-void OutMenu(user* member) {//µÇÂ¼ÏµÍ³ÖĞÊà
-    int judge;//ÅĞ¶ÏµÇÂ¼»ò×¢²á
-    int judge2;//ÅĞ¶ÏÊÇ·ñÔÙ´ÎµÇÂ¼
-    int judge3;//ÅĞ¶ÏÊÇ·ñ×¢²á
+void OutMenu(user* member) {//ç™»å½•ç³»ç»Ÿä¸­æ¢
+    int judge;//åˆ¤æ–­ç™»å½•æˆ–æ³¨å†Œ
+    int judge2;//åˆ¤æ–­æ˜¯å¦å†æ¬¡ç™»å½•
+    int judge3;//åˆ¤æ–­æ˜¯å¦æ³¨å†Œ
 
-    judge = MessageBoxA(NULL, "»¶Ó­À´µ½¡°ºäÉ±ÖÁÔü¡±³ÉÓïÑİÎä³¡£¡ÊÇ·ñµÇÂ¼£¿", "µÇÂ¼ÏµÍ³", MB_YESNOCANCEL);
-    system("title µÇÂ¼½çÃæ");
+    judge = MessageBoxA(NULL, "æ¬¢è¿æ¥åˆ°â€œè½°æ€è‡³æ¸£â€æˆè¯­æ¼”æ­¦åœºï¼æ˜¯å¦ç™»å½•ï¼Ÿ", "ç™»å½•ç³»ç»Ÿ", MB_YESNOCANCEL);
+    system("title ç™»å½•ç•Œé¢");
     system("color f4");
     system("mode con cols=40 lines=10");
-    if (judge == 6) {//Ñ¡ÔñµÇÂ½
-        while (SingIn(member) == 0) {//ÖØ¸´µÇÂ¼ÏµÍ³ÏÔÊ¾
-            judge2 = MessageBoxA(NULL, "ÇëÈ·ÈÏÓÃ»§Ãû¡¢ÃÜÂëÊäÈëÊÇ·ñÕıÈ·", "µÇÂ¼Ê§°Ü£¡", MB_ICONINFORMATION | MB_YESNOCANCEL);
-            system("cls");//ÇåÆÁ
-            if (judge2 == 7) {//Ã»ÓĞÈ·ÈÏ£¬ÍË³ö
-                MessageBoxA(NULL, "ÄãÑ¡ÔñÍË³öÏµÍ³£¡", "ÍË³öÏµÍ³", MB_ICONINFORMATION | MB_OK);
+    if (judge == 6) {//é€‰æ‹©ç™»é™†
+        while (SingIn(member) == 0) {//é‡å¤ç™»å½•ç³»ç»Ÿæ˜¾ç¤º
+            judge2 = MessageBoxA(NULL, "è¯·ç¡®è®¤ç”¨æˆ·åã€å¯†ç è¾“å…¥æ˜¯å¦æ­£ç¡®", "ç™»å½•å¤±è´¥ï¼", MB_ICONINFORMATION | MB_YESNOCANCEL);
+            system("cls");//æ¸…å±
+            if (judge2 == 7) {//æ²¡æœ‰ç¡®è®¤ï¼Œé€€å‡º
+                MessageBoxA(NULL, "ä½ é€‰æ‹©é€€å‡ºç³»ç»Ÿï¼", "é€€å‡ºç³»ç»Ÿ", MB_ICONINFORMATION | MB_OK);
                 exit(0);
             }
         }
     }
     else if (judge == 7) {
-        judge3 = MessageBoxA(NULL, "Ñ¡Ôñ¡°ÊÇ¡±½øÈë×¢²á£¬·ñÔòÍË³ö³ÌĞò¡£", "ÊÇ·ñ×¢²á£¿", MB_YESNOCANCEL);
-        if (judge3 == 7) {//Ã»ÓĞÈ·ÈÏ£¬ÍË³ö
-            MessageBoxA(NULL, "ÄãÑ¡ÔñÍË³öÏµÍ³£¡", "ÍË³öÏµÍ³", MB_ICONINFORMATION | MB_OK);
+        judge3 = MessageBoxA(NULL, "é€‰æ‹©â€œæ˜¯â€è¿›å…¥æ³¨å†Œï¼Œå¦åˆ™é€€å‡ºç¨‹åºã€‚", "æ˜¯å¦æ³¨å†Œï¼Ÿ", MB_YESNOCANCEL);
+        if (judge3 == 7) {//æ²¡æœ‰ç¡®è®¤ï¼Œé€€å‡º
+            MessageBoxA(NULL, "ä½ é€‰æ‹©é€€å‡ºç³»ç»Ÿï¼", "é€€å‡ºç³»ç»Ÿ", MB_ICONINFORMATION | MB_OK);
             exit(0);
         }
         IsRegister(member);
     }
     else {
-        MessageBoxA(NULL, "ÄãÑ¡ÔñÍË³öÏµÍ³£¡", "ÍË³öÏµÍ³", MB_ICONINFORMATION | MB_OK);
-        exit(0);//Ñ¡ÔñÈ¡Ïû£¬ÍË³ö
+        MessageBoxA(NULL, "ä½ é€‰æ‹©é€€å‡ºç³»ç»Ÿï¼", "é€€å‡ºç³»ç»Ÿ", MB_ICONINFORMATION | MB_OK);
+        exit(0);//é€‰æ‹©å–æ¶ˆï¼Œé€€å‡º
     }
-    printf("\n\n        Êı¾İ¼ÓÔØÖĞ...   \n\n");
+    printf("\n\n        æ•°æ®åŠ è½½ä¸­...   \n\n");
     system("pause");
     system("cls");
 }
 
-int SingIn(user* member) {//µÇÂ¼²Ù×÷
+int SingIn(user* member) {//ç™»å½•æ“ä½œ
     int i;
     int flag = 0;
     char ch;
-    user compare;//´æ·ÅÊäÈëĞÅÏ¢
+    user compare;//å­˜æ”¾è¾“å…¥ä¿¡æ¯
 
     FILE* fp;
     fp = fopen("user.txt", "r");
     if (fp == NULL) {
-        MessageBoxA(NULL, "ÍË³öÏµÍ³", "·¢Éú´íÎó", MB_ICONSTOP | MB_OK);
+        MessageBoxA(NULL, "é€€å‡ºç³»ç»Ÿ", "å‘ç”Ÿé”™è¯¯", MB_ICONSTOP | MB_OK);
         exit(0);
     }
-    printf("ÓÃ»§Ãû£º ");
+    printf("ç”¨æˆ·åï¼š ");
     rewind(stdin);
     fgets(member->name, 6, stdin);
     for (i = 0; i < 6; i++) {
@@ -535,7 +535,7 @@ int SingIn(user* member) {//µÇÂ¼²Ù×÷
     }
     rewind(stdin);
 
-    printf("\nÃÜÂë£º");
+    printf("\nå¯†ç ï¼š");
     member->password[20] = '\0';
     for (i = 0; i < 20; i++) {
         ch = getch();
@@ -553,7 +553,7 @@ int SingIn(user* member) {//µÇÂ¼²Ù×÷
         fscanf(fp, "%s %s\n", compare.name, compare.password);
         if (strcmp(member->name, compare.name) == 0 && strcmp(member->password, compare.password) == 0) {
             flag = 1;
-            MessageBoxA(NULL, "»¶Ó­Ê¹ÓÃ", "ÑéÖ¤³É¹¦", MB_OK);
+            MessageBoxA(NULL, "æ¬¢è¿ä½¿ç”¨", "éªŒè¯æˆåŠŸ", MB_OK);
             break;
         }
     }
@@ -568,19 +568,19 @@ int IsRegister(user* member) {
     int flag;
 
 
-    system("title ×¢²á½çÃæ");
+    system("title æ³¨å†Œç•Œé¢");
     system("color f4");
     system("mode con cols=50 lines=10");
 
     FILE* fp;
     fp = fopen("user.txt", "r+");
     if (fp == NULL) {
-        MessageBoxA(NULL, "ÍË³öÏµÍ³", "·¢Éú´íÎó", MB_ICONSTOP | MB_OK);
+        MessageBoxA(NULL, "é€€å‡ºç³»ç»Ÿ", "å‘ç”Ÿé”™è¯¯", MB_ICONSTOP | MB_OK);
         exit(0);
     }
     while (1) {
         flag = 1;
-        printf("ÇëÊäÈëĞÂÓÃ»§Ãû(²»³¬¹ı5¸ö×Ö·û)£º");
+        printf("è¯·è¾“å…¥æ–°ç”¨æˆ·å(ä¸è¶…è¿‡5ä¸ªå­—ç¬¦)ï¼š");
         fgets(member->name, 6, stdin);
         for (i = 0; i < 6; i++) {
             if (member->name[i] == '\n') {
@@ -591,7 +591,7 @@ int IsRegister(user* member) {
         printf("\n");
         rewind(stdin);
 
-        while (!(feof(fp))) {//ºË¶ÔÓÃ»§ĞÅÏ¢£¬·ÀÖ¹ÖØÃû
+        while (!(feof(fp))) {//æ ¸å¯¹ç”¨æˆ·ä¿¡æ¯ï¼Œé˜²æ­¢é‡å
             fscanf(fp, "%s%s", storage.name, storage.password);
             if (strcmp(member->name, storage.name) == 0)
                 flag = 0;
@@ -599,12 +599,12 @@ int IsRegister(user* member) {
         if (flag == 1) {
             break;
         }
-        MessageBoxA(NULL, "ÓÃ»§ÃûÒÑ´æÔÚ", "×¢²áÊ§°Ü", MB_ICONEXCLAMATION | MB_OK);
+        MessageBoxA(NULL, "ç”¨æˆ·åå·²å­˜åœ¨", "æ³¨å†Œå¤±è´¥", MB_ICONEXCLAMATION | MB_OK);
         system("cls");
         rewind(stdin);
     }
 
-    printf("ÇëÊäÈëÄãµÄÃÜÂë(²»³¬¹ı20Î»)£º");
+    printf("è¯·è¾“å…¥ä½ çš„å¯†ç (ä¸è¶…è¿‡20ä½)ï¼š");
     member->password[20] = '\0';
     fgets(member->password, 20, stdin);
     for (i = 0; i < 20; i++) {
@@ -617,7 +617,7 @@ int IsRegister(user* member) {
 
     printf("\n");
     fprintf(fp, "%s %s\n", member->name, member->password);
-    MessageBoxA(NULL, "»¶Ó­½øÈë", "×¢²á³É¹¦", MB_OK);
+    MessageBoxA(NULL, "æ¬¢è¿è¿›å…¥", "æ³¨å†ŒæˆåŠŸ", MB_OK);
 
     fclose(fp);
 
@@ -625,13 +625,13 @@ int IsRegister(user* member) {
 }
 
 
-//ÕıÈ·½çÃæ
+//æ­£ç¡®ç•Œé¢
 void RightAns() {
     IMAGE rightImg;
     loadimage(&rightImg, _T("RightAns.png"), 831, 731);
     putimage(0, 0, &rightImg);
 }
-//½áÊø½çÃæ
+//ç»“æŸç•Œé¢
 void Gameover(wchar_t rightAns[21][9], int rightCnt, wchar_t wrongAns[200][9], int wrongCnt) {
     IMAGE overImg1, overImg2;
     MOUSEMSG mouse;
@@ -640,7 +640,7 @@ void Gameover(wchar_t rightAns[21][9], int rightCnt, wchar_t wrongAns[200][9], i
     putimage(0, 0, &overImg1);
     loadimage(&overImg1, _T("over2.png"), 1300, 171);
     putimage(0, 561, &overImg1);
-    settextstyle(30, 0, _T("¿¬Ìå"));
+    settextstyle(30, 0, _T("æ¥·ä½“"));
     settextcolor(BLACK);
 
     while (true){
@@ -660,7 +660,7 @@ void Gameover(wchar_t rightAns[21][9], int rightCnt, wchar_t wrongAns[200][9], i
                         idx++;
                     }
                 }
-                if (mouse.x >= 447 && mouse.x <= 733 && mouse.y >= 573 && mouse.y <= 626){//·µ»ØÖ÷½çÃæ
+                if (mouse.x >= 447 && mouse.x <= 733 && mouse.y >= 573 && mouse.y <= 626){//è¿”å›ä¸»ç•Œé¢
                     //begin_menu();
                     break;
                 }
@@ -684,7 +684,7 @@ void Gameover(wchar_t rightAns[21][9], int rightCnt, wchar_t wrongAns[200][9], i
     }
 
 }
-//¿ªÊ¼½çÃæ
+//å¼€å§‹ç•Œé¢
 void begin_menu() {
     initgraph(1300, 731);
     IMAGE menu;
@@ -732,20 +732,20 @@ void begin_menu() {
     }
     closegraph();
 }
-// char×ª¿í×Ö·û
+// charè½¬å®½å­—ç¬¦
 void CharToWCharT(char* putQuestion, wchar_t* wp) {
     int bufSize = MultiByteToWideChar(CP_ACP, 0, putQuestion, -1, NULL, 0);
     MultiByteToWideChar(CP_ACP, 0, putQuestion, -1, wp, bufSize);
 }
-//ÆÁÄ»ÉÏÏÔÊ¾Êı×Ö
+//å±å¹•ä¸Šæ˜¾ç¤ºæ•°å­—
 void number_write(int number_size, int x, int y, int number, COLORREF color) {
     TCHAR s[30];
     _stprintf_s(s, _T("%d"), number);
-    settextstyle(number_size, 0, _T("¿¬Ìå"));
+    settextstyle(number_size, 0, _T("æ¥·ä½“"));
     settextcolor(color);
     outtextxy(x, y, s);
 }
-//Å®æ´²¹Ìì
+//å¥³å¨²è¡¥å¤©
 void plays_hard() {
     initgraph(1300, 731);
     IMAGE ground1, ground2;
@@ -754,14 +754,14 @@ void plays_hard() {
     putimage(0, 0, &ground1);
     putimage(831, 0, &ground2);
 
-    EasyTextBox txtName1, txtName2; //´ğÌâ¿ò
+    EasyTextBox txtName1, txtName2; //ç­”é¢˜æ¡†
     MOUSEMSG mouse, mouse1;
-    int x, y;//Êó±êÊı×éÏÂ±ê
+    int x, y;//é¼ æ ‡æ•°ç»„ä¸‹æ ‡
 
     wchar_t rightAns[20][9];
-    wchar_t wrongAns[20][9];//ÕıÈ·ºÍ´íÎóÌâÄ¿
+    wchar_t wrongAns[20][9];//æ­£ç¡®å’Œé”™è¯¯é¢˜ç›®
 
-    int score = 0; //·ÖÊı
+    int score = 0; //åˆ†æ•°
     number_write(30, 1060, 156, score, WHITE);
     int rightCnt = 0;
     number_write(30, 1060, 430, rightCnt, WHITE);
@@ -772,10 +772,10 @@ void plays_hard() {
     clock_t pauStart = 0, pauEnd = 0, pauTime = 0;
     start = clock();
 
-    int num; //³ÉÓïÊıÁ¿
+    int num; //æˆè¯­æ•°é‡
     char putQuestion[9];
     int rNum[2];
-    idiom word[300]; //´æ·Å³ÉÓïÊı¾İ
+    idiom word[300]; //å­˜æ”¾æˆè¯­æ•°æ®
     idiom* wptr = word;
     num = GetData(wptr);
 
@@ -784,7 +784,7 @@ void plays_hard() {
     CharToWCharT(putQuestion, wp);
 
     setbkcolor(0xeeeeee);
-    settextstyle(100, 0, _T("¿¬Ìå"));
+    settextstyle(100, 0, _T("æ¥·ä½“"));
     settextcolor(YELLOW);
     outtextxy(370, 300, wp);
 
@@ -798,8 +798,8 @@ void plays_hard() {
             mouse = GetMouseMsg();
             if (mouse.uMsg == WM_LBUTTONDOWN) {
                 if (mouse.x >= 956 && mouse.x <= 1200 && mouse.y >= 600 && mouse.y <= 666)
-                {//ÔİÍ£
-                    outtextxy(1030, 680, L"ÔİÍ£ÖĞ");
+                {//æš‚åœ
+                    outtextxy(1030, 680, L"æš‚åœä¸­");
                     pauStart = clock();
                     while (true){
                         if (MouseHit() == true) {
@@ -807,7 +807,7 @@ void plays_hard() {
                             if (mouse1.uMsg == WM_LBUTTONDOWN) {
                                 if (mouse1.x >= 956 && mouse1.x <= 1200 && mouse1.y >= 600 && mouse1.y <= 666) {
                                     pauEnd = clock();
-                                    outtextxy(1030, 680, L"ÓÎÏ·ÖĞ");
+                                    outtextxy(1030, 680, L"æ¸¸æˆä¸­");
                                     pauTime += (pauEnd - pauStart);
                                     break;
                                 }
@@ -819,28 +819,28 @@ void plays_hard() {
                 if (txtName1.Check(mouse.x, mouse.y))	txtName1.OnMessage(start, pauTime);
                 if (txtName2.Check(mouse.x, mouse.y))	txtName2.OnMessage(start, pauTime);
 
-                if (mouse.x >= 25 && mouse.x <= 176 && mouse.y >= 635 && mouse.y <= 704){//ÍË³öÓÎÏ·
+                if (mouse.x >= 25 && mouse.x <= 176 && mouse.y >= 635 && mouse.y <= 704){//é€€å‡ºæ¸¸æˆ
                     cleardevice;
                     begin_menu();
                 }
 
-                if (mouse.x >= 434 && mouse.x <= 602 && mouse.y >= 500 && mouse.y <= 562){//Ìá½» £¨ÅĞ¶Ï£©
+                if (mouse.x >= 434 && mouse.x <= 602 && mouse.y >= 500 && mouse.y <= 562){//æäº¤ ï¼ˆåˆ¤æ–­ï¼‰
                     CharToWCharT((wptr + rand)->word, wp);
                     pauStart = clock();
                     count++;
                     if (wp[rNum[0]] != txtName1.Text() || wp[rNum[1]] != txtName2.Text())
-                    {   //´íÎó
+                    {   //é”™è¯¯
                         wcscpy(wrongAns[wrongCnt++], wp);
                         //setbkcolor(0xeeeeee);
-                        settextstyle(70, 0, _T("¿¬Ìå"));
+                        settextstyle(70, 0, _T("æ¥·ä½“"));
                         settextcolor(RED);
-                        outtextxy(300, 150, L"´íÁË£¬ÕıÈ·´ğ°¸:");
-                        settextstyle(100, 0, _T("¿¬Ìå"));
+                        outtextxy(300, 150, L"é”™äº†ï¼Œæ­£ç¡®ç­”æ¡ˆ:");
+                        settextstyle(100, 0, _T("æ¥·ä½“"));
                         settextcolor(YELLOW);
                         outtextxy(370 + rNum[0] * 100, 300, wp[rNum[0]]);
                         outtextxy(370 + rNum[1] * 100, 300, wp[rNum[1]]);
                     }
-                    else{   //ÕıÈ·
+                    else{   //æ­£ç¡®
                         score += 5;
                         wcscpy(rightAns[rightCnt++], wp);
                         RightAns();
@@ -853,7 +853,7 @@ void plays_hard() {
                     CharToWCharT(putQuestion, wp);
 
                     setbkcolor(0xeeeeee);
-                    settextstyle(100, 0, _T("¿¬Ìå"));
+                    settextstyle(100, 0, _T("æ¥·ä½“"));
                     settextcolor(YELLOW);
                     outtextxy(370, 300, wp);
                     //setbkcolor(0xeeeeee);
@@ -885,37 +885,37 @@ void plays_hard() {
 }
 
 int getQuestion_hard(idiom* wptr, int num, char question[9], int rNum[]){
-    int rand;  //Ëæ»ú³éÈ¡ÌâºÅ
-    int rNum1;  //Ëæ»úÒşÈ¥µÄµÚÒ»¸ö×ÖµÄÎ»ÖÃ
-    int rNum2;  //Ëæ»úÒşÈ¥µÄ¶ş¸ö×ÖµÄÎ»ÖÃ
+    int rand;  //éšæœºæŠ½å–é¢˜å·
+    int rNum1;  //éšæœºéšå»çš„ç¬¬ä¸€ä¸ªå­—çš„ä½ç½®
+    int rNum2;  //éšæœºéšå»çš„äºŒä¸ªå­—çš„ä½ç½®
 
     static int usedQues[300];
 
-    srand(time(NULL)); //µ÷ÓÃËæ»úÖÖ×Ó
-    question[8] = '\0'; // ½«ÎÊÌâÆ´³É×Ö·û´®
+    srand(time(NULL)); //è°ƒç”¨éšæœºç§å­
+    question[8] = '\0'; // å°†é—®é¢˜æ‹¼æˆå­—ç¬¦ä¸²
 
-    //±£Ö¤Ã¿´ÎÌâÄ¿²»Í¬
+    //ä¿è¯æ¯æ¬¡é¢˜ç›®ä¸åŒ
     do {
         rand = MyRand(num);
     } while (usedQues[rand] == 1);
-    //¼ÇÂ¼ÒÑ¾­³öÏÖ¹ıµÄÌâºÅ
+    //è®°å½•å·²ç»å‡ºç°è¿‡çš„é¢˜å·
     usedQues[rand] = 1;
 
-    strcpy(question, (wptr + rand)->word); //Ô­³ÉÓïĞ´ÈëÎÊÌâ×Ö·û´®
+    strcpy(question, (wptr + rand)->word); //åŸæˆè¯­å†™å…¥é—®é¢˜å­—ç¬¦ä¸²
 
-    //²úÉúÒªÒşÈ¥µÄÎ»ÖÃµÄËæ»úÊı
+    //äº§ç”Ÿè¦éšå»çš„ä½ç½®çš„éšæœºæ•°
     rNum1 = MyRand(4);
     do {
         rNum2 = MyRand(4);
     } while (rNum1 == rNum2);
 
-    //±£Ö¤rNum2ºóÓÚrNum1
+    //ä¿è¯rNum2åäºrNum1
     if (rNum2 < rNum1) {
         int temp = rNum1;
         rNum1 = rNum2;
         rNum2 = temp;
     }
-    //ÒªÒşÈ¥µÄ×ÖÌæ»»ÎªÏÂ»®Ïß
+    //è¦éšå»çš„å­—æ›¿æ¢ä¸ºä¸‹åˆ’çº¿
     question[2 * rNum1] = question[2 * rNum1 + 1] = '_';
     question[2 * rNum2] = question[2 * rNum2 + 1] = '_';
     rNum[0] = rNum1;
