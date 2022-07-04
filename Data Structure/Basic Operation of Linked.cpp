@@ -7,31 +7,31 @@ typedef struct Node
 {
 	int data;
 	struct Node * pNext;
-}NODE,*PNODE;//¶¨Òå½á¹¹Ìå 
+}NODE,*PNODE;//å®šä¹‰ç»“æ„ä½“ 
 
 
-PNODE create_list(void);//´´½¨Á´±í 
-PNODE delete_list(PNODE pHead,int a,int *n);//É¾³ıÖ¸¶¨ÔªËØ 
-void traverse_list(PNODE pHead);//Êä³öÁ´±íµÄÖµ 
-PNODE delete1_list(PNODE pHead);//É¾³ıÖØ¸´ÔªËØ 
-PNODE reverse_list(PNODE pHead);//µ¹Ğò
-void insert_list(PNODE pHead,int x,int y);//ÊäÈëx£¬y¡£ÔÚµÚÒ»¸öxºó²åÈëy¡£ÈôÎŞx£¬ÔÚ±íÎ²²åÈëy 
+PNODE create_list(void);//åˆ›å»ºé“¾è¡¨ 
+PNODE delete_list(PNODE pHead,int a,int *n);//åˆ é™¤æŒ‡å®šå…ƒç´  
+void traverse_list(PNODE pHead);//è¾“å‡ºé“¾è¡¨çš„å€¼ 
+PNODE delete1_list(PNODE pHead);//åˆ é™¤é‡å¤å…ƒç´  
+PNODE reverse_list(PNODE pHead);//å€’åº
+void insert_list(PNODE pHead,int x,int y);//è¾“å…¥xï¼Œyã€‚åœ¨ç¬¬ä¸€ä¸ªxåæ’å…¥yã€‚è‹¥æ— xï¼Œåœ¨è¡¨å°¾æ’å…¥y 
 
 
 int main()
 {
 	int n=0;
 	PNODE pHead=NULL;
-	pHead=create_list();//´´½¨Á´±í 
+	pHead=create_list();//åˆ›å»ºé“¾è¡¨ 
 	traverse_list(pHead);
-	pHead=delete_list(pHead,3,&n);//É¾³ıÖ¸¶¨ÔªËØ 
+	pHead=delete_list(pHead,3,&n);//åˆ é™¤æŒ‡å®šå…ƒç´  
 	traverse_list(pHead);
 	printf("%d\n",n);
-	pHead=delete1_list(pHead);//É¾³ıÖØ¸´ÔªËØ
+	pHead=delete1_list(pHead);//åˆ é™¤é‡å¤å…ƒç´ 
 	traverse_list(pHead);
-	pHead=reverse_list(pHead);//µ¹Ğò
+	pHead=reverse_list(pHead);//å€’åº
 	traverse_list(pHead);
-	insert_list(pHead,4,5);//ÊäÈëx£¬y¡£ÔÚµÚÒ»¸öxºó²åÈëy¡£ÈôÎŞx£¬ÔÚ±íÎ²²åÈëy
+	insert_list(pHead,4,5);//è¾“å…¥xï¼Œyã€‚åœ¨ç¬¬ä¸€ä¸ªxåæ’å…¥yã€‚è‹¥æ— xï¼Œåœ¨è¡¨å°¾æ’å…¥y
 	traverse_list(pHead);
 	
 	return 0;
@@ -45,14 +45,14 @@ PNODE create_list()
 	
 	if (!pHead)
 	{
-		printf("·ÖÅäÄÚ´æÊ§°Ü£¬³ÌĞò½áÊø");
+		printf("åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºç»“æŸ");
 		exit(-1); 
 	}
 	
-	printf("ÇëÊäÈëÁ´±í³¤¶È£º");
+	printf("è¯·è¾“å…¥é“¾è¡¨é•¿åº¦ï¼š");
 	scanf("%d",&len);
 	
-	PNODE pTail=pHead;//¶¨ÒåÒ»¸öÖ¸Õë£¬ÁîËü×ÜÊÇÖ¸ÏòÁ´±í×îºóÒ»¸öÓĞĞ§ÔªËØ 
+	PNODE pTail=pHead;//å®šä¹‰ä¸€ä¸ªæŒ‡é’ˆï¼Œä»¤å®ƒæ€»æ˜¯æŒ‡å‘é“¾è¡¨æœ€åä¸€ä¸ªæœ‰æ•ˆå…ƒç´  
 	pTail->pNext=NULL;
 	
 	for (int i=0;i<len;i++)
@@ -60,16 +60,16 @@ PNODE create_list()
 		PNODE pNew=(PNODE)malloc(sizeof(NODE));
 		if (pNew==NULL)
 		{
-			printf("·ÖÅäÄÚ´æÊ§°Ü£¬³ÌĞò½áÊø");
+			printf("åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºç»“æŸ");
 			exit(-1); 
 		}
 		
-		printf("ÇëÊäÈëÒª²åÈëÁ´±íµÄÖµ£º");
+		printf("è¯·è¾“å…¥è¦æ’å…¥é“¾è¡¨çš„å€¼ï¼š");
 		scanf("%d",&val);
 		
 		pNew->data=val; 
-		pTail->pNext=pNew;//½«ĞÂÉú³ÉµÄ½Óµ½×îºóÒ»¸öÓĞĞ§ÔªËØÖ¸ÕëµÄÎ²²¿ 
-		pNew->pNext=NULL;//½«×îºóÒ»¸öÔªËØµÄÖ¸ÕëÓòÉèÎª¿Õ 
+		pTail->pNext=pNew;//å°†æ–°ç”Ÿæˆçš„æ¥åˆ°æœ€åä¸€ä¸ªæœ‰æ•ˆå…ƒç´ æŒ‡é’ˆçš„å°¾éƒ¨ 
+		pNew->pNext=NULL;//å°†æœ€åä¸€ä¸ªå…ƒç´ çš„æŒ‡é’ˆåŸŸè®¾ä¸ºç©º 
 		pTail=pTail->pNext;
 		}	
 	return pHead;
@@ -80,12 +80,12 @@ PNODE create_list()
 PNODE delete_list(PNODE pHead,int a,int *n)
 {
 	int * c=n;
-	if (!pHead)//ÅĞ¶ÏÁ´±íÊÇ·ñÎª¿Õ 
+	if (!pHead)//åˆ¤æ–­é“¾è¡¨æ˜¯å¦ä¸ºç©º 
 		return NULL;
 	PNODE p=pHead;
 	while(p->pNext!=NULL)
 	{
-		if (p->pNext->data==a)//Èô´ËÖ¸ÕëµÄÏÂÒ»¸öÔªËØÎªÖ¸¶¨ÔªËØ£¬½«Ö¸ÕëÖ¸ÏòÏÂÏÂÒ»¸öÔªËØ£¬²¢ÊÍ·ÅÄÚ´æ 
+		if (p->pNext->data==a)//è‹¥æ­¤æŒ‡é’ˆçš„ä¸‹ä¸€ä¸ªå…ƒç´ ä¸ºæŒ‡å®šå…ƒç´ ï¼Œå°†æŒ‡é’ˆæŒ‡å‘ä¸‹ä¸‹ä¸€ä¸ªå…ƒç´ ï¼Œå¹¶é‡Šæ”¾å†…å­˜ 
 		{
 			PNODE q=p->pNext;
 			p->pNext=p->pNext->pNext;
@@ -141,7 +141,7 @@ PNODE reverse_list(PNODE pHead)
 {
 	PNODE p,q,qNew;
 	p=pHead->pNext;
-	q=(PNODE)malloc(sizeof(NODE));//½¨Á¢Ò»¸öĞÂµÄÁ´±í£¬ÓÃÍ·²åÈë·¨½«Ô­Á´±íµÄÖµÊäÈë 
+	q=(PNODE)malloc(sizeof(NODE));//å»ºç«‹ä¸€ä¸ªæ–°çš„é“¾è¡¨ï¼Œç”¨å¤´æ’å…¥æ³•å°†åŸé“¾è¡¨çš„å€¼è¾“å…¥ 
 	q->pNext=NULL;
 	while(p!=NULL)
 	{
@@ -155,7 +155,7 @@ PNODE reverse_list(PNODE pHead)
 }
 
 
-void insert_list(PNODE pHead,int x,int y)//ÊäÈëx£¬y¡£ÔÚµÚÒ»¸öxºó²åÈëy¡£ÈôÎŞx£¬ÔÚ±íÎ²²åÈëy
+void insert_list(PNODE pHead,int x,int y)//è¾“å…¥xï¼Œyã€‚åœ¨ç¬¬ä¸€ä¸ªxåæ’å…¥yã€‚è‹¥æ— xï¼Œåœ¨è¡¨å°¾æ’å…¥y
 {
 	int flag=0;
 	PNODE p,pNew;
