@@ -10,9 +10,9 @@ typedef struct {
 	int* base;
 }Sqstack;
 
-void initstack(Sqstack* sq);//Õ»µÄ³õÊ¼»¯ 
-void push(Sqstack* ,int );//Ñ¹Õ» 
-int pop(Sqstack*);//³öÕ» 
+void initstack(Sqstack* sq);//æ ˆçš„åˆå§‹åŒ– 
+void push(Sqstack* ,int );//å‹æ ˆ 
+int pop(Sqstack*);//å‡ºæ ˆ 
 
 
 int main()
@@ -20,17 +20,17 @@ int main()
 	Sqstack sq1,sq2;
 	initstack(&sq1);initstack(&sq2);
 	int nums[]={1,2,3,4,5,6};
-	for(int i=0;i<6;i++)//½«ÔªËØÑ¹ÈëÕ»1 
+	for(int i=0;i<6;i++)//å°†å…ƒç´ å‹å…¥æ ˆ1 
 	{
 		push(&sq1,*(nums+i));
 	}
-	printf("³ö¶ÓµÄË³ĞòÎª:\n");
+	printf("å‡ºé˜Ÿçš„é¡ºåºä¸º:\n");
 	while(sq1.base != sq1.top)
 	{
 		while(sq1.top - sq1.base >1)
-			push(&sq2,pop(&sq1));//½«Õ»1ÔªËØÑ¹ÈëÕ»2 
-		printf("%d \t",pop(&sq1));//Êä³öÕ»µ×ÔªËØ 
-		while(sq2.top - sq2.base > 0)//½«Õ»2ÔªËØÑ¹ÈëÕ»1 
+			push(&sq2,pop(&sq1));//å°†æ ˆ1å…ƒç´ å‹å…¥æ ˆ2 
+		printf("%d \t",pop(&sq1));//è¾“å‡ºæ ˆåº•å…ƒç´  
+		while(sq2.top - sq2.base > 0)//å°†æ ˆ2å…ƒç´ å‹å…¥æ ˆ1 
 			push(&sq1,pop(&sq2));
 	}
 	printf("\n");
@@ -40,7 +40,7 @@ int main()
 }
 
 
-void initstack(Sqstack* sq)//Õ»µÄ³õÊ¼»¯ 
+void initstack(Sqstack* sq)//æ ˆçš„åˆå§‹åŒ– 
 {
 	sq->base=(int*)malloc(STACKSIZE*sizeof(int));
 	if(!sq->base)  exit(-1);
@@ -48,7 +48,7 @@ void initstack(Sqstack* sq)//Õ»µÄ³õÊ¼»¯
 	sq->stacksize=STACKSIZE;
 }
 
-void push(Sqstack* sq,int n)//Ñ¹Õ» 
+void push(Sqstack* sq,int n)//å‹æ ˆ 
 {
 	if((sq->top-sq->base)==sq->stacksize)
 	{
@@ -60,7 +60,7 @@ void push(Sqstack* sq,int n)//Ñ¹Õ»
 	*sq->top++=n;
 }
 
-int pop(Sqstack* sq)//³öÕ» 
+int pop(Sqstack* sq)//å‡ºæ ˆ 
 {
 	if(sq->top==sq->base) exit(-1);
 	return *--sq->top;
