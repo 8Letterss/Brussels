@@ -1,42 +1,42 @@
 #include<bits/stdc++.h>
 using namespace std; 
 
-#define STACKSIZE 100   //Õ»µÄÄÚ´æ¿Õ¼ä·ÖÅäÁ¿ 
+#define STACKSIZE 100   //æ ˆçš„å†…å­˜ç©ºé—´åˆ†é…é‡ 
 #define STACKADD 10
 
 typedef struct LNode{
 	int data;
 	struct LNode* next;	
-}Node,*pNode; //´´½¨Á´±í½á¹¹Ìå 
+}Node,*pNode; //åˆ›å»ºé“¾è¡¨ç»“æž„ä½“ 
 
 typedef struct {
 	int size;
 	int * top;
 	int * base;
-}Sqstack;// ´´½¨Õ»½á¹¹Ìå 
+}Sqstack;// åˆ›å»ºæ ˆç»“æž„ä½“ 
 
 
 
-pNode createlist(void);//´´½¨Á´±í 
-void traverselist(pNode);//Êä³öÁ´±í 
-void initstack(Sqstack * sq);//³õÊ¼»¯Õ» 
-void push(Sqstack * sq,int a);//Ñ¹Õ» 
-void pop(Sqstack * sq,int* e);//³öÕ» 
-int key1(pNode pHead,Sqstack * sq);//ÓÃË³ÐòÕ»ÅÐ¶Ïµ¥Á´±íÔÚÔªËØÕý·´ÐòÊÇ·ñÏàÍ¬ 
+pNode createlist(void);//åˆ›å»ºé“¾è¡¨ 
+void traverselist(pNode);//è¾“å‡ºé“¾è¡¨ 
+void initstack(Sqstack * sq);//åˆå§‹åŒ–æ ˆ 
+void push(Sqstack * sq,int a);//åŽ‹æ ˆ 
+void pop(Sqstack * sq,int* e);//å‡ºæ ˆ 
+int key1(pNode pHead,Sqstack * sq);//ç”¨é¡ºåºæ ˆåˆ¤æ–­å•é“¾è¡¨åœ¨å…ƒç´ æ­£ååºæ˜¯å¦ç›¸åŒ 
 void key2(pNode pHead,pNode pstack);
 
 int main()
 {
 	pNode pHead=NULL;
 	pHead=createlist() ;
-	traverselist(pHead);//´´½¨Ò»¸öÁ´±í²¢Êä³öÑéÖ¤
+	traverselist(pHead);//åˆ›å»ºä¸€ä¸ªé“¾è¡¨å¹¶è¾“å‡ºéªŒè¯
 	 
 	Sqstack sq;
-	initstack(&sq);//´´½¨Õ»
+	initstack(&sq);//åˆ›å»ºæ ˆ
 	 
-	int flag=key1(pHead,&sq);//ÓÃË³ÐòÕ»ÅÐ¶Ïµ¥Á´±íÔÚÔªËØÕý·´ÐòÊÇ·ñÏàÍ¬ 
-	if(flag)  printf("Á´±íÖÐËùÓÐÔªËØÕý·´ÐòÏàÍ¬\n");
-	else  printf("Õý·´Ðò²»Í¬\n"); 
+	int flag=key1(pHead,&sq);//ç”¨é¡ºåºæ ˆåˆ¤æ–­å•é“¾è¡¨åœ¨å…ƒç´ æ­£ååºæ˜¯å¦ç›¸åŒ 
+	if(flag)  printf("é“¾è¡¨ä¸­æ‰€æœ‰å…ƒç´ æ­£ååºç›¸åŒ\n");
+	else  printf("æ­£ååºä¸åŒ\n"); 
 	
 	pNode pstack=NULL;
 	key2(pHead,pstack);
@@ -52,11 +52,11 @@ pNode createlist()
 	pNode pls=(pNode)malloc(sizeof(Node));
 	if(!pls)
 	{
-		printf("·ÖÅäÄÚ´æÊ§°Ü£¬³ÌÐò½áÊø");
+		printf("åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºç»“æŸ");
 		exit(-1) ;
 	}
 	
-	printf("ÇëÊäÈëÁ´±íµÄ³¤¶È£º");
+	printf("è¯·è¾“å…¥é“¾è¡¨çš„é•¿åº¦ï¼š");
 	scanf("%d",&len);
 	pNode pTail=pls;
 	
@@ -65,11 +65,11 @@ pNode createlist()
 		pNode pNew=(pNode)malloc(sizeof(Node));
 		if(!pNew)
 		{
-			printf("·ÖÅäÄÚ´æÊ§°Ü£¬³ÌÐò½áÊø");
+			printf("åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºç»“æŸ");
 			exit(-1);
 		}
 		
-		printf("ÇëÊäÈëÁ´±íµÄÖµ£º");
+		printf("è¯·è¾“å…¥é“¾è¡¨çš„å€¼ï¼š");
 		scanf("%d",&val);
 		
 		pNew->data=val;
@@ -97,7 +97,7 @@ void initstack(Sqstack * sq)
 	sq->base=(int*)malloc(STACKSIZE*sizeof(int));
 	if(!sq->base)
 	{
-		printf("·ÖÅäÄÚ´æÊ§°Ü£¬³ÌÐò½áÊø");
+		printf("åˆ†é…å†…å­˜å¤±è´¥ï¼Œç¨‹åºç»“æŸ");
 		exit(-1);
 	}
 	
@@ -105,9 +105,9 @@ void initstack(Sqstack * sq)
 	sq->size=STACKSIZE;
 }
 
-void push(Sqstack * sq,int a)//ÈëÕ» 
+void push(Sqstack * sq,int a)//å…¥æ ˆ 
 {
-	if((sq->top-sq->base)==sq->size)//ÅÐ¶ÏÕ»ÊÇ·ñÒÑÂú£¬ÈôÂúÔòÖØÐÂ·ÖÅäÄÚ´æ 
+	if((sq->top-sq->base)==sq->size)//åˆ¤æ–­æ ˆæ˜¯å¦å·²æ»¡ï¼Œè‹¥æ»¡åˆ™é‡æ–°åˆ†é…å†…å­˜ 
 	{
 		sq->base=(int *)realloc(sq->base,(sq->size+STACKADD)*sizeof(int));
 		if(!sq->base) exit(-1);
@@ -117,7 +117,7 @@ void push(Sqstack * sq,int a)//ÈëÕ»
 	*sq->top++=a;
 }
 
-void pop(Sqstack *sq,int* e)//³öÕ» 
+void pop(Sqstack *sq,int* e)//å‡ºæ ˆ 
 {
 	if(sq->top==sq->base) exit(-1);
 	*e =*--sq->top;
@@ -127,12 +127,12 @@ int key1(pNode pHead,Sqstack * sq)
 {
 	int flag=1,e;
 	pNode p1=pHead->next,p2=pHead->next;
-	while(p1!=NULL)//½«µ¥Á´±íÖÐµÄÔªËØÑ¹ÈëÕ»ÖÐ 
+	while(p1!=NULL)//å°†å•é“¾è¡¨ä¸­çš„å…ƒç´ åŽ‹å…¥æ ˆä¸­ 
 	{
 		push(sq,p1->data);
 		p1=p1->next;
 	}
-	while(sq->top!=sq->base)//½«Õ»ÖÐÔªËØÒÀ´ÎÊä³ö£¬²¢Óëµ¥Á´±íÖÐÔªËØÅÐ¶Ï ÊÇ·ñÏàµÈ 
+	while(sq->top!=sq->base)//å°†æ ˆä¸­å…ƒç´ ä¾æ¬¡è¾“å‡ºï¼Œå¹¶ä¸Žå•é“¾è¡¨ä¸­å…ƒç´ åˆ¤æ–­ æ˜¯å¦ç›¸ç­‰ 
 	{
 		pop(sq,&e);
 		if(e==p2->data)
@@ -153,7 +153,7 @@ void key2(pNode pHead,pNode pstack)
 	pNode pl=pHead->next,pls;
 	pstack=(pNode)malloc(sizeof(Node));
 	pstack->next=NULL;
-	while(pl!=NULL)//ÓÃÍ·²åÈë·¨£¬ÔÚÁ´Õ»µÄÍ·²¿²åÈëÔªËØ 
+	while(pl!=NULL)//ç”¨å¤´æ’å…¥æ³•ï¼Œåœ¨é“¾æ ˆçš„å¤´éƒ¨æ’å…¥å…ƒç´  
 	{
 		pNode p=(pNode)malloc(sizeof(Node));
 		p->data=pl->data;
@@ -162,7 +162,7 @@ void key2(pNode pHead,pNode pstack)
 		pl=pl->next; 
 	}
 	pls=pstack->next;
-	while(pls!=NULL)//½«ÔªËØÊä³ö 
+	while(pls!=NULL)//å°†å…ƒç´ è¾“å‡º 
 	{
 		printf("%d\t",pls->data);
 		pls=pls->next;
