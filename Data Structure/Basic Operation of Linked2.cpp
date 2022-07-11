@@ -38,11 +38,11 @@ PNODE create_list(void)
 	PNODE pHead=(PNODE)malloc(sizeof(NODE));
 	if (NULL == pHead)
 	{
-		printf("·ÖÅäÄÚ´æÊ§°Ü\n");
+		printf("åˆ†é…å†…å­˜å¤±è´¥\n");
 		exit(-1);
 	}
 	
-	printf("ÇëÊäÈëÁ´±í³¤¶È\n");
+	printf("è¯·è¾“å…¥é“¾è¡¨é•¿åº¦\n");
 	scanf("%d",&len);
 	
 	PNODE pTail=pHead;
@@ -53,10 +53,10 @@ PNODE create_list(void)
 		PNODE pNew=(PNODE)malloc(sizeof(NODE));
 		if (NULL == pNew)
 		{
-			printf("·ÖÅäÄÚ´æÊ§°Ü\n");
+			printf("åˆ†é…å†…å­˜å¤±è´¥\n");
 			exit(-1);
 		}
-		printf("ÇëÊäÈëÒª²åÈëÁ´±íµÄÖµ£¬val=");
+		printf("è¯·è¾“å…¥è¦æ’å…¥é“¾è¡¨çš„å€¼ï¼Œval=");
 		scanf("%d",&val);
 		
 		pNew->data=val;
@@ -66,37 +66,3 @@ PNODE create_list(void)
 	}
 	return pHead;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
