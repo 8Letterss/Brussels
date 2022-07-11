@@ -1,28 +1,28 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-#define STACKSIZE 100//¶¨ÒåÕ»ÄÚ´æ¿Õ¼ä´óĞ¡ 
+#define STACKSIZE 100//å®šä¹‰æ ˆå†…å­˜ç©ºé—´å¤§å° 
 #define STACKADD 10
 
 typedef struct Node{
 	char data[10];
 	struct Node* next;
-}Node,*pNode;//¶¨ÒåÁ´±íµÄ½á¹¹Ìå 
+}Node,*pNode;//å®šä¹‰é“¾è¡¨çš„ç»“æ„ä½“ 
 
-typedef struct DelStu{//´¢´æÉ¾³ıÑ§ÉúĞÅÏ¢
-        int bottom;//µ×²¿Î»ÖÃ
-        int top;//¶¥²¿Î»ÖÃ
-        char data[100][100];//¶şÎ¬Êı×é´æ´¢Ñ§ÉúĞÅÏ¢
-}Sqstack;//¶¨ÒåÕ»µÄ½á¹¹Ìå 
+typedef struct DelStu{//å‚¨å­˜åˆ é™¤å­¦ç”Ÿä¿¡æ¯
+        int bottom;//åº•éƒ¨ä½ç½®
+        int top;//é¡¶éƒ¨ä½ç½®
+        char data[100][100];//äºŒç»´æ•°ç»„å­˜å‚¨å­¦ç”Ÿä¿¡æ¯
+}Sqstack;//å®šä¹‰æ ˆçš„ç»“æ„ä½“ 
 
 pNode createlist(pNode );
 void travelist(pNode );
 void deletelist(pNode ,char*,char name2[],Sqstack* sq);
-Sqstack* InitStack();//Õ»µÄ³õÊ¼»¯ 
-void Push(Sqstack*,char e[]);//Ñ¹Õ» 
-void pop(Sqstack* ,char []);//³öÕ»
-void showDel(Sqstack *stu);//²é¿´É¾³ıµÄĞÅÏ¢
-void undo(Sqstack *sq,pNode L);//³öÕ»£¬³·Ïú²Ù×÷
+Sqstack* InitStack();//æ ˆçš„åˆå§‹åŒ– 
+void Push(Sqstack*,char e[]);//å‹æ ˆ 
+void pop(Sqstack* ,char []);//å‡ºæ ˆ
+void showDel(Sqstack *stu);//æŸ¥çœ‹åˆ é™¤çš„ä¿¡æ¯
+void undo(Sqstack *sq,pNode L);//å‡ºæ ˆï¼Œæ’¤é”€æ“ä½œ
 
 
 int main()
@@ -33,10 +33,10 @@ int main()
 	Sqstack* sq=InitStack();
 	travelist(stu);
 	
-	printf("ÇëÊäÈëÒªÉ¾³ıÑ§ÉúĞÕÃû£º");
+	printf("è¯·è¾“å…¥è¦åˆ é™¤å­¦ç”Ÿå§“åï¼š");
 	scanf("%s",name1);
   	deletelist(stu,name1,name2,sq);
-	printf("Ê£ÏÂµÄÑ§ÉúÓĞ£º"); 
+	printf("å‰©ä¸‹çš„å­¦ç”Ÿæœ‰ï¼š"); 
 	travelist(stu);
 	
 	showDel(sq);
@@ -47,20 +47,20 @@ int main()
 }
 
 
-pNode createlist(pNode stu)//´´½¨µ¥Á´±í£¬²¢ÊäÈëÑ§ÉúĞÕÃû 
+pNode createlist(pNode stu)//åˆ›å»ºå•é“¾è¡¨ï¼Œå¹¶è¾“å…¥å­¦ç”Ÿå§“å 
 {
 	stu=(pNode)malloc(sizeof(Node));
 	if(!stu) exit(-1);
 	
 	int n;
 	pNode pTail=stu;
-	printf("ÇëÊäÈëÑ§Éú¸öÊı£º");
+	printf("è¯·è¾“å…¥å­¦ç”Ÿä¸ªæ•°ï¼š");
 	scanf("%d",&n);
 	for(int i=0;i<n;i++)
 	{
 		pNode pNew=(pNode)malloc(sizeof(Node));
 		if(!pNew)  exit(-1);
-		printf("ÇëÊäÈëµÚ%dÎªÑ§ÉúĞÕÃû£º",i+1);
+		printf("è¯·è¾“å…¥ç¬¬%dä¸ºå­¦ç”Ÿå§“åï¼š",i+1);
 		scanf("%s",pNew->data);
 		pTail->next=pNew;
 		pNew->next=NULL;
@@ -69,7 +69,7 @@ pNode createlist(pNode stu)//´´½¨µ¥Á´±í£¬²¢ÊäÈëÑ§ÉúĞÕÃû
 	return stu;
 }
 
-void travelist(pNode stu)//½«µ¥Á´±íÊä³ö 
+void travelist(pNode stu)//å°†å•é“¾è¡¨è¾“å‡º 
 {	if(!stu) exit(-1);
 
 	pNode pls=stu->next;
@@ -81,7 +81,7 @@ void travelist(pNode stu)//½«µ¥Á´±íÊä³ö
 	printf("\n");
 }
 
-void deletelist(pNode stu,char* name1,char name2[10],Sqstack* sq)//É¾³ıÖ¸¶¨ÔªËØ 
+void deletelist(pNode stu,char* name1,char name2[10],Sqstack* sq)//åˆ é™¤æŒ‡å®šå…ƒç´  
 {
 	pNode pls=stu,q;
 	int flag=0;
@@ -92,7 +92,7 @@ void deletelist(pNode stu,char* name1,char name2[10],Sqstack* sq)//É¾³ıÖ¸¶¨ÔªËØ
 		{
 			q=pls->next;
 			strcpy(name2,q->data);
-			printf("ÄúÉ¾³ıµÄÑ§ÉúĞÕÃûÎª£º%s\n",name2);
+			printf("æ‚¨åˆ é™¤çš„å­¦ç”Ÿå§“åä¸ºï¼š%s\n",name2);
 			Push(sq,name2);
 			pls->next=q->next;
 			flag++;
@@ -102,51 +102,51 @@ void deletelist(pNode stu,char* name1,char name2[10],Sqstack* sq)//É¾³ıÖ¸¶¨ÔªËØ
 			pls=pls->next; 
 		}
 	} 
-	if(flag==0) printf("²»´æÔÚ´ËÑ§ÉúĞÕÃû"); 
+	if(flag==0) printf("ä¸å­˜åœ¨æ­¤å­¦ç”Ÿå§“å"); 
 }
 
 
-Sqstack* InitStack()//³õÊ¼»¯
+Sqstack* InitStack()//åˆå§‹åŒ–
 {
-    Sqstack* s=(Sqstack*)malloc(sizeof(Sqstack));//¿ª±Ù¿Õ¼ä
+    Sqstack* s=(Sqstack*)malloc(sizeof(Sqstack));//å¼€è¾Ÿç©ºé—´
     if(s==NULL) return 0;
     s->bottom=s->top=0;
     return s;
 }
 
 
-void Push(Sqstack*s,char e[]){//½«±»É¾³ıµÄÑ§ÉúĞÅÏ¢Ñ¹ÈëÕ»
+void Push(Sqstack*s,char e[]){//å°†è¢«åˆ é™¤çš„å­¦ç”Ÿä¿¡æ¯å‹å…¥æ ˆ
        strcpy(s->data[s->top],e);
        s->top++;
 }
 
-void showDel(Sqstack *sq)//²é¿´É¾³ıµÄĞÅÏ¢
+void showDel(Sqstack *sq)//æŸ¥çœ‹åˆ é™¤çš„ä¿¡æ¯
 {
-    printf("ÏÂÃæÏÔÊ¾±»É¾³ıÑ§ÉúĞÅÏ¢£º");
+    printf("ä¸‹é¢æ˜¾ç¤ºè¢«åˆ é™¤å­¦ç”Ÿä¿¡æ¯ï¼š");
     Sqstack* p=sq;
-    int a = p->top;//¼ÇÂ¼¶¥²¿
+    int a = p->top;//è®°å½•é¡¶éƒ¨
     //p->bottom=p->top=0;
 
-    while(p->top!=p->bottom){//±éÀúÕ»
+    while(p->top!=p->bottom){//éå†æ ˆ
             printf("%s\n",p->data[p->top-1]);
             p->top--;
     }
-    p->top=a;//½«top·Å»ØÔ­À´µÄ¶¥²¿
+    p->top=a;//å°†topæ”¾å›åŸæ¥çš„é¡¶éƒ¨
     return;
 }
 
-void undo(Sqstack *sq,pNode stu)//³öÕ»£¬³·Ïú²Ù×÷
+void undo(Sqstack *sq,pNode stu)//å‡ºæ ˆï¼Œæ’¤é”€æ“ä½œ
 {
     char *e;
     pNode p=stu;
-    if(sq->top!=sq->bottom){//Õ»·Ç¿Õ
+    if(sq->top!=sq->bottom){//æ ˆéç©º
         e=sq->data[sq->top-1];
         sq->top--;
-        printf("³·ÏúµÄÑ§ÉúĞÅÏ¢£º%s\n",e);
+        printf("æ’¤é”€çš„å­¦ç”Ÿä¿¡æ¯ï¼š%s\n",e);
 
 		while(p->next!=NULL) p=p->next;
-        p->next=(pNode)malloc(sizeof(Node)); // Éú³ÉĞÂ½áµã²¢²åÈëµ½±íÎ²
-        strcpy(p->next->data,e);//³·Ïú²Ù×÷
+        p->next=(pNode)malloc(sizeof(Node)); // ç”Ÿæˆæ–°ç»“ç‚¹å¹¶æ’å…¥åˆ°è¡¨å°¾
+        strcpy(p->next->data,e);//æ’¤é”€æ“ä½œ
         p->next->next = NULL;
     }
     return ;
