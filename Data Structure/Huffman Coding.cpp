@@ -1,31 +1,31 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define n 5  					//¶¨Òå×Ö·û¸öÊı 
-#define m (n*2-1)			    // ½áµã¸öÊı 
+#define n 5  					//å®šä¹‰å­—ç¬¦ä¸ªæ•° 
+#define m (n*2-1)			    // ç»“ç‚¹ä¸ªæ•° 
 #define maxweight 10000
 
-//¶¨Òå¹ş·òÂüÊ÷½áµã½á¹¹Ìå 
+//å®šä¹‰å“ˆå¤«æ›¼æ ‘ç»“ç‚¹ç»“æ„ä½“ 
 typedef struct {
 	char ch;
 	int weight;
 	int parent,lchild,rchild;
 }HuffmanTree;
-//¶¨Òå±àÂë½á¹¹Ìå 
+//å®šä¹‰ç¼–ç ç»“æ„ä½“ 
 typedef struct{
 	char bits[n];
 	int start;
 	char ch;
 }Code;
 
-HuffmanTree HT[m];//´´½¨¹ş·òÂüÊ÷ 
+HuffmanTree HT[m];//åˆ›å»ºå“ˆå¤«æ›¼æ ‘ 
 Code HC[n];
 
-void SmallWelcome();//²Ëµ¥ 
-void CreateHuffman();//¹ş·òÂüÊ÷µÄ³õÊ¼»¯ 
-void HuffmanCoding();//ÇóÃ¿¸ö×Ö·ûµÄ±àÂë 
-void HuffmanCode();//¶ÔÎÄ±¾½øĞĞ±àÂë  
-void deCode();//¶ÔÎÄ±¾½øĞĞÒëÂë 
-void printTree(HuffmanTree);//´òÓ¡¹ş·òÂüÊ÷ 
+void SmallWelcome();//èœå• 
+void CreateHuffman();//å“ˆå¤«æ›¼æ ‘çš„åˆå§‹åŒ– 
+void HuffmanCoding();//æ±‚æ¯ä¸ªå­—ç¬¦çš„ç¼–ç  
+void HuffmanCode();//å¯¹æ–‡æœ¬è¿›è¡Œç¼–ç   
+void deCode();//å¯¹æ–‡æœ¬è¿›è¡Œè¯‘ç  
+void printTree(HuffmanTree);//æ‰“å°å“ˆå¤«æ›¼æ ‘ 
 
 int main(){ 
 	SmallWelcome();
@@ -36,20 +36,20 @@ int main(){
 	printTree(HT[m-1]);
 }
 
-//¹ş·òÂüÊ÷µÄ´´½¨ 
+//å“ˆå¤«æ›¼æ ‘çš„åˆ›å»º 
 void CreateHuffman(){
 	int p1,p2,s1,s2,i,j,w;
 	int flag=0;
 	char c;
-	//½áµãĞÅÏ¢³õÊ¼»¯
+	//ç»“ç‚¹ä¿¡æ¯åˆå§‹åŒ–
 	for(i=0;i<m;i++){       
 		HT[i].parent=0;HT[i].lchild=-1;
 		HT[i].rchild=-1;HT[i].weight=0;
 	}
-	//¶ÁÈë×Ö·ûĞÅÏ¢ 
+	//è¯»å…¥å­—ç¬¦ä¿¡æ¯ 
 	for(i=0;i<n;i++){
 //		if(scanf("%c %d",&c,&w)!=2){
-//			printf("ÊäÈë´íÎó\n");
+//			printf("è¾“å…¥é”™è¯¯\n");
 //			fflush(stdin);
 //			i--;
 //			continue;
@@ -58,7 +58,7 @@ void CreateHuffman(){
 		fflush(stdin);
 		for(j=0;j<i;j++){
 			if(HT[j].ch==c){
-				printf("¸Ã×Ö·û´®ÒÑ´æÔÚ\n");
+				printf("è¯¥å­—ç¬¦ä¸²å·²å­˜åœ¨\n");
 				flag=1;
 				break;
 			}
@@ -67,7 +67,7 @@ void CreateHuffman(){
 		if(flag==0){
 			HT[i].weight=w;
 			HT[i].ch=c;
-			printf("          µÚ%d¸ö×Ö·ûÎª%c£¬ÆäÈ¨ÖµÎª%d\n",i+1,HT[i].ch,HT[i].weight);
+			printf("          ç¬¬%dä¸ªå­—ç¬¦ä¸º%cï¼Œå…¶æƒå€¼ä¸º%d\n",i+1,HT[i].ch,HT[i].weight);
 		}
 		else {
 			i--;
@@ -75,19 +75,19 @@ void CreateHuffman(){
 		}
 	}
 	
-	//½«Æä±£´æÔÚÎÄµµÀï 
+	//å°†å…¶ä¿å­˜åœ¨æ–‡æ¡£é‡Œ 
 	FILE *fpWrite=fopen("hfm Tree.txt","w");
 	for(i=0;i<n;i++){
-		fprintf(fpWrite, "µÚ%d¸ö×Ö·ûÎª£º%c£¬ÆäÈ¨ÖµÎª£º%d\n",i+1,HT[i].ch,HT[i].weight);
+		fprintf(fpWrite, "ç¬¬%dä¸ªå­—ç¬¦ä¸ºï¼š%cï¼Œå…¶æƒå€¼ä¸ºï¼š%d\n",i+1,HT[i].ch,HT[i].weight);
 	}  
     fclose(fpWrite);
-    printf("\n×Ö·û¼°ÆäÈ¨ÖµÒÑ±£´æÔÚÎÄ¼şhfm Tree.txtÖĞ\n");
+    printf("\nå­—ç¬¦åŠå…¶æƒå€¼å·²ä¿å­˜åœ¨æ–‡ä»¶hfm Tree.txtä¸­\n");
 	
-	//½¨Á¢¹ş·òÂüÊ÷ 
+	//å»ºç«‹å“ˆå¤«æ›¼æ ‘ 
 	for(i=n;i<m;i++){
 		p1=0;p2=0;
 		s1=maxweight;s2=maxweight;
-		//ÕÒ³öÈ¨Öµ×îĞ¡µÄÁ½¸ö×Ö·û 
+		//æ‰¾å‡ºæƒå€¼æœ€å°çš„ä¸¤ä¸ªå­—ç¬¦ 
 		for(j=0;j<i;j++){
 			if(HT[j].parent==0){
 				if(HT[j].weight<s1){
@@ -109,7 +109,7 @@ void CreateHuffman(){
 }
 
 
-//¶Ô¹ş·òÂüÊ÷½øĞĞ±àÂë 
+//å¯¹å“ˆå¤«æ›¼æ ‘è¿›è¡Œç¼–ç  
 void HuffmanCoding(){
 	int i,j,p,c;
 	Code cd; 
@@ -118,9 +118,9 @@ void HuffmanCoding(){
 		cd.ch=HT[i].ch;
 		c=i;
 		p=HT[i].parent;
-		while(p!=0){//µ½¸ù½ÚµãÍ£Ö¹ 
+		while(p!=0){//åˆ°æ ¹èŠ‚ç‚¹åœæ­¢ 
 			cd.start--;
-			if(HT[p].lchild==c){		//Èç¹ûiÊÇÆä×óº¢×Ó£¬×ó0ÓÒ1£» 
+			if(HT[p].lchild==c){		//å¦‚æœiæ˜¯å…¶å·¦å­©å­ï¼Œå·¦0å³1ï¼› 
 				cd.bits[cd.start]='0';
 			}
 			else{
@@ -132,8 +132,8 @@ void HuffmanCoding(){
 		HC[i]=cd;
 	} 
 	
-	//Êä³öÃ¿¸ö×Ö·ûµÄ¹ş·òÂü±àÂë
-	printf("\n          Ã¿¸ö×Ö·ûµÄ¹ş·òÂü±àÂë·Ö±ğÊÇ£º\n");
+	//è¾“å‡ºæ¯ä¸ªå­—ç¬¦çš„å“ˆå¤«æ›¼ç¼–ç 
+	printf("\n          æ¯ä¸ªå­—ç¬¦çš„å“ˆå¤«æ›¼ç¼–ç åˆ†åˆ«æ˜¯ï¼š\n");
 	char num;
 	for(i=0;i<n;i++){
 		printf("          %c: ",HC[i].ch);
@@ -143,17 +143,17 @@ void HuffmanCoding(){
 		printf("\n");
 	}
 	
-	//½«·û¼°Æä¹ş·òÂü±àÂë±£´æÔÚÎÄ¼şÀï 
+	//å°†ç¬¦åŠå…¶å“ˆå¤«æ›¼ç¼–ç ä¿å­˜åœ¨æ–‡ä»¶é‡Œ 
 	FILE *fpWrite=fopen("hfm Tree.txt","a");
 	for(i=0;i<n;i++){
-		fprintf(fpWrite, "µÚ%d¸ö×Ö·ûÎª£º%c£¬Æä¹ş·òÂü±àÂëÎª£º",i+1,HC[i].ch);
+		fprintf(fpWrite, "ç¬¬%dä¸ªå­—ç¬¦ä¸ºï¼š%cï¼Œå…¶å“ˆå¤«æ›¼ç¼–ç ä¸ºï¼š",i+1,HC[i].ch);
 		for(j=HC[i].start;j<=n;j++){
 			fprintf(fpWrite,"%c ",HC[i].bits[j]);
 		}
 		fprintf(fpWrite,"\n");
 	}  
     fclose(fpWrite);
-    printf("\n×Ö·û¼°Æä¹ş·òÂü±àÂëÒÑ±£´æÔÚÎÄ¼şhfm Tree.txtÖĞ\n");
+    printf("\nå­—ç¬¦åŠå…¶å“ˆå¤«æ›¼ç¼–ç å·²ä¿å­˜åœ¨æ–‡ä»¶hfm Tree.txtä¸­\n");
 }
 
 void HuffmanCode(){
@@ -163,9 +163,9 @@ void HuffmanCode(){
 	FILE *fpRead=fopen("ToBeTran.txt","r");  
     if(fpRead==NULL)  exit(-1); 
     fscanf(fpRead,"%s ",ch);  
-    printf("\nĞèÒª±àÒëµÄÎÄ±¾ÊÇ£º%s \n",ch);
+    printf("\néœ€è¦ç¼–è¯‘çš„æ–‡æœ¬æ˜¯ï¼š%s \n",ch);
     
-    printf("\n±àÒë½á¹ûÊÇ£º"); 
+    printf("\nç¼–è¯‘ç»“æœæ˜¯ï¼š"); 
     FILE *fpWrite=fopen("CodeFile.txt","w");
 
 	while(ch[i]!='\0'){
@@ -184,12 +184,12 @@ void HuffmanCode(){
 	}//while 
 	
 	if(flag==1){
-		printf("Ğè±àÒëµÄÎÄ±¾ÖĞÎŞÊäÈë×Ö·û£¬³ÌĞò½áÊø\n");
+		printf("éœ€ç¼–è¯‘çš„æ–‡æœ¬ä¸­æ— è¾“å…¥å­—ç¬¦ï¼Œç¨‹åºç»“æŸ\n");
 		exit(-1);
 	}	
 	fclose(fpWrite);
 	printf("\n"); 
-	printf("\n±àÒë½á¹ûÒÑ±£´æÔÚÎÄ¼şCodeFile.txtÖĞ\n");
+	printf("\nç¼–è¯‘ç»“æœå·²ä¿å­˜åœ¨æ–‡ä»¶CodeFile.txtä¸­\n");
 
 }
 
@@ -200,13 +200,13 @@ void deCode(){
 	FILE *fpRead=fopen("CodeFile.txt","r");  
     if(fpRead==NULL)  exit(-1); 
     fscanf(fpRead,"%s",cd);
-    printf("\nĞèÒªÒëÂëµÄ×Ö·û´®Îª:\n");
+    printf("\néœ€è¦è¯‘ç çš„å­—ç¬¦ä¸²ä¸º:\n");
 	while(cd[count]!='\0'){
 		printf("%c",cd[count++]);
 		if(count%50==0) printf("\n");
 	}
-//    printf("\nĞèÒªÒëÂëµÄ×Ö·û´®Îª%s\n",cd);
-	printf("\nÒëÂëºóµÄ×Ö·ûÎª£º"); 
+//    printf("\néœ€è¦è¯‘ç çš„å­—ç¬¦ä¸²ä¸º%s\n",cd);
+	printf("\nè¯‘ç åçš„å­—ç¬¦ä¸ºï¼š"); 
 	while(cd[j]!='\0'){
 		if(cd[j]=='0'){
 			i=HT[i].lchild;
@@ -223,18 +223,18 @@ void deCode(){
 	}//while
 	printf("\n");
 //	if(HT[i].lchild!=-1 && cd[j]=='\0') {
-//		printf("ÊäÈë´íÎó\n");
+//		printf("è¾“å…¥é”™è¯¯\n");
 //	}
 	
 	FILE *fpWrite=fopen("TextFile.txt","w");
-	fprintf(fpWrite, "Æä±àÒë½á¹ûÎª£º%s\n",ch);
+	fprintf(fpWrite, "å…¶ç¼–è¯‘ç»“æœä¸ºï¼š%s\n",ch);
     fclose(fpWrite);
-    printf("\nÆä±àÒë½á¹ûÒÑ±£´æÔÚÎÄ¼şTextFile.txtÖĞ\n");
+    printf("\nå…¶ç¼–è¯‘ç»“æœå·²ä¿å­˜åœ¨æ–‡ä»¶TextFile.txtä¸­\n");
 }
 
 void printTree(HuffmanTree ht){
 	FILE *fpWrite=fopen("TreePrint.txt","a");
-	static int level = -1; //¼ÇÂ¼ÊÇµÚ¼¸²ã´Î
+	static int level = -1; //è®°å½•æ˜¯ç¬¬å‡ å±‚æ¬¡
 	int i;
 	
 	if(ht.weight==0) return;
@@ -256,14 +256,14 @@ void printTree(HuffmanTree ht){
 }
 
 void SmallWelcome(){
-	printf("          ****************¹ş·òÂü±àÂë****************\n");
+	printf("          ****************å“ˆå¤«æ›¼ç¼–ç ****************\n");
 	printf("          ******************************************\n");
-	printf("          ****************¹²ÓĞ5¸ö×Ö·û***************\n"); 
-	printf("          *        1.Çë·Ö±ğÊäÈë×Ö·û¼°ÆäÈ¨Öµ        *\n");
-	printf("          *        2.¶ÔÎÄµµ½øĞĞ±àÂë                *\n");
-	printf("          *        3.¶Ô±àÂëÎÄ¼şÒëÂë                *\n");
-	printf("          *        4.´òÓ¡¹ş·òÂüÊ÷                  *\n");
-	printf("          *        (È¨Öµ²»ÄÜ³¬¹ı10000£©            *\n");
+	printf("          ****************å…±æœ‰5ä¸ªå­—ç¬¦***************\n"); 
+	printf("          *        1.è¯·åˆ†åˆ«è¾“å…¥å­—ç¬¦åŠå…¶æƒå€¼        *\n");
+	printf("          *        2.å¯¹æ–‡æ¡£è¿›è¡Œç¼–ç                 *\n");
+	printf("          *        3.å¯¹ç¼–ç æ–‡ä»¶è¯‘ç                 *\n");
+	printf("          *        4.æ‰“å°å“ˆå¤«æ›¼æ ‘                  *\n");
+	printf("          *        (æƒå€¼ä¸èƒ½è¶…è¿‡10000ï¼‰            *\n");
 	printf("          ******************************************\n");
 	
 }
