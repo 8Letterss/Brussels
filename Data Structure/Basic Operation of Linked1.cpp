@@ -186,19 +186,3 @@ void insert_list(PNODE pHead,int x,int y)//输入x，y。在第一个x后插入y
 	}
 	
  } 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
