@@ -4,7 +4,7 @@
 #define ROW 8
 #define COL 8
 #define MAX_STEPS (ROW*COL)
-//¶¨ÒåÆåÅÌ´óĞ¡ 
+//å®šä¹‰æ£‹ç›˜å¤§å° 
  
 typedef struct stact{
     int x;
@@ -12,27 +12,27 @@ typedef struct stact{
     int direction;
 }HorseStact; 
 
-//ÆåÅÌ 
+//æ£‹ç›˜ 
 int chess[ROW+1][COL+1];
-//ÏÂÒ»²½ÂäÆå·½Ïò 
+//ä¸‹ä¸€æ­¥è½æ£‹æ–¹å‘ 
 int dir[8][2]={{2,-1},{-2,-1},{-2,1},{2,1},{1,-2},{-1,-2},{-1,2},{1,2}};
 
-int TopStact;//Õ»¶¥ 
-int OutStact;//³öÕ» 
+int TopStact;//æ ˆé¡¶ 
+int OutStact;//å‡ºæ ˆ 
 int t=1;
 HorseStact horse[MAX_STEPS]; 
 
-//³õÊ¼»¯
+//åˆå§‹åŒ–
 void init(){
     int n=MAX_STEPS-1;
-    //³õÊ¼»¯horse 
+    //åˆå§‹åŒ–horse 
     while(n!=-1){
         horse[n].x=0;
         horse[n].y=0;
         horse[n].direction=-1;
         n--;
     }
-	//³õÊ¼»¯ÆåÅÌ 
+	//åˆå§‹åŒ–æ£‹ç›˜ 
     for(int i=1;i<=ROW;i++){
         for(int j=1;j<=COL;j++){
             chess[i][j]=0;
@@ -42,7 +42,7 @@ void init(){
     OutStact=0;
 }
 
-//ÈëÕ»
+//å…¥æ ˆ
 void PushStact(int xx,int yy){
     TopStact++;
     horse[TopStact].x=xx;
@@ -50,7 +50,7 @@ void PushStact(int xx,int yy){
     horse[TopStact].direction=-1;
 }
 
-//³öÕ»
+//å‡ºæ ˆ
 void PopStact(){
     horse[TopStact].x=0;
     horse[TopStact].y=0;
@@ -58,12 +58,12 @@ void PopStact(){
     TopStact--;
 }
 
-//±ê¼ÇÎ»ÖÃ
+//æ ‡è®°ä½ç½®
 void MarkChess(int xx,int yy){
     chess[xx][yy]=TopStact+1;
 }
 
-//´òÓ¡Ã¿Ò»²½Î»ÖÃ
+//æ‰“å°æ¯ä¸€æ­¥ä½ç½®
 void PrintSteps(){
     printf("(%d,%d)",horse[TopStact].x,horse[TopStact].y);
     t++;
@@ -84,18 +84,18 @@ void TheHorseStepBoard(){
         xnow=horse[TopStact].x;
         ynow=horse[TopStact].y;
 
-        //¶Ô·½Ïò½øĞĞÅÅĞò
+        //å¯¹æ–¹å‘è¿›è¡Œæ’åº
         int nextstep[ROW]={};
         for(int i=0;i<ROW;i++){
-            int xnext=xnow+dir[i][0];//¼ÆËãÏÂÒ»²½Î»ÖÃ×ø±ê 
+            int xnext=xnow+dir[i][0];//è®¡ç®—ä¸‹ä¸€æ­¥ä½ç½®åæ ‡ 
             int ynext=ynow+dir[i][1];
 
-            if((xnext>0 && xnext<=ROW)&&(ynext>0 &&ynext<=COL)&&(chess[xnext][ynext]==0)){//È·¶¨ÏÂÒ»²½¿ÉĞĞ 
+            if((xnext>0 && xnext<=ROW)&&(ynext>0 &&ynext<=COL)&&(chess[xnext][ynext]==0)){//ç¡®å®šä¸‹ä¸€æ­¥å¯è¡Œ 
                 for(int j=0;j<ROW;j++){
-                    int xnextnext=xnext+dir[j][0];//¼ÆËãÏÂÏÂÒ»²½Î»ÖÃ×ø±ê 
+                    int xnextnext=xnext+dir[j][0];//è®¡ç®—ä¸‹ä¸‹ä¸€æ­¥ä½ç½®åæ ‡ 
                     int ynextnext=ynext+dir[j][1];
 
-                    if((xnextnext>0 && xnextnext<=ROW)&&(ynextnext>0 &&ynextnext<=COL)&&(chess[xnextnext][ynextnext]==0)){//È·¶¨ÏÂÏÂÒ»²½¿ÉĞĞ 
+                    if((xnextnext>0 && xnextnext<=ROW)&&(ynextnext>0 &&ynextnext<=COL)&&(chess[xnextnext][ynextnext]==0)){//ç¡®å®šä¸‹ä¸‹ä¸€æ­¥å¯è¡Œ 
                         nextstep[i]++; 
                     }
                 }//for(j)
@@ -104,7 +104,7 @@ void TheHorseStepBoard(){
 
         int realnext[ROW]={0};
         int k=0,tt=ROW+1;
-        //ÕÒ³ö×îĞ¡µÄnextstep£¬½«Æä¸³¸ørealnext£¬²¢½«Ô­Êı¾İ×î´ó»¯£¬ÕÒ³örealnext
+        //æ‰¾å‡ºæœ€å°çš„nextstepï¼Œå°†å…¶èµ‹ç»™realnextï¼Œå¹¶å°†åŸæ•°æ®æœ€å¤§åŒ–ï¼Œæ‰¾å‡ºrealnext
         for(int i=0;i<ROW;i++){
             tt=ROW+1;
             for(int j=0;j<8;j++){
@@ -127,11 +127,11 @@ void TheHorseStepBoard(){
             if((xx<=ROW &&xx>0) &&(yy<=COL && yy>0)&&(chess[xx][yy]==0)){
                 PushStact(xx,yy);
                 MarkChess(xx,yy);
-                break;//·ûºÏÔòÑ¹ÈëÕ»ÖĞ²¢±ê¼Ç 
+                break;//ç¬¦åˆåˆ™å‹å…¥æ ˆä¸­å¹¶æ ‡è®° 
             }
         }
 		
-		//ÈôÏÂÒ»²½×ß²»ÁË£¬Ôò³öÕ»»ØËİ 
+		//è‹¥ä¸‹ä¸€æ­¥èµ°ä¸äº†ï¼Œåˆ™å‡ºæ ˆå›æº¯ 
         if(horse[TopStact].direction>=7){
             printf("\n out:(%d,%d)\n",horse[TopStact].x,horse[TopStact].y);
             chess[horse[TopStact].x][horse[TopStact].y]=0;
@@ -146,12 +146,12 @@ int main()
 {
     int xx,yy;
 
-    printf("Please Input: x y\n");//¿ªÊ¼Î»ÖÃ 
+    printf("Please Input: x y\n");//å¼€å§‹ä½ç½® 
     scanf("%d %d",&xx,&yy);
 
     init();
-    PushStact(xx,yy);//½«ÆäÑ¹ÈëÕ»ÖĞ 
-    MarkChess(xx,yy);//²¢±ê¼Ç 
+    PushStact(xx,yy);//å°†å…¶å‹å…¥æ ˆä¸­ 
+    MarkChess(xx,yy);//å¹¶æ ‡è®° 
 
     printf("\n route address:\n");
     printf("(%d,%d)",xx,yy);
